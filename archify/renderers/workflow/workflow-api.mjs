@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderDiagramHtml, validateGuidedViews, validateRelationshipIds } from '../shared/cli.mjs';
+import { renderDiagramHtml, validateCrossCollectionContracts } from '../shared/cli.mjs';
 import { validateEngineeringProfile } from '../shared/engineering-profiles.mjs';
 import { validateSchema } from '../shared/validator.mjs';
 import { verifyRepositoryEvidence } from '../shared/repository-evidence.mjs';
@@ -20,11 +20,11 @@ function readTemplate() {
   return cachedTemplate;
 }
 
-// In-memory counterpart to render-workflow.mjs: same validation and resource
-// preparation as the CLI's loadDiagramWithBrandMarks + compileWorkflow, minus
-// argv/file I/O. Never installs the process-level diagnostics boundary, so an
-// author-facing failure comes back as { ok: false } instead of taking down
-// the host process; only an unclassified implementation error still throws.
+// In-memory counterpart to render-workflow.mjs: preserves document validation
+// and resource preparation from loadDiagramWithBrandMarks + compileWorkflow.
+// Template/repository reads and remote brand fetches can still perform I/O.
+// Never installs the process-level diagnostics boundary: classified failures
+// return { ok: false }; unclassified implementation errors still throw.
 // The caller owns delivery: nothing here writes a file or claims completion.
 export async function renderWorkflow(options = {}) {
   return withDiagnosticRecordingSuppressed(() => renderWorkflowInternal(options));
@@ -45,8 +45,7 @@ async function renderWorkflowInternal({
   let sourceEvidence = null;
   try {
     validateSchema('workflow', diagram);
-    validateGuidedViews('workflow', diagram);
-    validateRelationshipIds('workflow', diagram);
+    validateCrossCollectionContracts('workflow', diagram);
     validateEngineeringProfile('workflow', diagram);
     sourceEvidence = verifyRepositoryEvidence('workflow', diagram, repoRoot);
     if (prepareBrandMarks) await prepareDiagramBrandMarks('workflow', diagram);
