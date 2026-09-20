@@ -82,12 +82,9 @@ test('renderWorkflow never installs the CLI-only process-level diagnostics bound
   assert.equal(globalThis[BOUNDARY_KEY], undefined);
 });
 
-test('renderWorkflow enforces guided-view and relationship-id contracts that compileWorkflow alone skips', async () => {
+test('renderWorkflow enforces guided-view and relationship-id contracts', async () => {
   const duplicateEdgeIds = workflow();
   duplicateEdgeIds.edges.push({ id: 'ab', from: 'b', to: 'a', label: 'reply' });
-  const bareCompile = compileWorkflow({ workflow: structuredClone(duplicateEdgeIds) });
-  assert.equal(bareCompile.ok, true, 'compileWorkflow alone has no relationship-id uniqueness check');
-
   const viaLibrary = await renderWorkflow({ workflow: duplicateEdgeIds, prepareBrandMarks: false });
   assert.equal(viaLibrary.ok, false);
   assert.deepEqual(viaLibrary.diagnostics.map((entry) => entry.code), ['relationship/duplicate-id']);
