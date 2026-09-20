@@ -1,0 +1,604 @@
+TAP version 13
+# Subtest: readable-v2 auto routing selects a feasible corridor around a same-lane obstacle
+ok 1 - readable-v2 auto routing selects a feasible corridor around a same-lane obstacle
+  ---
+  duration_ms: 33.4469
+  type: 'test'
+  ...
+# Subtest: readable-v2 evaluates automatic endpoint sides against the complete labeled route
+ok 2 - readable-v2 evaluates automatic endpoint sides against the complete labeled route
+  ---
+  duration_ms: 20.8462
+  type: 'test'
+  ...
+# Subtest: readable-v2 retries automatic endpoint sides against already planned routes
+ok 3 - readable-v2 retries automatic endpoint sides against already planned routes
+  ---
+  duration_ms: 33.8784
+  type: 'test'
+  ...
+# Subtest: readable-v2 expands an outside corridor for deterministic labeled fan-out
+ok 4 - readable-v2 expands an outside corridor for deterministic labeled fan-out
+  ---
+  duration_ms: 87.1915
+  type: 'test'
+  ...
+# Subtest: readable-v2 expands an outside corridor without moving the lane geometry
+ok 5 - readable-v2 expands an outside corridor without moving the lane geometry
+  ---
+  duration_ms: 77.0705
+  type: 'test'
+  ...
+# Subtest: readable-v2 may expand an unlabeled edge around already placed labels
+ok 6 - readable-v2 may expand an unlabeled edge around already placed labels
+  ---
+  duration_ms: 130.1912
+  type: 'test'
+  ...
+# Subtest: readable-v2 feeds a measured outside-channel constraint back into layout
+ok 7 - readable-v2 feeds a measured outside-channel constraint back into layout
+  ---
+  duration_ms: 11.0725
+  type: 'test'
+  ...
+# Subtest: readable-v2 feeds a measured adjacent-rank gutter back into layout
+ok 8 - readable-v2 feeds a measured adjacent-rank gutter back into layout
+  ---
+  duration_ms: 2.4904
+  type: 'test'
+  ...
+# Subtest: readable-v2 feeds a measured lane gap back into layout
+ok 9 - readable-v2 feeds a measured lane gap back into layout
+  ---
+  duration_ms: 3.3016
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects duplicate authored via points with a typed explicit-pin diagnostic
+ok 10 - readable-v2 rejects duplicate authored via points with a typed explicit-pin diagnostic
+  ---
+  duration_ms: 4.7414
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects diagonal authored via geometry with a typed explicit-pin diagnostic
+ok 11 - readable-v2 rejects diagonal authored via geometry with a typed explicit-pin diagnostic
+  ---
+  duration_ms: 3.8705
+  type: 'test'
+  ...
+# Subtest: readable-v2 duplicate evidence excludes a compatible channel assertion
+ok 12 - readable-v2 duplicate evidence excludes a compatible channel assertion
+  ---
+  duration_ms: 2.5792
+  type: 'test'
+  ...
+# Subtest: readable-v2 obstacle evidence excludes a compatible channel assertion
+ok 13 - readable-v2 obstacle evidence excludes a compatible channel assertion
+  ---
+  duration_ms: 1.5571
+  type: 'test'
+  ...
+# Subtest: readable-v2 infers omitted endpoint sides around an authored via
+ok 14 - readable-v2 infers omitted endpoint sides around an authored via
+  ---
+  duration_ms: 4.6467
+  type: 'test'
+  ...
+# Subtest: readable-v2 reports an infeasible authored target side with its verified single-pin repair
+ok 15 - readable-v2 reports an infeasible authored target side with its verified single-pin repair
+  ---
+  duration_ms: 16.212
+  type: 'test'
+  ...
+# Subtest: readable-v2 reports via and fromSide as a minimal conflict with two verified repairs
+ok 16 - readable-v2 reports via and fromSide as a minimal conflict with two verified repairs
+  ---
+  duration_ms: 3.8835
+  type: 'test'
+  ...
+# Subtest: readable-v2 infers endpoint sides for auto channel pins
+ok 17 - readable-v2 infers endpoint sides for auto channel pins
+  ---
+  duration_ms: 2.7322
+  type: 'test'
+  ...
+# Subtest: readable-v2 treats an omitted preset side as a solver choice
+ok 18 - readable-v2 treats an omitted preset side as a solver choice
+  ---
+  duration_ms: 4.5034
+  type: 'test'
+  ...
+# Subtest: readable-v2 treats an infeasible route preset as a candidate-family conflict, not a coordinate pin
+ok 19 - readable-v2 treats an infeasible route preset as a candidate-family conflict, not a coordinate pin
+  ---
+  duration_ms: 11.9025
+  type: 'test'
+  ...
+# Subtest: readable-v2 never accepts a same-lane drop through the preset-only fallback
+ok 20 - readable-v2 never accepts a same-lane drop through the preset-only fallback
+  ---
+  duration_ms: 7.713
+  type: 'test'
+  ...
+# Subtest: readable-v2 never silently ignores coordinate pins that conflict with a route preset
+ok 21 - readable-v2 never silently ignores coordinate pins that conflict with a route preset
+  ---
+  duration_ms: 9.8902
+  type: 'test'
+  ...
+# Subtest: readable-v2 preset compatibility reports both authored causal paths and verified repairs
+ok 22 - readable-v2 preset compatibility reports both authored causal paths and verified repairs
+  ---
+  duration_ms: 2.6565
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects a raw via that does not belong to its route preset family
+ok 23 - readable-v2 rejects a raw via that does not belong to its route preset family
+  ---
+  duration_ms: 2.384
+  type: 'test'
+  ...
+# Subtest: readable-v2 preserves a compatible straight via without normalization
+ok 24 - readable-v2 preserves a compatible straight via without normalization
+  ---
+  duration_ms: 0.8444
+  type: 'test'
+  ...
+# Subtest: readable-v2 preserves a compatible drop via without normalization
+ok 25 - readable-v2 preserves a compatible drop via without normalization
+  ---
+  duration_ms: 0.6598
+  type: 'test'
+  ...
+# Subtest: readable-v2 preserves a compatible outside-right via without normalization
+ok 26 - readable-v2 preserves a compatible outside-right via without normalization
+  ---
+  duration_ms: 0.6653
+  type: 'test'
+  ...
+# Subtest: readable-v2 preserves a compatible return-left via without normalization
+ok 27 - readable-v2 preserves a compatible return-left via without normalization
+  ---
+  duration_ms: 0.6998
+  type: 'test'
+  ...
+# Subtest: readable-v2 preserves a compatible bottom-channel via without normalization
+ok 28 - readable-v2 preserves a compatible bottom-channel via without normalization
+  ---
+  duration_ms: 0.6781
+  type: 'test'
+  ...
+# Subtest: readable-v2 preserves a compatible up-channel via without normalization
+ok 29 - readable-v2 preserves a compatible up-channel via without normalization
+  ---
+  duration_ms: 0.6946
+  type: 'test'
+  ...
+# Subtest: readable-v2 keeps a compatible channel pin authoritative inside its route preset
+ok 30 - readable-v2 keeps a compatible channel pin authoritative inside its route preset
+  ---
+  duration_ms: 1.2652
+  type: 'test'
+  ...
+# Subtest: readable-v2 keeps channelX authoritative for outside-right
+ok 31 - readable-v2 keeps channelX authoritative for outside-right
+  ---
+  duration_ms: 1.0758
+  type: 'test'
+  ...
+# Subtest: readable-v2 keeps channelX authoritative for return-left
+ok 32 - readable-v2 keeps channelX authoritative for return-left
+  ---
+  duration_ms: 0.8295
+  type: 'test'
+  ...
+# Subtest: readable-v2 keeps channelY authoritative for bottom-channel
+ok 33 - readable-v2 keeps channelY authoritative for bottom-channel
+  ---
+  duration_ms: 0.8904
+  type: 'test'
+  ...
+# Subtest: readable-v2 keeps channelY authoritative for up-channel
+ok 34 - readable-v2 keeps channelY authoritative for up-channel
+  ---
+  duration_ms: 1.3069
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects outside-right when its channel belongs to another route family
+ok 35 - readable-v2 rejects outside-right when its channel belongs to another route family
+  ---
+  duration_ms: 3.582
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects return-left when its channel belongs to another route family
+ok 36 - readable-v2 rejects return-left when its channel belongs to another route family
+  ---
+  duration_ms: 2.656
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects bottom-channel when its channel belongs to another route family
+ok 37 - readable-v2 rejects bottom-channel when its channel belongs to another route family
+  ---
+  duration_ms: 1.8076
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects up-channel when its channel belongs to another route family
+ok 38 - readable-v2 rejects up-channel when its channel belongs to another route family
+  ---
+  duration_ms: 1.3963
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects drop when its channel belongs to another route family
+ok 39 - readable-v2 rejects drop when its channel belongs to another route family
+  ---
+  duration_ms: 1.3724
+  type: 'test'
+  ...
+# Subtest: readable-v2 treats channels beside via as assertions over the authored path
+ok 40 - readable-v2 treats channels beside via as assertions over the authored path
+  ---
+  duration_ms: 2.9289
+  type: 'test'
+  ...
+# Subtest: readable-v2 reports via and channelY as a minimal assertion conflict with two verified repairs
+ok 41 - readable-v2 reports via and channelY as a minimal assertion conflict with two verified repairs
+  ---
+  duration_ms: 3.0902
+  type: 'test'
+  ...
+# Subtest: readable-v2 reports conflicts between absolute label and route pins as typed geometry
+ok 42 - readable-v2 reports conflicts between absolute label and route pins as typed geometry
+  ---
+  duration_ms: 43.2999
+  type: 'test'
+  ...
+# Subtest: readable-v2 derives label-route pins from joint verified removals when route plans first
+ok 43 - readable-v2 derives label-route pins from joint verified removals when route plans first
+  ---
+  duration_ms: 659.3481
+  type: 'test'
+  ...
+# Subtest: readable-v2 derives both causal pins when label plans before the authored route
+ok 44 - readable-v2 derives both causal pins when label plans before the authored route
+  ---
+  duration_ms: 22.5325
+  type: 'test'
+  ...
+# Subtest: readable-v2 classifies an authored labelAt colliding with an earlier automatic route
+ok 45 - readable-v2 classifies an authored labelAt colliding with an earlier automatic route
+  ---
+  duration_ms: 555.5197
+  type: 'test'
+  ...
+# Subtest: readable-v2 classifies an automatic label colliding with a later authored route
+ok 46 - readable-v2 classifies an automatic label colliding with a later authored route
+  ---
+  duration_ms: 7.1259
+  type: 'test'
+  ...
+# Subtest: readable-v2 classifies an authored labelAt colliding with an earlier automatic label
+ok 47 - readable-v2 classifies an authored labelAt colliding with an earlier automatic label
+  ---
+  duration_ms: 440.2849
+  type: 'test'
+  ...
+# Subtest: readable-v2 derives the causal labelAt from joint verified label removals
+ok 48 - readable-v2 derives the causal labelAt from joint verified label removals
+  ---
+  duration_ms: 641.4151
+  type: 'test'
+  ...
+# Subtest: readable-v2 reports conflicts between two absolute label pins without deleting semantics
+ok 49 - readable-v2 reports conflicts between two absolute label pins without deleting semantics
+  ---
+  duration_ms: 14.7716
+  type: 'test'
+  ...
+# Subtest: readable-v2 reports showcase crossings between two absolute route pins
+ok 50 - readable-v2 reports showcase crossings between two absolute route pins
+  ---
+  duration_ms: 6.2148
+  type: 'test'
+  ...
+# Subtest: readable-v2 catches an automatic route crossing exactly at an authored straight-through via
+ok 51 - readable-v2 catches an automatic route crossing exactly at an authored straight-through via
+  ---
+  duration_ms: 6.3491
+  type: 'test'
+  ...
+# Subtest: readable-v2 catches two pinned routes crossing exactly at their straight-through vias
+ok 52 - readable-v2 catches two pinned routes crossing exactly at their straight-through vias
+  ---
+  duration_ms: 7.2301
+  type: 'test'
+  ...
+# Subtest: readable-v2 classifies a side-only authored route crossing an automatic route
+ok 53 - readable-v2 classifies a side-only authored route crossing an automatic route
+  ---
+  duration_ms: 8.0574
+  type: 'test'
+  ...
+# Subtest: readable-v2 classifies a side-only authored route sharing an automatic corridor
+ok 54 - readable-v2 classifies a side-only authored route sharing an automatic corridor
+  ---
+  duration_ms: 8.9317
+  type: 'test'
+  ...
+# Subtest: readable-v2 classifies a preset-only route sharing an automatic corridor
+ok 55 - readable-v2 classifies a preset-only route sharing an automatic corridor
+  ---
+  duration_ms: 5.7618
+  type: 'test'
+  ...
+# Subtest: readable-v2 reports unknown edge endpoints with a precise semantic diagnostic
+ok 56 - readable-v2 reports unknown edge endpoints with a precise semantic diagnostic
+  ---
+  duration_ms: 2.9355
+  type: 'test'
+  ...
+# Subtest: unknown endpoint diagnostics retain the authored edge pointer after canonical sorting
+ok 57 - unknown endpoint diagnostics retain the authored edge pointer after canonical sorting
+  ---
+  duration_ms: 2.7675
+  type: 'test'
+  ...
+# Subtest: unknown node lane diagnostics retain the authored node pointer after canonical sorting
+ok 58 - unknown node lane diagnostics retain the authored node pointer after canonical sorting
+  ---
+  duration_ms: 0.9476
+  type: 'test'
+  ...
+# Subtest: duplicate lane id diagnostics name both authored source pointers
+ok 59 - duplicate lane id diagnostics name both authored source pointers
+  ---
+  duration_ms: 0.7068
+  type: 'test'
+  ...
+# Subtest: duplicate node id diagnostics name both authored source pointers
+ok 60 - duplicate node id diagnostics name both authored source pointers
+  ---
+  duration_ms: 0.4883
+  type: 'test'
+  ...
+# Subtest: showcase rejects nested authored outside-right corridors while standard permits them
+ok 61 - showcase rejects nested authored outside-right corridors while standard permits them
+  ---
+  duration_ms: 5.9953
+  type: 'test'
+  ...
+# Subtest: an explicit standard profile overrides an ambient showcase profile
+ok 62 - an explicit standard profile overrides an ambient showcase profile
+  ---
+  duration_ms: 1.309
+  type: 'test'
+  ...
+# Subtest: readable-v2 never advertises an unverified blocking-node repair
+ok 63 - readable-v2 never advertises an unverified blocking-node repair
+  ---
+  duration_ms: 2.153
+  type: 'test'
+  ...
+# Subtest: standard profile rejects a 4px endpoint stub as a hard route constraint
+ok 64 - standard profile rejects a 4px endpoint stub as a hard route constraint
+  ---
+  duration_ms: 1.7633
+  type: 'test'
+  ...
+# Subtest: standard profile rejects a 12px interior turn segment as a hard route constraint
+ok 65 - standard profile rejects a 12px interior turn segment as a hard route constraint
+  ---
+  duration_ms: 2.3497
+  type: 'test'
+  ...
+# Subtest: readable-v2 reports collapsed channel pins without escaping the compiler boundary
+ok 66 - readable-v2 reports collapsed channel pins without escaping the compiler boundary
+  ---
+  duration_ms: 6.1784
+  type: 'test'
+  ...
+# Subtest: parallel anonymous edges remain byte-deterministic when their input order changes
+ok 67 - parallel anonymous edges remain byte-deterministic when their input order changes
+  ---
+  duration_ms: 5.7926
+  type: 'test'
+  ...
+# Subtest: compileWorkflow returns a diagnostic result instead of throwing when meta is absent
+ok 68 - compileWorkflow returns a diagnostic result instead of throwing when meta is absent
+  ---
+  duration_ms: 1.6325
+  type: 'test'
+  ...
+# Subtest: compileWorkflow returns typed failures for non-document public inputs without throwing
+ok 69 - compileWorkflow returns typed failures for non-document public inputs without throwing
+  ---
+  duration_ms: 0.6917
+  type: 'test'
+  ...
+# Subtest: compileWorkflow enforces the canonical workflow schema at its public boundary
+ok 70 - compileWorkflow enforces the canonical workflow schema at its public boundary
+  ---
+  duration_ms: 1.5178
+  type: 'test'
+  ...
+# Subtest: compileWorkflow applies the shared cross-collection contracts the renderer enforces
+ok 71 - compileWorkflow applies the shared cross-collection contracts the renderer enforces
+  ---
+  duration_ms: 412.11
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects a negative absolute label pin without an explicit viewBox
+ok 72 - readable-v2 rejects a negative absolute label pin without an explicit viewBox
+  ---
+  duration_ms: 11.1121
+  type: 'test'
+  ...
+# Subtest: readable-v2 rejects an explicit channel that crosses the measured legend
+ok 73 - readable-v2 rejects an explicit channel that crosses the measured legend
+  ---
+  duration_ms: 2.9088
+  type: 'test'
+  ...
+# Subtest: readable-v2 explicit-pin diagnostics name the first intersected node and segment
+ok 74 - readable-v2 explicit-pin diagnostics name the first intersected node and segment
+  ---
+  duration_ms: 1.3948
+  type: 'test'
+  ...
+# Subtest: fixed-v1 publishes only repairs that survive complete replanning
+ok 75 - fixed-v1 publishes only repairs that survive complete replanning
+  ---
+  duration_ms: 5.7693
+  type: 'test'
+  ...
+# Subtest: fixed-v1 verifies the exact serialized values in every rounded-width repair
+ok 76 - fixed-v1 verifies the exact serialized values in every rounded-width repair
+  ---
+  duration_ms: 5.2162
+  type: 'test'
+  ...
+# Subtest: renderWorkflow requires a parsed document object, not argv or a path
+ok 77 - renderWorkflow requires a parsed document object, not argv or a path
+  ---
+  duration_ms: 1.7149
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns rendered output and matches the compiler used underneath
+ok 78 - renderWorkflow returns rendered output and matches the compiler used underneath
+  ---
+  duration_ms: 62.888
+  type: 'test'
+  ...
+# Subtest: renderWorkflow never mutates the caller's document and stays independent across repeated/concurrent calls
+ok 79 - renderWorkflow never mutates the caller's document and stays independent across repeated/concurrent calls
+  ---
+  duration_ms: 72.3775
+  type: 'test'
+  ...
+# Subtest: renderWorkflow never installs the CLI-only process-level diagnostics boundary
+ok 80 - renderWorkflow never installs the CLI-only process-level diagnostics boundary
+  ---
+  duration_ms: 18.9957
+  type: 'test'
+  ...
+# Subtest: renderWorkflow enforces guided-view and relationship-id contracts
+ok 81 - renderWorkflow enforces guided-view and relationship-id contracts
+  ---
+  duration_ms: 1.7089
+  type: 'test'
+  ...
+# Subtest: renderWorkflow reports a compiler-level failure as data, not an exception
+ok 82 - renderWorkflow reports a compiler-level failure as data, not an exception
+  ---
+  duration_ms: 0.7252
+  type: 'test'
+  ...
+# Subtest: completed library failures do not enter CLI history or erase existing CLI diagnostics
+ok 83 - completed library failures do not enter CLI history or erase existing CLI diagnostics
+  ---
+  duration_ms: 344.2165
+  type: 'test'
+  ...
+# Subtest: overlapping asynchronous library failures stay isolated from concurrent CLI recording
+ok 84 - overlapping asynchronous library failures stay isolated from concurrent CLI recording
+  ---
+  duration_ms: 312.0416
+  type: 'test'
+  ...
+# Subtest: renderWorkflow keeps unspecified quality advisory regardless of the host environment
+ok 85 - renderWorkflow keeps unspecified quality advisory regardless of the host environment
+  ---
+  duration_ms: 94.8004
+  type: 'test'
+  ...
+# Subtest: renderWorkflow quality arguments and authored profiles control both acceptance and metadata
+ok 86 - renderWorkflow quality arguments and authored profiles control both acceptance and metadata
+  ---
+  duration_ms: 51.0536
+  type: 'test'
+  ...
+# Subtest: workflow CLI still resolves its quality profile from the environment
+ok 87 - workflow CLI still resolves its quality profile from the environment
+  ---
+  duration_ms: 689.888
+  type: 'test'
+  ...
+# Subtest: default brand preparation preserves frozen inputs and matches real CLI output across repeated calls
+ok 88 - default brand preparation preserves frozen inputs and matches real CLI output across repeated calls
+  ---
+  duration_ms: 531.3916
+  type: 'test'
+  ...
+# Subtest: library and real CLI return the same schema/type diagnostic without rendered output
+ok 89 - library and real CLI return the same schema/type diagnostic without rendered output
+  ---
+  duration_ms: 261.2592
+  type: 'test'
+  ...
+# Subtest: library and real CLI return the same relationship/duplicate-id diagnostic without rendered output
+ok 90 - library and real CLI return the same relationship/duplicate-id diagnostic without rendered output
+  ---
+  duration_ms: 198.7723
+  type: 'test'
+  ...
+# Subtest: library and real CLI return the same guided-view/invalid diagnostic without rendered output
+ok 91 - library and real CLI return the same guided-view/invalid diagnostic without rendered output
+  ---
+  duration_ms: 187.6525
+  type: 'test'
+  ...
+# Subtest: library and real CLI return the same workflow/required-edge diagnostic without rendered output
+ok 92 - library and real CLI return the same workflow/required-edge diagnostic without rendered output
+  ---
+  duration_ms: 218.8632
+  type: 'test'
+  ...
+# Subtest: library and real CLI return the same brand/unknown diagnostic without rendered output
+ok 93 - library and real CLI return the same brand/unknown diagnostic without rendered output
+  ---
+  duration_ms: 230.8364
+  type: 'test'
+  ...
+# Subtest: default resources retain pinned repository evidence in the result and CLI-identical HTML
+ok 94 - default resources retain pinned repository evidence in the result and CLI-identical HTML
+  ---
+  duration_ms: 1350.5048
+  type: 'test'
+  ...
+# Subtest: library and real CLI preserve the repository-evidence/root-required failure
+ok 95 - library and real CLI preserve the repository-evidence/root-required failure
+  ---
+  duration_ms: 619.6037
+  type: 'test'
+  ...
+# Subtest: library and real CLI preserve the repository-evidence/origin-mismatch failure
+ok 96 - library and real CLI preserve the repository-evidence/origin-mismatch failure
+  ---
+  duration_ms: 805.9665
+  type: 'test'
+  ...
+# Subtest: library and real CLI preserve the repository-evidence/revision-unavailable failure
+ok 97 - library and real CLI preserve the repository-evidence/revision-unavailable failure
+  ---
+  duration_ms: 1009.4387
+  type: 'test'
+  ...
+# Subtest: library and real CLI preserve the repository-evidence/file-missing failure
+ok 98 - library and real CLI preserve the repository-evidence/file-missing failure
+  ---
+  duration_ms: 999.0115
+  type: 'test'
+  ...
+# Subtest: library and real CLI preserve the repository-evidence/line-out-of-range failure
+ok 99 - library and real CLI preserve the repository-evidence/line-out-of-range failure
+  ---
+  duration_ms: 1071.0613
+  type: 'test'
+  ...
+1..99
+# tests 99
+# suites 0
+# pass 99
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7908.5352

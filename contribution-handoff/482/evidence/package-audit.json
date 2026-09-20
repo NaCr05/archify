@@ -1,0 +1,10 @@
+{
+  "entries": 85,
+  "changedSinceActualMerge": [
+    "archify/renderers/workflow/workflow-api.mjs"
+  ],
+  "entryModesUnchanged": true,
+  "allPackagedFilesMatchCanonicalSource": true,
+  "manifestTransformation": "scripts and devDependencies removed by scripts/stage-clean-skill.mjs",
+  "zipSha256": "b86f2a018165503249655b16f64046b639bf20e25a9b88ef3e8329d6a00228b9"
+}

@@ -1,0 +1,31 @@
+✔ renderWorkflow requires a parsed document object, not argv or a path (2.8846ms)
+✔ renderWorkflow returns rendered output and matches the compiler used underneath (71.955ms)
+✔ renderWorkflow never mutates the caller's document and stays independent across repeated/concurrent calls (59.4769ms)
+✔ renderWorkflow never installs the CLI-only process-level diagnostics boundary (16.2527ms)
+✔ renderWorkflow enforces guided-view and relationship-id contracts (2.2357ms)
+✔ renderWorkflow reports a compiler-level failure as data, not an exception (1.9031ms)
+✔ completed library failures do not enter CLI history or erase existing CLI diagnostics (475.7904ms)
+✔ overlapping asynchronous library failures stay isolated from concurrent CLI recording (431.0035ms)
+✔ renderWorkflow keeps unspecified quality advisory regardless of the host environment (82.685ms)
+✔ renderWorkflow quality arguments and authored profiles control both acceptance and metadata (41.3535ms)
+✔ workflow CLI still resolves its quality profile from the environment (969.6251ms)
+✔ default brand preparation preserves frozen inputs and matches real CLI output across repeated calls (746.1209ms)
+✔ library and real CLI return the same schema/type diagnostic without rendered output (312.6543ms)
+✔ library and real CLI return the same relationship/duplicate-id diagnostic without rendered output (230.4093ms)
+✔ library and real CLI return the same guided-view/invalid diagnostic without rendered output (253.1555ms)
+✔ library and real CLI return the same workflow/required-edge diagnostic without rendered output (308.7746ms)
+✔ library and real CLI return the same brand/unknown diagnostic without rendered output (353.7352ms)
+✔ default resources retain pinned repository evidence in the result and CLI-identical HTML (2216.7133ms)
+✔ library and real CLI preserve the repository-evidence/root-required failure (916.5512ms)
+✔ library and real CLI preserve the repository-evidence/origin-mismatch failure (1177.9476ms)
+✔ library and real CLI preserve the repository-evidence/revision-unavailable failure (1518.0003ms)
+✔ library and real CLI preserve the repository-evidence/file-missing failure (1542.0512ms)
+✔ library and real CLI preserve the repository-evidence/line-out-of-range failure (1773.4743ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12127.6608

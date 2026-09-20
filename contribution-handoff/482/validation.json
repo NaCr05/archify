@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-20",
+  "repository": "tt-a1i/archify",
+  "originalPR482": "77b1fd52d4b651109310a665977f63b455544fc4",
+  "dev": "5769206e556e3a74a382b826ad84391080280ccc",
+  "testedHead": "c9933c471145d3152cb2d59782bf4c97b65978fb",
+  "actualMerge": "054ba7b4dec924b00aad143f87899cdfd9fc5127",
+  "sourceBranch": "test/workflow-library-resource-contracts",
+  "hostedCI": "Not included in this local evidence; run on the final integrated PR head",
+  "results": {
+    "windows22Contracts": {
+      "pass": 99,
+      "fail": 0,
+      "skip": 0
+    },
+    "linux22Full": {
+      "pass": 2045,
+      "fail": 0,
+      "skip": 76
+    },
+    "windows24ExtractedPackage": {
+      "pass": 23,
+      "fail": 0,
+      "skip": 0
+    },
+    "canonicalZip": "byte-identical",
+    "linuxPackageSmoke": "passed"
+  },
+  "cumulativePatch": {
+    "sha256": "74c156ed6442d8adfe0f08cb50ba05d990dda1bb90f32eee8a868cac23cc33c0",
+    "sourceBaseTree": "3060a5c7a3f7c4e851216ae9d1ff464c5d50f196",
+    "appliedAndCompared": true,
+    "excludesZIP": true
+  },
+  "package": {
+    "entries": 85,
+    "sha256": "b86f2a018165503249655b16f64046b639bf20e25a9b88ef3e8329d6a00228b9"
+  },
+  "limitations": [
+    "No real-browser acceptance",
+    "Skipped gates are not counted as passed",
+    "Focused source run predates the ZIP-only final commit; runtime/test sources are identical"
+  ]
+}

@@ -1,0 +1,136 @@
+TAP version 13
+# Subtest: completed library failures do not enter CLI history or erase existing CLI diagnostics
+not ok 1 - completed library failures do not enter CLI history or erase existing CLI diagnostics
+  ---
+  duration_ms: 254.302
+  type: 'test'
+  location: '<workspace>\\work\\archify-482-fixes-20260920\\candidate\\archify\\test\\workflow-library-api-diagnostics.test.mjs:50:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        'test/cli-existing',
+    +   'schema/required',
+    +   'schema/required',
+    +   'schema/required',
+    +   'schema/required',
+    +   'schema/required',
+    +   'schema/required',
+    +   'guided-view/invalid',
+    +   'guided-view/invalid',
+    +   'guided-view/invalid',
+    +   'workflow/unknown-node-lane',
+        'test/cli-current'
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'test/cli-existing'
+    1: 'test/cli-current'
+  actual:
+    0: 'test/cli-existing'
+    1: 'schema/required'
+    2: 'schema/required'
+    3: 'schema/required'
+    4: 'schema/required'
+    5: 'schema/required'
+    6: 'schema/required'
+    7: 'guided-view/invalid'
+    8: 'guided-view/invalid'
+    9: 'guided-view/invalid'
+    10: 'workflow/unknown-node-lane'
+    11: 'test/cli-current'
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertCliDiagnostics (file:///<workspace>/work/archify-482-fixes-20260920/candidate/archify/test/workflow-library-api-diagnostics.test.mjs:47:10)
+    TestContext.<anonymous> (file:///<workspace>/work/archify-482-fixes-20260920/candidate/archify/test/workflow-library-api-diagnostics.test.mjs:72:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: overlapping asynchronous library failures stay isolated from concurrent CLI recording
+not ok 2 - overlapping asynchronous library failures stay isolated from concurrent CLI recording
+  ---
+  duration_ms: 250.6338
+  type: 'test'
+  location: '<workspace>\\work\\archify-482-fixes-20260920\\candidate\\archify\\test\\workflow-library-api-diagnostics.test.mjs:75:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        'test/cli-concurrent',
+    +   'brand/digest-mismatch',
+        'test/cli-current'
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'test/cli-concurrent'
+    1: 'test/cli-current'
+  actual:
+    0: 'test/cli-concurrent'
+    1: 'brand/digest-mismatch'
+    2: 'test/cli-current'
+  operator: 'deepStrictEqual'
+  stack: |-
+    assertCliDiagnostics (file:///<workspace>/work/archify-482-fixes-20260920/candidate/archify/test/workflow-library-api-diagnostics.test.mjs:47:10)
+    TestContext.<anonymous> (file:///<workspace>/work/archify-482-fixes-20260920/candidate/archify/test/workflow-library-api-diagnostics.test.mjs:114:3)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: renderWorkflow keeps unspecified quality advisory regardless of the host environment
+not ok 3 - renderWorkflow keeps unspecified quality advisory regardless of the host environment
+  ---
+  duration_ms: 47.8557
+  type: 'test'
+  location: '<workspace>\\work\\archify-482-fixes-20260920\\candidate\\archify\\test\\workflow-library-api-quality.test.mjs:40:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'showcase'
+    - 'standard'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'standard'
+  actual: 'showcase'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///<workspace>/work/archify-482-fixes-20260920/candidate/archify/test/workflow-library-api-quality.test.mjs:52:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: renderWorkflow quality arguments and authored profiles control both acceptance and metadata
+ok 4 - renderWorkflow quality arguments and authored profiles control both acceptance and metadata
+  ---
+  duration_ms: 39.8936
+  type: 'test'
+  ...
+# Subtest: workflow CLI still resolves its quality profile from the environment
+ok 5 - workflow CLI still resolves its quality profile from the environment
+  ---
+  duration_ms: 546.2028
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 2
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 897.5972

@@ -1,0 +1,562 @@
+diff --git a/archify/renderers/shared/cli.mjs b/archify/renderers/shared/cli.mjs
+index de644a0..c33f8a2 100644
+--- a/archify/renderers/shared/cli.mjs
++++ b/archify/renderers/shared/cli.mjs
+@@ -375,13 +375,17 @@ export function validateCrossCollectionContracts(diagramType, diagram) {
+ }
+ 
+ // Accessible name for the generated diagram SVG.
+-export function svgRootAttrs(meta, explicitQualityProfile) {
++export function svgRootAttrs(meta, explicitQualityProfile, { profileIsAuthoritative = false } = {}) {
+   const animation = meta.animation === 'trace' ? ' data-animation="trace"' : '';
+   const preset = ` data-preset="${esc(meta.visual_preset || 'classic')}"`;
+   const engineeringProfile = meta.engineering_profile
+     ? ` data-engineering-profile="${esc(meta.engineering_profile)}"`
+     : '';
+-  const requestedProfile = explicitQualityProfile || process.env.ARCHIFY_QUALITY_PROFILE || meta.quality_profile;
++  // Compilers resolve their own profile, including an unspecified/advisory
++  // policy. Only CLI callers may fall back to the process environment here.
++  const requestedProfile = profileIsAuthoritative
++    ? explicitQualityProfile
++    : explicitQualityProfile || process.env.ARCHIFY_QUALITY_PROFILE || meta.quality_profile;
+   const qualityProfile = requestedProfile === 'showcase' ? 'showcase' : 'standard';
+   const advisory = requestedProfile ? '' : ' data-quality-gates="advisory"';
+   return `role="img" lang="${esc(resolveLocale(meta.locale))}" aria-labelledby="archify-diagram-title archify-diagram-description"${animation}${preset}${engineeringProfile} data-quality-profile="${esc(qualityProfile)}"${advisory}`;
+diff --git a/archify/renderers/shared/diagnostics.mjs b/archify/renderers/shared/diagnostics.mjs
+index 0b26736..9eaf364 100644
+--- a/archify/renderers/shared/diagnostics.mjs
++++ b/archify/renderers/shared/diagnostics.mjs
+@@ -1,3 +1,4 @@
++import { AsyncLocalStorage } from 'node:async_hooks';
+ import fs from 'node:fs';
+ import path from 'node:path';
+ 
+@@ -5,7 +6,7 @@ const DIAGNOSTIC_MODE = process.env.ARCHIFY_DIAGNOSTIC_FORMAT === 'json';
+ const recorded = [];
+ const recordedMessages = new Set();
+ const boundaryKey = Symbol.for('archify.renderer-diagnostic-boundary');
+-let recordingSuppressionDepth = 0;
++const recordingSuppression = new AsyncLocalStorage();
+ 
+ function plainObject(value) {
+   if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
+@@ -30,7 +31,7 @@ function normalizedDiagnostic(diagnostic) {
+ }
+ 
+ export function recordDiagnostic(diagnostic) {
+-  if (!DIAGNOSTIC_MODE || recordingSuppressionDepth > 0) return;
++  if (!DIAGNOSTIC_MODE || recordingSuppression.getStore()) return;
+   const normalized = normalizedDiagnostic(diagnostic);
+   if (recordedMessages.has(normalized.message)) return;
+   recordedMessages.add(normalized.message);
+@@ -38,12 +39,9 @@ export function recordDiagnostic(diagnostic) {
+ }
+ 
+ export function withDiagnosticRecordingSuppressed(callback) {
+-  recordingSuppressionDepth += 1;
+-  try {
+-    return callback();
+-  } finally {
+-    recordingSuppressionDepth -= 1;
+-  }
++  // Keep speculative synchronous work and asynchronous library calls out of
++  // CLI history without suppressing unrelated operations in the same process.
++  return recordingSuppression.run(true, callback);
+ }
+ 
+ export function throwDiagnosticError(message, diagnostics) {
+diff --git a/archify/renderers/workflow/workflow-api.mjs b/archify/renderers/workflow/workflow-api.mjs
+index 5438ca9..6496ced 100644
+--- a/archify/renderers/workflow/workflow-api.mjs
++++ b/archify/renderers/workflow/workflow-api.mjs
+@@ -1,11 +1,12 @@
+ import fs from 'node:fs';
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+-import { renderDiagramHtml, validateGuidedViews, validateRelationshipIds } from '../shared/cli.mjs';
++import { renderDiagramHtml, validateCrossCollectionContracts } from '../shared/cli.mjs';
+ import { validateEngineeringProfile } from '../shared/engineering-profiles.mjs';
+ import { validateSchema } from '../shared/validator.mjs';
+ import { verifyRepositoryEvidence } from '../shared/repository-evidence.mjs';
+ import { prepareDiagramBrandMarks } from '../shared/brand-marks.mjs';
++import { withDiagnosticRecordingSuppressed } from '../shared/diagnostics.mjs';
+ import { compileWorkflow } from './workflow-compiler.mjs';
+ 
+ const __dirname = path.dirname(fileURLToPath(import.meta.url));
+@@ -19,13 +20,17 @@ function readTemplate() {
+   return cachedTemplate;
+ }
+ 
+-// In-memory counterpart to render-workflow.mjs: same validation and resource
+-// preparation as the CLI's loadDiagramWithBrandMarks + compileWorkflow, minus
+-// argv/file I/O. Never installs the process-level diagnostics boundary, so an
+-// author-facing failure comes back as { ok: false } instead of taking down
+-// the host process; only an unclassified implementation error still throws.
++// In-memory counterpart to render-workflow.mjs: preserves document validation
++// and resource preparation from loadDiagramWithBrandMarks + compileWorkflow.
++// Template/repository reads and remote brand fetches can still perform I/O.
++// Never installs the process-level diagnostics boundary: classified failures
++// return { ok: false }; unclassified implementation errors still throw.
+ // The caller owns delivery: nothing here writes a file or claims completion.
+-export async function renderWorkflow({
++export async function renderWorkflow(options = {}) {
++  return withDiagnosticRecordingSuppressed(() => renderWorkflowInternal(options));
++}
++
++async function renderWorkflowInternal({
+   workflow,
+   qualityProfile,
+   repoRoot,
+@@ -40,8 +45,7 @@ export async function renderWorkflow({
+   let sourceEvidence = null;
+   try {
+     validateSchema('workflow', diagram);
+-    validateGuidedViews('workflow', diagram);
+-    validateRelationshipIds('workflow', diagram);
++    validateCrossCollectionContracts('workflow', diagram);
+     validateEngineeringProfile('workflow', diagram);
+     sourceEvidence = verifyRepositoryEvidence('workflow', diagram, repoRoot);
+     if (prepareBrandMarks) await prepareDiagramBrandMarks('workflow', diagram);
+diff --git a/archify/renderers/workflow/workflow-compiler.mjs b/archify/renderers/workflow/workflow-compiler.mjs
+index 6bc01ea..bee507e 100644
+--- a/archify/renderers/workflow/workflow-compiler.mjs
++++ b/archify/renderers/workflow/workflow-compiler.mjs
+@@ -4312,7 +4312,7 @@ function renderSvg() {
+     && asArray(layout.laneHeights).some((height) => height > 104)
+     ? ' data-reader-fit="intrinsic-height"'
+     : '';
+-  return `      <svg viewBox="0 0 ${viewBox[0]} ${viewBox[1]}"${readerFit} ${svgRootAttrs(workflow.meta, resolvedQualityProfile)}>
++  return `      <svg viewBox="0 0 ${viewBox[0]} ${viewBox[1]}"${readerFit} ${svgRootAttrs(workflow.meta, resolvedQualityProfile, { profileIsAuthoritative: true })}>
+ ${svgAccessibleText(workflow.meta, 'workflow')}
+ ${renderDefinitions()}
+ 
+diff --git a/archify/test/workflow-library-api-call-contract.test.mjs b/archify/test/workflow-library-api-call-contract.test.mjs
+index d71540a..122440a 100644
+--- a/archify/test/workflow-library-api-call-contract.test.mjs
++++ b/archify/test/workflow-library-api-call-contract.test.mjs
+@@ -82,12 +82,9 @@ test('renderWorkflow never installs the CLI-only process-level diagnostics bound
+   assert.equal(globalThis[BOUNDARY_KEY], undefined);
+ });
+ 
+-test('renderWorkflow enforces guided-view and relationship-id contracts that compileWorkflow alone skips', async () => {
++test('renderWorkflow enforces guided-view and relationship-id contracts', async () => {
+   const duplicateEdgeIds = workflow();
+   duplicateEdgeIds.edges.push({ id: 'ab', from: 'b', to: 'a', label: 'reply' });
+-  const bareCompile = compileWorkflow({ workflow: structuredClone(duplicateEdgeIds) });
+-  assert.equal(bareCompile.ok, true, 'compileWorkflow alone has no relationship-id uniqueness check');
+-
+   const viaLibrary = await renderWorkflow({ workflow: duplicateEdgeIds, prepareBrandMarks: false });
+   assert.equal(viaLibrary.ok, false);
+   assert.deepEqual(viaLibrary.diagnostics.map((entry) => entry.code), ['relationship/duplicate-id']);
+diff --git a/archify/test/workflow-library-api-diagnostics.test.mjs b/archify/test/workflow-library-api-diagnostics.test.mjs
+new file mode 100644
+index 0000000..b7c8333
+--- /dev/null
++++ b/archify/test/workflow-library-api-diagnostics.test.mjs
+@@ -0,0 +1,115 @@
++import assert from 'node:assert/strict';
++import { spawnSync } from 'node:child_process';
++import test from 'node:test';
++
++const apiUrl = new URL('../renderers/workflow/workflow-api.mjs', import.meta.url).href;
++const diagnosticUrl = new URL('../renderers/shared/diagnostics.mjs', import.meta.url).href;
++
++function workflow() {
++  return {
++    schema_version: 2,
++    diagram_type: 'workflow',
++    meta: { title: 'Library diagnostics', output: 'caller-owned.html', quality_profile: 'standard', legend: { mode: 'hidden' } },
++    lanes: [{ id: 'main', label: 'Main' }],
++    nodes: [
++      { id: 'a', lane: 'main', col: 0, type: 'frontend', label: 'Input', brand: 'openai' },
++      { id: 'b', lane: 'main', col: 3, type: 'backend', label: 'Output' },
++    ],
++    edges: [{ id: 'ab', from: 'a', to: 'b' }],
++  };
++}
++
++function runChild(program) {
++  const script = `
++    import assert from 'node:assert/strict';
++    import { renderWorkflow } from ${JSON.stringify(apiUrl)};
++    import { installRendererDiagnosticBoundary, recordDiagnostic, throwDiagnosticError } from ${JSON.stringify(diagnosticUrl)};
++    const workflow = ${workflow.toString()};
++    ${program}
++  `;
++  return spawnSync(process.execPath, ['--input-type=module', '--eval', script], {
++    encoding: 'utf8',
++    timeout: 20000,
++    env: {
++      ...process.env,
++      ARCHIFY_DIAGNOSTIC_FORMAT: 'json',
++      ARCHIFY_BRAND_ALLOW_PRIVATE: '1',
++      ARCHIFY_BRAND_CAPTURE_TIMEOUT_MS: '10000',
++    },
++  });
++}
++
++function assertCliDiagnostics(result, expectedCodes) {
++  assert.equal(result.status, 1, result.stderr || result.error?.message);
++  assert.equal(result.stdout, '');
++  const receipt = JSON.parse(result.stderr);
++  assert.equal(receipt.ok, false);
++  assert.deepEqual(receipt.diagnostics.map(({ code }) => code), expectedCodes);
++}
++
++test('completed library failures do not enter CLI history or erase existing CLI diagnostics', () => {
++  const result = runChild(`
++    recordDiagnostic({ code: 'test/cli-existing', message: 'Existing CLI diagnostic' });
++    const schemaFailure = await renderWorkflow({ workflow: {} });
++    assert.equal(schemaFailure.ok, false);
++    assert.ok(schemaFailure.diagnostics.every(({ code }) => code === 'schema/required'));
++    for (let index = 0; index < 3; index++) {
++      const invalid = workflow();
++      invalid.meta.views = [{ id: 'view', label: 'View', focus: ['missing-' + index] }];
++      const result = await renderWorkflow({ workflow: invalid });
++      assert.deepEqual(result.diagnostics.map(({ code }) => code), ['guided-view/invalid']);
++    }
++    const compilerInput = workflow();
++    compilerInput.nodes[0].lane = 'missing';
++    const compilerFailure = await renderWorkflow({ workflow: compilerInput });
++    assert.equal(compilerFailure.ok, false);
++    assert.ok(compilerFailure.diagnostics.some(({ code }) => code === 'workflow/unknown-node-lane'));
++    assert.equal((await renderWorkflow({ workflow: workflow() })).ok, true);
++    assert.equal(globalThis[Symbol.for('archify.renderer-diagnostic-boundary')], undefined);
++    installRendererDiagnosticBoundary();
++    setImmediate(() => throwDiagnosticError('Current CLI error', [{ code: 'test/cli-current', message: 'Current CLI error' }]));
++  `);
++  assertCliDiagnostics(result, ['test/cli-existing', 'test/cli-current']);
++});
++
++test('overlapping asynchronous library failures stay isolated from concurrent CLI recording', () => {
++  const result = runChild(`
++    const { default: http } = await import('node:http');
++    const { createHash } = await import('node:crypto');
++    const icon = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=', 'base64');
++    const digest = createHash('sha256').update(icon).digest('hex');
++    const responses = [];
++    let bothRequested;
++    const requestsStarted = new Promise(resolve => { bothRequested = resolve; });
++    const server = http.createServer((_request, response) => {
++      responses.push(response);
++      if (responses.length === 2) bothRequested();
++    });
++    await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
++    try {
++      const valid = workflow();
++      valid.nodes[0].brand = { url: 'http://127.0.0.1:' + server.address().port + '/mark.png', sha256: digest };
++      const invalid = structuredClone(valid);
++      invalid.nodes[0].brand.sha256 = '0'.repeat(64);
++      const failedCall = renderWorkflow({ workflow: invalid });
++      const successfulCall = renderWorkflow({ workflow: valid });
++      await requestsStarted;
++      // This continuation belongs to the caller, outside both library calls.
++      recordDiagnostic({ code: 'test/cli-concurrent', message: 'Concurrent CLI diagnostic' });
++      for (const response of responses) {
++        response.writeHead(200, { 'content-type': 'image/png' });
++        response.end(icon);
++      }
++      const [failed, successful] = await Promise.all([failedCall, successfulCall]);
++      assert.deepEqual(failed.diagnostics.map(({ code }) => code), ['brand/digest-mismatch']);
++      assert.equal(successful.ok, true, JSON.stringify(successful.diagnostics));
++      assert.match(successful.svg, /data-brand-status="captured"/);
++    } finally {
++      server.closeAllConnections?.();
++      await new Promise(resolve => server.close(resolve));
++    }
++    installRendererDiagnosticBoundary();
++    setImmediate(() => throwDiagnosticError('Current CLI error', [{ code: 'test/cli-current', message: 'Current CLI error' }]));
++  `);
++  assertCliDiagnostics(result, ['test/cli-concurrent', 'test/cli-current']);
++});
+diff --git a/archify/test/workflow-library-api-quality.test.mjs b/archify/test/workflow-library-api-quality.test.mjs
+new file mode 100644
+index 0000000..b0c1e92
+--- /dev/null
++++ b/archify/test/workflow-library-api-quality.test.mjs
+@@ -0,0 +1,99 @@
++import assert from 'node:assert/strict';
++import { spawnSync } from 'node:child_process';
++import fs from 'node:fs';
++import os from 'node:os';
++import path from 'node:path';
++import { fileURLToPath } from 'node:url';
++import test from 'node:test';
++
++import { renderWorkflow } from '../renderers/workflow/workflow-api.mjs';
++
++// An authored shared corridor is allowed in advisory/standard mode, but the
++// showcase contract rejects it. This distinguishes metadata from actual gates.
++function nestedCorridors() {
++  return {
++    schema_version: 2,
++    diagram_type: 'workflow',
++    meta: { title: 'Nested corridors', output: 'corridors.html', legend: { mode: 'hidden' } },
++    lanes: [0, 1, 2, 3].map(index => ({ id: `l${index}`, label: `Lane ${index}` })),
++    nodes: [
++      { id: 'outer-from', lane: 'l0', col: 0, type: 'backend', label: 'Outer from' },
++      { id: 'inner-from', lane: 'l1', col: 0, type: 'backend', label: 'Inner from' },
++      { id: 'inner-to', lane: 'l2', col: 2, type: 'database', label: 'Inner to' },
++      { id: 'outer-to', lane: 'l3', col: 2, type: 'database', label: 'Outer to' },
++    ],
++    edges: [
++      { id: 'outer', from: 'outer-from', to: 'outer-to', route: 'outside-right', channelX: 800, fromSide: 'right', toSide: 'right' },
++      { id: 'inner', from: 'inner-from', to: 'inner-to', route: 'outside-right', channelX: 800, fromSide: 'right', toSide: 'right' },
++    ],
++  };
++}
++
++function restoreProfile(t) {
++  const previous = process.env.ARCHIFY_QUALITY_PROFILE;
++  t.after(() => {
++    if (previous === undefined) delete process.env.ARCHIFY_QUALITY_PROFILE;
++    else process.env.ARCHIFY_QUALITY_PROFILE = previous;
++  });
++}
++
++test('renderWorkflow keeps unspecified quality advisory regardless of the host environment', async t => {
++  restoreProfile(t);
++  const document = nestedCorridors();
++  delete process.env.ARCHIFY_QUALITY_PROFILE;
++  const expected = await renderWorkflow({ workflow: document });
++  assert.equal(expected.ok, true, JSON.stringify(expected.diagnostics));
++  assert.match(expected.svg, /data-quality-gates="advisory"/);
++
++  for (const ambient of ['showcase', 'standard']) {
++    process.env.ARCHIFY_QUALITY_PROFILE = ambient;
++    const actual = await renderWorkflow({ workflow: document });
++    assert.equal(actual.ok, true, JSON.stringify(actual.diagnostics));
++    assert.equal(actual.svg.match(/data-quality-profile="([^"]+)"/)?.[1], 'standard');
++    assert.match(actual.svg, /data-quality-gates="advisory"/);
++    assert.equal(actual.svg, expected.svg);
++    assert.equal(actual.html, expected.html);
++  }
++});
++
++test('renderWorkflow quality arguments and authored profiles control both acceptance and metadata', async t => {
++  restoreProfile(t);
++  process.env.ARCHIFY_QUALITY_PROFILE = 'standard';
++  const document = nestedCorridors();
++  const explicitShowcase = await renderWorkflow({ workflow: document, qualityProfile: 'showcase' });
++  assert.equal(explicitShowcase.ok, false);
++  assert.ok(explicitShowcase.diagnostics.some(({ code }) => code === 'workflow/explicit-pin-conflict'));
++
++  document.meta.quality_profile = 'showcase';
++  const authoredShowcase = await renderWorkflow({ workflow: document });
++  assert.equal(authoredShowcase.ok, false);
++  assert.ok(authoredShowcase.diagnostics.some(({ code }) => code === 'workflow/explicit-pin-conflict'));
++
++  process.env.ARCHIFY_QUALITY_PROFILE = 'showcase';
++  const explicitStandard = await renderWorkflow({ workflow: document, qualityProfile: 'standard' });
++  assert.equal(explicitStandard.ok, true, JSON.stringify(explicitStandard.diagnostics));
++  assert.match(explicitStandard.svg, /data-quality-profile="standard"/);
++  assert.doesNotMatch(explicitStandard.svg, /data-quality-gates="advisory"/);
++});
++
++test('workflow CLI still resolves its quality profile from the environment', t => {
++  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'archify-api-quality-'));
++  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
++  const input = path.join(directory, 'workflow.json');
++  const output = path.join(directory, 'workflow.html');
++  fs.writeFileSync(input, JSON.stringify(nestedCorridors()));
++  const renderer = fileURLToPath(new URL('../renderers/workflow/render-workflow.mjs', import.meta.url));
++  const run = profile => spawnSync(process.execPath, [renderer, input, output], {
++    encoding: 'utf8',
++    timeout: 15000,
++    env: { ...process.env, ARCHIFY_QUALITY_PROFILE: profile, ARCHIFY_DIAGNOSTIC_FORMAT: 'json' },
++  });
++  const strict = run('showcase');
++  assert.equal(strict.status, 1, strict.stderr || strict.error?.message);
++  assert.ok(JSON.parse(strict.stderr).diagnostics.some(({ code }) => code === 'workflow/explicit-pin-conflict'));
++  assert.equal(fs.existsSync(output), false);
++
++  const standard = run('standard');
++  assert.equal(standard.status, 0, standard.stderr || standard.error?.message);
++  assert.match(fs.readFileSync(output, 'utf8'), /data-quality-profile="standard"/);
++});
+diff --git a/archify/test/workflow-library-api-resources.test.mjs b/archify/test/workflow-library-api-resources.test.mjs
+new file mode 100644
+index 0000000..402216b
+--- /dev/null
++++ b/archify/test/workflow-library-api-resources.test.mjs
+@@ -0,0 +1,180 @@
++import assert from 'node:assert/strict';
++import { spawnSync } from 'node:child_process';
++import fs from 'node:fs';
++import os from 'node:os';
++import path from 'node:path';
++import test from 'node:test';
++import { fileURLToPath } from 'node:url';
++
++import { renderWorkflow } from '../renderers/workflow/workflow-api.mjs';
++
++const renderer = fileURLToPath(new URL('../renderers/workflow/render-workflow.mjs', import.meta.url));
++
++function workflow() {
++  return {
++    schema_version: 2,
++    diagram_type: 'workflow',
++    meta: { title: 'Resource contracts', output: 'caller-owned.html', locale: 'en', quality_profile: 'standard', legend: { mode: 'hidden' } },
++    lanes: [{ id: 'main', label: 'Main' }],
++    nodes: [
++      { id: 'a', lane: 'main', col: 0, type: 'frontend', label: 'Input', brand: 'openai' },
++      { id: 'b', lane: 'main', col: 3, type: 'backend', label: 'Output', brand: 'github' },
++    ],
++    edges: [{ id: 'ab', from: 'a', to: 'b', label: 'request' }],
++  };
++}
++
++function deepFreeze(value) {
++  if (value && typeof value === 'object') {
++    Object.values(value).forEach(deepFreeze);
++    Object.freeze(value);
++  }
++  return value;
++}
++
++function directory(t) {
++  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'archify-api-resources-'));
++  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
++  return root;
++}
++
++function runRenderer(t, document, repoRoot) {
++  const root = directory(t);
++  const input = path.join(root, 'input.json');
++  const output = path.join(root, 'output.html');
++  fs.writeFileSync(input, JSON.stringify(document));
++  const env = { ...process.env, ARCHIFY_DIAGNOSTIC_FORMAT: 'json' };
++  delete env.ARCHIFY_QUALITY_PROFILE;
++  delete env.ARCHIFY_REPO_ROOT;
++  if (repoRoot) env.ARCHIFY_REPO_ROOT = repoRoot;
++  const result = spawnSync(process.execPath, [renderer, input, output], {
++    cwd: root,
++    encoding: 'utf8',
++    timeout: 30000,
++    env,
++  });
++  assert.ifError(result.error);
++  return { ...result, html: fs.existsSync(output) ? fs.readFileSync(output, 'utf8') : undefined };
++}
++
++async function assertFailureParity(t, document, code, repoRoot) {
++  const before = structuredClone(document);
++  const library = await renderWorkflow({ workflow: deepFreeze(document), repoRoot });
++  assert.equal(library.ok, false);
++  assert.equal(library.html, undefined);
++  assert.equal(library.svg, undefined);
++  assert.deepEqual(library.diagnostics.map(entry => entry.code), [code]);
++  assert.deepEqual(document, before);
++
++  const cli = runRenderer(t, document, repoRoot);
++  assert.equal(cli.status, 1, cli.stderr);
++  assert.equal(cli.stdout, '');
++  assert.equal(cli.html, undefined);
++  assert.deepEqual(JSON.parse(cli.stderr).diagnostics, library.diagnostics);
++}
++
++function repositoryFixture(t) {
++  const root = directory(t);
++  function git(...args) {
++    const result = spawnSync('git', ['-c', `safe.directory=${root}`, '-C', root, ...args], {
++      encoding: 'utf8',
++      timeout: 30000,
++    });
++    assert.ifError(result.error);
++    assert.equal(result.status, 0, result.stderr);
++    return result.stdout.trim();
++  }
++  fs.mkdirSync(path.join(root, 'src'));
++  fs.writeFileSync(path.join(root, 'src/router.js'), 'export function route(input) {\n  return input.kind;\n}\n');
++  git('init', '--quiet');
++  git('config', 'core.autocrlf', 'false');
++  git('remote', 'add', 'origin', 'https://github.com/example/archify-api-fixture');
++  git('add', 'src/router.js');
++  git('-c', 'user.name=Archify Fixture', '-c', 'user.email=fixture@example.invalid',
++    '-c', 'commit.gpgsign=false', 'commit', '--quiet', '-m', 'Synthetic evidence fixture');
++  const document = workflow();
++  document.meta.repository = {
++    url: 'https://github.com/example/archify-api-fixture',
++    revision: git('rev-parse', 'HEAD'),
++  };
++  document.nodes[0].sources = [{ path: 'src/router.js', line: 1, end_line: 3 }];
++  return { root, document };
++}
++
++test('default brand preparation preserves frozen inputs and matches real CLI output across repeated calls', async t => {
++  const document = deepFreeze(workflow());
++  const before = structuredClone(document);
++  const first = await renderWorkflow({ workflow: document });
++  assert.equal(first.ok, true, JSON.stringify(first.diagnostics));
++  assert.match(first.svg, /data-brand-mark="openai"/);
++  assert.match(first.svg, /data-brand-mark="github"/);
++
++  const alternate = workflow();
++  delete alternate.nodes[0].brand;
++  const [again, different, third] = await Promise.all([
++    renderWorkflow({ workflow: document }),
++    renderWorkflow({ workflow: alternate }),
++    renderWorkflow({ workflow: document }),
++  ]);
++  assert.deepEqual(again, first);
++  assert.deepEqual(third, first);
++  assert.equal(different.ok, true, JSON.stringify(different.diagnostics));
++  assert.doesNotMatch(different.svg, /data-brand-mark="openai"/);
++  assert.match(different.svg, /data-brand-mark="github"/);
++  assert.deepEqual(document, before);
++
++  const cli = runRenderer(t, document);
++  assert.equal(cli.status, 0, cli.stderr);
++  assert.equal(cli.html, first.html);
++});
++
++for (const { code, mutate } of [
++  { code: 'schema/type', mutate: document => { document.nodes[0].col = 'invalid'; } },
++  { code: 'relationship/duplicate-id', mutate: document => { document.edges.push({ id: 'ab', from: 'b', to: 'a' }); } },
++  { code: 'guided-view/invalid', mutate: document => { document.meta.views = [{ id: 'view', label: 'View', focus: ['missing'] }]; } },
++  { code: 'workflow/required-edge', mutate: document => { document.semanticChecks = { requiredEdges: [{ from: 'b', to: 'a' }] }; } },
++  { code: 'brand/unknown', mutate: document => { document.nodes[0].brand = 'archify-test-unknown-brand'; } },
++]) {
++  test(`library and real CLI return the same ${code} diagnostic without rendered output`, async t => {
++    const document = workflow();
++    mutate(document);
++    await assertFailureParity(t, document, code);
++  });
++}
++
++test('default resources retain pinned repository evidence in the result and CLI-identical HTML', async t => {
++  const { root, document } = repositoryFixture(t);
++  // Verification must use the pinned Git object, even when the working file
++  // no longer contains the authored line range.
++  fs.writeFileSync(path.join(root, 'src/router.js'), 'changed working tree\n');
++  const before = structuredClone(document);
++  const result = await renderWorkflow({ workflow: deepFreeze(document), repoRoot: root });
++  assert.equal(result.ok, true, JSON.stringify(result.diagnostics));
++  assert.equal(result.sourceEvidence.verified, true);
++  assert.equal(result.sourceEvidence.referenceCount, 1);
++  assert.equal(result.sourceEvidence.repository.revision, document.meta.repository.revision);
++  assert.match(result.sourceEvidence.nodes.a[0].href, /\/blob\/[a-f0-9]{40}\/src\/router\.js#L1-L3$/);
++  const payload = result.html.match(/<script id="archify-source-evidence-data" type="application\/json">([\s\S]*?)<\/script>/);
++  assert.ok(payload, 'Verified evidence must also reach the rendered HTML.');
++  assert.deepEqual(JSON.parse(payload[1]), JSON.parse(JSON.stringify(result.sourceEvidence)));
++  assert.match(result.svg, /data-brand-mark="openai"/);
++  assert.deepEqual(document, before);
++
++  const cli = runRenderer(t, document, root);
++  assert.equal(cli.status, 0, cli.stderr);
++  assert.equal(cli.html, result.html);
++});
++
++for (const { code, mutate, omitRoot } of [
++  { code: 'repository-evidence/root-required', omitRoot: true },
++  { code: 'repository-evidence/origin-mismatch', mutate: document => { document.meta.repository.url = 'https://github.com/example/different-repository'; } },
++  { code: 'repository-evidence/revision-unavailable', mutate: document => { document.meta.repository.revision = '0'.repeat(40); } },
++  { code: 'repository-evidence/file-missing', mutate: document => { document.nodes[0].sources[0].path = 'src/missing.js'; } },
++  { code: 'repository-evidence/line-out-of-range', mutate: document => { document.nodes[0].sources[0].end_line = 999; } },
++]) {
++  test(`library and real CLI preserve the ${code} failure`, async t => {
++    const { root, document } = repositoryFixture(t);
++    mutate?.(document);
++    await assertFailureParity(t, document, code, omitRoot ? undefined : root);
++  });
++}
