@@ -1,0 +1,320 @@
+TAP version 13
+# Subtest: render architecture: input read/parse and output failures name the failing operation
+ok 1 - render architecture: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 732.068701
+  type: 'test'
+  ...
+# Subtest: render architecture: successful direct and public rendering retain the output contract
+ok 2 - render architecture: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 298.865858
+  type: 'test'
+  ...
+# Subtest: render workflow: input read/parse and output failures name the failing operation
+ok 3 - render workflow: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 825.713126
+  type: 'test'
+  ...
+# Subtest: render workflow: successful direct and public rendering retain the output contract
+ok 4 - render workflow: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 484.116723
+  type: 'test'
+  ...
+# Subtest: render sequence: input read/parse and output failures name the failing operation
+ok 5 - render sequence: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 520.748867
+  type: 'test'
+  ...
+# Subtest: render sequence: successful direct and public rendering retain the output contract
+ok 6 - render sequence: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 294.926189
+  type: 'test'
+  ...
+# Subtest: render dataflow: input read/parse and output failures name the failing operation
+ok 7 - render dataflow: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 560.269093
+  type: 'test'
+  ...
+# Subtest: render dataflow: successful direct and public rendering retain the output contract
+ok 8 - render dataflow: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 303.581593
+  type: 'test'
+  ...
+# Subtest: render lifecycle: input read/parse and output failures name the failing operation
+ok 9 - render lifecycle: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 555.893055
+  type: 'test'
+  ...
+# Subtest: render lifecycle: successful direct and public rendering retain the output contract
+ok 10 - render lifecycle: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 330.341296
+  type: 'test'
+  ...
+# Subtest: render layout rejection exposes the existing diagnostic and preserves an existing artifact
+ok 11 - render layout rejection exposes the existing diagnostic and preserves an existing artifact
+  ---
+  duration_ms: 438.18393
+  type: 'test'
+  ...
+# Subtest: unexpected renderer exceptions keep native debugging information and are not relabelled as input errors
+ok 12 - unexpected renderer exceptions keep native debugging information and are not relabelled as input errors
+  ---
+  duration_ms: 146.814164
+  type: 'test'
+  ...
+# Subtest: a recorded layout diagnostic cannot hide a later unclassified exception
+ok 13 - a recorded layout diagnostic cannot hide a later unclassified exception
+  ---
+  duration_ms: 88.895251
+  type: 'test'
+  ...
+# Subtest: invalid output arguments keep their implementation error instead of a filesystem repair
+ok 14 - invalid output arguments keep their implementation error instead of a filesystem repair
+  ---
+  duration_ms: 197.417615
+  type: 'test'
+  ...
+# Subtest: renderer and standalone CLI format the same diagnostics consistently
+ok 15 - renderer and standalone CLI format the same diagnostics consistently
+  ---
+  duration_ms: 2.728132
+  type: 'test'
+  ...
+# Subtest: the renderer boundary delivers a receipt larger than the pipe buffer
+ok 16 - the renderer boundary delivers a receipt larger than the pipe buffer
+  ---
+  duration_ms: 63.785816
+  type: 'test'
+  ...
+# Subtest: the renderer boundary waits for a stalled reader instead of truncating
+ok 17 - the renderer boundary waits for a stalled reader instead of truncating
+  ---
+  duration_ms: 310.661292
+  type: 'test'
+  ...
+# Subtest: the renderer boundary keeps delivering receipts that fit in one write
+ok 18 - the renderer boundary keeps delivering receipts that fit in one write
+  ---
+  duration_ms: 25.21295
+  type: 'test'
+  ...
+# Subtest: workflow compiler import preserves host state outside the repository (human)
+ok 19 - workflow compiler import preserves host state outside the repository (human)
+  ---
+  duration_ms: 125.237919
+  type: 'test'
+  ...
+# Subtest: failed workflow compilation leaves a later exception to the host (human)
+ok 20 - failed workflow compilation leaves a later exception to the host (human)
+  ---
+  duration_ms: 154.495023
+  type: 'test'
+  ...
+# Subtest: workflow compiler import preserves host state outside the repository (json)
+ok 21 - workflow compiler import preserves host state outside the repository (json)
+  ---
+  duration_ms: 92.230479
+  type: 'test'
+  ...
+# Subtest: failed workflow compilation leaves a later exception to the host (json)
+ok 22 - failed workflow compilation leaves a later exception to the host (json)
+  ---
+  duration_ms: 87.576298
+  type: 'test'
+  ...
+# Subtest: architecture CLI installs JSON diagnostics before reading and validating input
+ok 23 - architecture CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 263.53923
+  type: 'test'
+  ...
+# Subtest: workflow CLI installs JSON diagnostics before reading and validating input
+ok 24 - workflow CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 247.817644
+  type: 'test'
+  ...
+# Subtest: sequence CLI installs JSON diagnostics before reading and validating input
+ok 25 - sequence CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 197.485395
+  type: 'test'
+  ...
+# Subtest: dataflow CLI installs JSON diagnostics before reading and validating input
+ok 26 - dataflow CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 229.665744
+  type: 'test'
+  ...
+# Subtest: lifecycle CLI installs JSON diagnostics before reading and validating input
+ok 27 - lifecycle CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 249.570908
+  type: 'test'
+  ...
+# Subtest: workflow v1: A/B/A compilation preserves frozen inputs and earlier results
+ok 28 - workflow v1: A/B/A compilation preserves frozen inputs and earlier results
+  ---
+  duration_ms: 41.844867
+  type: 'test'
+  ...
+# Subtest: workflow v1: failure/success calls retain independent result diagnostics
+ok 29 - workflow v1: failure/success calls retain independent result diagnostics
+  ---
+  duration_ms: 9.258915
+  type: 'test'
+  ...
+# Subtest: workflow v2: A/B/A compilation preserves frozen inputs and earlier results
+ok 30 - workflow v2: A/B/A compilation preserves frozen inputs and earlier results
+  ---
+  duration_ms: 23.522269
+  type: 'test'
+  ...
+# Subtest: workflow v2: failure/success calls retain independent result diagnostics
+ok 31 - workflow v2: failure/success calls retain independent result diagnostics
+  ---
+  duration_ms: 27.027417
+  type: 'test'
+  ...
+# Subtest: renderWorkflow preserves brands and matches CLI HTML with default options
+ok 32 - renderWorkflow preserves brands and matches CLI HTML with default options
+  ---
+  duration_ms: 291.885795
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns brand failures matching CLI diagnostics with default options
+ok 33 - renderWorkflow returns brand failures matching CLI diagnostics with default options
+  ---
+  duration_ms: 108.581949
+  type: 'test'
+  ...
+# Subtest: renderWorkflow preserves brands and matches CLI HTML with removed skip option
+ok 34 - renderWorkflow preserves brands and matches CLI HTML with removed skip option
+  ---
+  duration_ms: 189.49322
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns brand failures matching CLI diagnostics with removed skip option
+ok 35 - renderWorkflow returns brand failures matching CLI diagnostics with removed skip option
+  ---
+  duration_ms: 105.818772
+  type: 'test'
+  ...
+# Subtest: renderWorkflow prepares its own clone even when the caller already prepared brands
+ok 36 - renderWorkflow prepares its own clone even when the caller already prepared brands
+  ---
+  duration_ms: 15.224018
+  type: 'test'
+  ...
+# Subtest: branded renders remain independent across repeated, concurrent and failed calls
+ok 37 - branded renders remain independent across repeated, concurrent and failed calls
+  ---
+  duration_ms: 63.849042
+  type: 'test'
+  ...
+# Subtest: renderWorkflow requires a parsed document object, not argv or a path
+ok 38 - renderWorkflow requires a parsed document object, not argv or a path
+  ---
+  duration_ms: 1.738945
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns rendered output and matches the compiler used underneath
+ok 39 - renderWorkflow returns rendered output and matches the compiler used underneath
+  ---
+  duration_ms: 104.881155
+  type: 'test'
+  ...
+# Subtest: renderWorkflow never mutates the caller's document and stays independent across repeated/concurrent calls
+ok 40 - renderWorkflow never mutates the caller's document and stays independent across repeated/concurrent calls
+  ---
+  duration_ms: 96.109906
+  type: 'test'
+  ...
+# Subtest: renderWorkflow never installs the CLI-only process-level diagnostics boundary
+ok 41 - renderWorkflow never installs the CLI-only process-level diagnostics boundary
+  ---
+  duration_ms: 20.383144
+  type: 'test'
+  ...
+# Subtest: renderWorkflow enforces guided-view and relationship-id contracts
+ok 42 - renderWorkflow enforces guided-view and relationship-id contracts
+  ---
+  duration_ms: 0.917362
+  type: 'test'
+  ...
+# Subtest: renderWorkflow reports a compiler-level failure as data, not an exception
+ok 43 - renderWorkflow reports a compiler-level failure as data, not an exception
+  ---
+  duration_ms: 0.642876
+  type: 'test'
+  ...
+# Subtest: a failed renderWorkflow call does not leak diagnostics into a later unrelated CLI failure
+ok 44 - a failed renderWorkflow call does not leak diagnostics into a later unrelated CLI failure
+  ---
+  duration_ms: 216.363393
+  type: 'test'
+  ...
+# Subtest: renderWorkflow stays advisory regardless of an ambient ARCHIFY_QUALITY_PROFILE the caller never asked for
+ok 45 - renderWorkflow stays advisory regardless of an ambient ARCHIFY_QUALITY_PROFILE the caller never asked for
+  ---
+  duration_ms: 132.623768
+  type: 'test'
+  ...
+# Subtest: renderWorkflow still honors an explicit qualityProfile argument under the same ambient env
+ok 46 - renderWorkflow still honors an explicit qualityProfile argument under the same ambient env
+  ---
+  duration_ms: 23.87475
+  type: 'test'
+  ...
+1..46
+# tests 46
+# suites 0
+# pass 46
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5888.543694
+golden renders (renderer output must match checked-in examples)
+  ok    workflow: workflow-agent-tool-call-rendered.html
+  ok    workflow: packaged workflow-agent-tool-call-rendered.html
+  ok    sequence: sequence-cache-miss-request.html
+  ok    sequence: packaged sequence-cache-miss-request.html
+  ok    dataflow: dataflow-product-analytics.html
+  ok    dataflow: packaged dataflow-product-analytics.html
+  ok    lifecycle: lifecycle-agent-run.html
+  ok    lifecycle: packaged lifecycle-agent-run.html
+  ok    architecture: web-app-rendered.html
+  ok    architecture: packaged web-app-rendered.html
+schema enforcement (invalid JSON must fail with a path-prefixed message)
+  ok    card dot outside enum
+  ok    node id starting with a digit
+  ok    extra property rejected
+  ok    column beyond layout maximum
+  ok    missing schema_version
+  ok    cross-lane state overlap
+  ok    zero component width rejected by schema
+  ok    zero component height rejected by schema
+  ok    negative component width rejected by schema
+template freshness (architecture example must carry the current template)
+  ok    web-app.html style blocks match template
+  ok    web-app.html script blocks match template
+version sync
+  ok    template generator meta matches package.json version
+  ok    package-lock.json version matches package.json
+  ok    SKILL.md metadata version matches package.json major.minor
+  ok    README.md badge matches package.json version
+  ok    README_EN.md badge matches package.json version
+  ok    README_ZH.md badge matches package.json version
+  ok    GitHub Pages version labels match package.json
+
+all checks passed

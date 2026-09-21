@@ -1,0 +1,1 @@
+README example: valid branded diagram writes HTML; invalid brand returns diagnostics and does not overwrite the prior output.

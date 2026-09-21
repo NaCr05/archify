@@ -1,0 +1,286 @@
+TAP version 13
+# Subtest: renderWorkflow preserves brands and matches CLI HTML with default options
+ok 1 - renderWorkflow preserves brands and matches CLI HTML with default options
+  ---
+  duration_ms: 632.6337
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns brand failures matching CLI diagnostics with default options
+ok 2 - renderWorkflow returns brand failures matching CLI diagnostics with default options
+  ---
+  duration_ms: 249.6738
+  type: 'test'
+  ...
+# Subtest: renderWorkflow preserves brands and matches CLI HTML with removed skip option
+ok 3 - renderWorkflow preserves brands and matches CLI HTML with removed skip option
+  ---
+  duration_ms: 320.766
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns brand failures matching CLI diagnostics with removed skip option
+ok 4 - renderWorkflow returns brand failures matching CLI diagnostics with removed skip option
+  ---
+  duration_ms: 223.4457
+  type: 'test'
+  ...
+# Subtest: renderWorkflow prepares its own clone even when the caller already prepared brands
+ok 5 - renderWorkflow prepares its own clone even when the caller already prepared brands
+  ---
+  duration_ms: 17.267
+  type: 'test'
+  ...
+# Subtest: branded renders remain independent across repeated, concurrent and failed calls
+ok 6 - branded renders remain independent across repeated, concurrent and failed calls
+  ---
+  duration_ms: 64.1394
+  type: 'test'
+  ...
+# Subtest: renderWorkflow requires a parsed document object, not argv or a path
+ok 7 - renderWorkflow requires a parsed document object, not argv or a path
+  ---
+  duration_ms: 2.0484
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns rendered output and matches the compiler used underneath
+ok 8 - renderWorkflow returns rendered output and matches the compiler used underneath
+  ---
+  duration_ms: 182.9223
+  type: 'test'
+  ...
+# Subtest: renderWorkflow never mutates the caller's document and stays independent across repeated/concurrent calls
+ok 9 - renderWorkflow never mutates the caller's document and stays independent across repeated/concurrent calls
+  ---
+  duration_ms: 91.3626
+  type: 'test'
+  ...
+# Subtest: renderWorkflow never installs the CLI-only process-level diagnostics boundary
+ok 10 - renderWorkflow never installs the CLI-only process-level diagnostics boundary
+  ---
+  duration_ms: 44.0059
+  type: 'test'
+  ...
+# Subtest: renderWorkflow enforces guided-view and relationship-id contracts
+ok 11 - renderWorkflow enforces guided-view and relationship-id contracts
+  ---
+  duration_ms: 3.348
+  type: 'test'
+  ...
+# Subtest: renderWorkflow reports a compiler-level failure as data, not an exception
+ok 12 - renderWorkflow reports a compiler-level failure as data, not an exception
+  ---
+  duration_ms: 2.6544
+  type: 'test'
+  ...
+# Subtest: a failed renderWorkflow call does not leak diagnostics into a later unrelated CLI failure
+ok 13 - a failed renderWorkflow call does not leak diagnostics into a later unrelated CLI failure
+  ---
+  duration_ms: 478.0389
+  type: 'test'
+  ...
+# Subtest: renderWorkflow stays advisory regardless of an ambient ARCHIFY_QUALITY_PROFILE the caller never asked for
+ok 14 - renderWorkflow stays advisory regardless of an ambient ARCHIFY_QUALITY_PROFILE the caller never asked for
+  ---
+  duration_ms: 98.3664
+  type: 'test'
+  ...
+# Subtest: renderWorkflow still honors an explicit qualityProfile argument under the same ambient env
+ok 15 - renderWorkflow still honors an explicit qualityProfile argument under the same ambient env
+  ---
+  duration_ms: 68.9597
+  type: 'test'
+  ...
+# Subtest: render architecture: input read/parse and output failures name the failing operation
+ok 16 - render architecture: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 1678.0346
+  type: 'test'
+  ...
+# Subtest: render architecture: successful direct and public rendering retain the output contract
+ok 17 - render architecture: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 713.1912
+  type: 'test'
+  ...
+# Subtest: render workflow: input read/parse and output failures name the failing operation
+ok 18 - render workflow: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 1752.7373
+  type: 'test'
+  ...
+# Subtest: render workflow: successful direct and public rendering retain the output contract
+ok 19 - render workflow: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 1248.5448
+  type: 'test'
+  ...
+# Subtest: render sequence: input read/parse and output failures name the failing operation
+ok 20 - render sequence: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 1590.6183
+  type: 'test'
+  ...
+# Subtest: render sequence: successful direct and public rendering retain the output contract
+ok 21 - render sequence: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 860.8641
+  type: 'test'
+  ...
+# Subtest: render dataflow: input read/parse and output failures name the failing operation
+ok 22 - render dataflow: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 1434.5623
+  type: 'test'
+  ...
+# Subtest: render dataflow: successful direct and public rendering retain the output contract
+ok 23 - render dataflow: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 661.6236
+  type: 'test'
+  ...
+# Subtest: render lifecycle: input read/parse and output failures name the failing operation
+ok 24 - render lifecycle: input read/parse and output failures name the failing operation
+  ---
+  duration_ms: 1339.1433
+  type: 'test'
+  ...
+# Subtest: render lifecycle: successful direct and public rendering retain the output contract
+ok 25 - render lifecycle: successful direct and public rendering retain the output contract
+  ---
+  duration_ms: 636.058
+  type: 'test'
+  ...
+# Subtest: render layout rejection exposes the existing diagnostic and preserves an existing artifact
+ok 26 - render layout rejection exposes the existing diagnostic and preserves an existing artifact
+  ---
+  duration_ms: 1072.0711
+  type: 'test'
+  ...
+# Subtest: unexpected renderer exceptions keep native debugging information and are not relabelled as input errors
+ok 27 - unexpected renderer exceptions keep native debugging information and are not relabelled as input errors
+  ---
+  duration_ms: 361.524
+  type: 'test'
+  ...
+# Subtest: a recorded layout diagnostic cannot hide a later unclassified exception
+ok 28 - a recorded layout diagnostic cannot hide a later unclassified exception
+  ---
+  duration_ms: 374.5413
+  type: 'test'
+  ...
+# Subtest: invalid output arguments keep their implementation error instead of a filesystem repair
+ok 29 - invalid output arguments keep their implementation error instead of a filesystem repair
+  ---
+  duration_ms: 391.5018
+  type: 'test'
+  ...
+# Subtest: renderer and standalone CLI format the same diagnostics consistently
+ok 30 - renderer and standalone CLI format the same diagnostics consistently
+  ---
+  duration_ms: 5.9441
+  type: 'test'
+  ...
+# Subtest: the renderer boundary delivers a receipt larger than the pipe buffer
+ok 31 - the renderer boundary delivers a receipt larger than the pipe buffer
+  ---
+  duration_ms: 224.5083
+  type: 'test'
+  ...
+# Subtest: the renderer boundary waits for a stalled reader instead of truncating
+ok 32 - the renderer boundary waits for a stalled reader instead of truncating
+  ---
+  duration_ms: 367.1528
+  type: 'test'
+  ...
+# Subtest: the renderer boundary keeps delivering receipts that fit in one write
+ok 33 - the renderer boundary keeps delivering receipts that fit in one write
+  ---
+  duration_ms: 128.3753
+  type: 'test'
+  ...
+# Subtest: workflow compiler import preserves host state outside the repository (human)
+ok 34 - workflow compiler import preserves host state outside the repository (human)
+  ---
+  duration_ms: 254.8734
+  type: 'test'
+  ...
+# Subtest: failed workflow compilation leaves a later exception to the host (human)
+ok 35 - failed workflow compilation leaves a later exception to the host (human)
+  ---
+  duration_ms: 208.5613
+  type: 'test'
+  ...
+# Subtest: workflow compiler import preserves host state outside the repository (json)
+ok 36 - workflow compiler import preserves host state outside the repository (json)
+  ---
+  duration_ms: 226.8478
+  type: 'test'
+  ...
+# Subtest: failed workflow compilation leaves a later exception to the host (json)
+ok 37 - failed workflow compilation leaves a later exception to the host (json)
+  ---
+  duration_ms: 195.9491
+  type: 'test'
+  ...
+# Subtest: architecture CLI installs JSON diagnostics before reading and validating input
+ok 38 - architecture CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 570.0742
+  type: 'test'
+  ...
+# Subtest: workflow CLI installs JSON diagnostics before reading and validating input
+ok 39 - workflow CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 602.2708
+  type: 'test'
+  ...
+# Subtest: sequence CLI installs JSON diagnostics before reading and validating input
+ok 40 - sequence CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 545.5374
+  type: 'test'
+  ...
+# Subtest: dataflow CLI installs JSON diagnostics before reading and validating input
+ok 41 - dataflow CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 572.5495
+  type: 'test'
+  ...
+# Subtest: lifecycle CLI installs JSON diagnostics before reading and validating input
+ok 42 - lifecycle CLI installs JSON diagnostics before reading and validating input
+  ---
+  duration_ms: 658.8289
+  type: 'test'
+  ...
+# Subtest: workflow v1: A/B/A compilation preserves frozen inputs and earlier results
+ok 43 - workflow v1: A/B/A compilation preserves frozen inputs and earlier results
+  ---
+  duration_ms: 45.8158
+  type: 'test'
+  ...
+# Subtest: workflow v1: failure/success calls retain independent result diagnostics
+ok 44 - workflow v1: failure/success calls retain independent result diagnostics
+  ---
+  duration_ms: 5.7527
+  type: 'test'
+  ...
+# Subtest: workflow v2: A/B/A compilation preserves frozen inputs and earlier results
+ok 45 - workflow v2: A/B/A compilation preserves frozen inputs and earlier results
+  ---
+  duration_ms: 23.931
+  type: 'test'
+  ...
+# Subtest: workflow v2: failure/success calls retain independent result diagnostics
+ok 46 - workflow v2: failure/success calls retain independent result diagnostics
+  ---
+  duration_ms: 15.5135
+  type: 'test'
+  ...
+1..46
+# tests 46
+# suites 0
+# pass 46
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 14497.0193

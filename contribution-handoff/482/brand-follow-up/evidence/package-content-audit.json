@@ -1,0 +1,10 @@
+{
+  "baseEntries": 85,
+  "candidateEntries": 85,
+  "entryChanges": [],
+  "changedContent": [
+    "archify/renderers/workflow/README.md",
+    "archify/renderers/workflow/workflow-api.mjs"
+  ],
+  "modeChanges": []
+}

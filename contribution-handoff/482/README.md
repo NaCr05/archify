@@ -1,5 +1,7 @@
 # Workflow API #482: fixes and resource-contract handoff
 
+Latest: [2026-09-21 focused brand-resource correction](brand-follow-up/README.md), based on current PR head `62940dd`. Use that small follow-up for the maintainer's outstanding brand request. The older cumulative patch below targets the original PR history; the author has already independently implemented its quality/diagnostic fixes, so do not reapply that older patch wholesale.
+
 Contribution material for [tt-a1i/archify#482](https://github.com/tt-a1i/archify/pull/482), prepared on 2026-09-20 for the original author to integrate.
 
 - [Exact tested source](https://github.com/NaCr05/archify/tree/c9933c471145d3152cb2d59782bf4c97b65978fb): `c9933c471145d3152cb2d59782bf4c97b65978fb`.
