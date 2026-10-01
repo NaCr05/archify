@@ -1,0 +1,615 @@
+TAP version 13
+# Subtest: bounded service returns the same cached notice on repeated deliveries
+ok 1 - bounded service returns the same cached notice on repeated deliveries
+  ---
+  duration_ms: 451.062553
+  type: 'test'
+  ...
+# Subtest: service deadline kills a blocked child and leaves no later result
+ok 2 - service deadline kills a blocked child and leaves no later result
+  ---
+  duration_ms: 89.377786
+  type: 'test'
+  ...
+# Subtest: a slow network records its failed check before the deadline and backs off
+not ok 3 - a slow network records its failed check before the deadline and backs off
+  ---
+  duration_ms: 606.000212
+  type: 'test'
+  location: '/tmp/archify-533-recheck-wRquZk/base/archify/test/delivery-update.test.mjs:87:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + 'timeout'
+    - 'check-failed'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'check-failed'
+  actual: 'timeout'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/archify-533-recheck-wRquZk/base/archify/test/delivery-update.test.mjs:99:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: a synchronous renderer delay does not turn a completed check into a timeout
+ok 4 - a synchronous renderer delay does not turn a completed check into a timeout
+  ---
+  duration_ms: 990.009216
+  type: 'test'
+  ...
+# Subtest: a killed checker holding the cache claim can be followed by a new check
+ok 5 - a killed checker holding the cache claim can be followed by a new check
+  ---
+  duration_ms: 474.536876
+  type: 'test'
+  ...
+# Subtest: standalone deliver and finalize receipts include one update without changing diagram identity
+ok 6 - standalone deliver and finalize receipts include one update without changing diagram identity
+  ---
+  duration_ms: 2991.107562
+  type: 'test'
+  ...
+# Subtest: a failed finalize gate preserves update in full and compact receipts
+ok 7 - a failed finalize gate preserves update in full and compact receipts
+  ---
+  duration_ms: 57.714443
+  type: 'test'
+  ...
+# Subtest: a standalone delivery quality failure retains a known update
+ok 8 - a standalone delivery quality failure retains a known update
+  ---
+  duration_ms: 292.209739
+  type: 'test'
+  ...
+# Subtest: summary indexes every captured viewport/theme and preserves failed diagnostics
+not ok 9 - summary indexes every captured viewport/theme and preserves failed diagnostics
+  ---
+  duration_ms: 634.022204
+  type: 'test'
+  location: '/tmp/archify-533-recheck-wRquZk/base/archify/test/visual-check.test.mjs:33:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    0 !== 4
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 4
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/archify-533-recheck-wRquZk/base/archify/test/visual-check.test.mjs:39:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: findChrome discovers chrome.exe from a Windows PATH after default locations
+ok 10 - findChrome discovers chrome.exe from a Windows PATH after default locations
+  ---
+  duration_ms: 1.084309
+  type: 'test'
+  ...
+# Subtest: findChrome keeps an installed Windows Chrome ahead of PATH candidates
+ok 11 - findChrome keeps an installed Windows Chrome ahead of PATH candidates
+  ---
+  duration_ms: 0.242417
+  type: 'test'
+  ...
+# Subtest: findChrome checks Chromium command names on a Windows PATH
+ok 12 - findChrome checks Chromium command names on a Windows PATH
+  ---
+  duration_ms: 0.461194
+  type: 'test'
+  ...
+# Subtest: visual-check disables the Chrome sandbox only for root or an explicit environment opt-in
+ok 13 - visual-check disables the Chrome sandbox only for root or an explicit environment opt-in
+  ---
+  duration_ms: 0.262981
+  type: 'test'
+  ...
+# Subtest: visual-check converts a Chrome DevTools pipe reset and captured stderr into a structured failure
+ok 14 - visual-check converts a Chrome DevTools pipe reset and captured stderr into a structured failure
+  ---
+  duration_ms: 24.0664
+  type: 'test'
+  ...
+# Subtest: visual-check reports Chrome early exit status and stderr without an uncaught exception
+ok 15 - visual-check reports Chrome early exit status and stderr without an uncaught exception
+  ---
+  duration_ms: 7.080257
+  type: 'test'
+  ...
+# Subtest: visual-check records four containment viewports and four endpoint theme captures
+ok 16 - visual-check records four containment viewports and four endpoint theme captures
+  ---
+  duration_ms: 9.653481
+  type: 'test'
+  ...
+# Subtest: visual-check inspects a private snapshot even if the public artifact is replaced and restored
+ok 17 - visual-check inspects a private snapshot even if the public artifact is replaced and restored
+  ---
+  duration_ms: 7.435532
+  type: 'test'
+  ...
+# Subtest: visual-check uses and retires a short local snapshot with long evidence paths
+ok 18 - visual-check uses and retires a short local snapshot with long evidence paths
+  ---
+  duration_ms: 22.578212
+  type: 'test'
+  ...
+# Subtest: visual-check uses and retires a short local snapshot with long evidence paths after a browser failure
+ok 19 - visual-check uses and retires a short local snapshot with long evidence paths after a browser failure
+  ---
+  duration_ms: 8.265727
+  type: 'test'
+  ...
+# Subtest: visual-check retains and reports a local inspection directory that cannot be removed
+ok 20 - visual-check retains and reports a local inspection directory that cannot be removed
+  ---
+  duration_ms: 7.093274
+  type: 'test'
+  ...
+# Subtest: visual-check reports the retained local snapshot directory when its identity is unavailable
+ok 21 - visual-check reports the retained local snapshot directory when its identity is unavailable
+  ---
+  duration_ms: 4.818185
+  type: 'test'
+  ...
+# Subtest: visual-check preserves a replacement local snapshot directory that is empty and reports its location
+ok 22 - visual-check preserves a replacement local snapshot directory that is empty and reports its location
+  ---
+  duration_ms: 4.572703
+  type: 'test'
+  ...
+# Subtest: visual-check preserves a replacement local snapshot directory containing a file and reports its location
+ok 23 - visual-check preserves a replacement local snapshot directory containing a file and reports its location
+  ---
+  duration_ms: 3.367857
+  type: 'test'
+  ...
+# Subtest: visual-check preserves a regular screenshot claimant swapped before registration
+ok 24 - visual-check preserves a regular screenshot claimant swapped before registration
+  ---
+  duration_ms: 1073.273338
+  type: 'test'
+  ...
+# Subtest: visual-check preserves screenshot bytes changed after capture without an identity change
+ok 25 - visual-check preserves screenshot bytes changed after capture without an identity change
+  ---
+  duration_ms: 1076.941844
+  type: 'test'
+  ...
+# Subtest: visual-check cleanup preserves a successor swapped at its final removal boundary
+ok 26 - visual-check cleanup preserves a successor swapped at its final removal boundary
+  ---
+  duration_ms: 2143.967978
+  type: 'test'
+  ...
+# Subtest: sidecarPaths places outputs in outDir instead of beside the artifact
+ok 27 - sidecarPaths places outputs in outDir instead of beside the artifact
+  ---
+  duration_ms: 1.088637
+  type: 'test'
+  ...
+# Subtest: sidecarPaths keeps source-distinct case and Unicode names distinct under target semantics
+ok 28 - sidecarPaths keeps source-distinct case and Unicode names distinct under target semantics
+  ---
+  duration_ms: 10.281971
+  type: 'test'
+  ...
+# Subtest: visual-check writes all sidecars into --out-dir end-to-end, none beside the artifact
+ok 29 - visual-check writes all sidecars into --out-dir end-to-end, none beside the artifact
+  ---
+  duration_ms: 9.260001
+  type: 'test'
+  ...
+# Subtest: visual-check sidecar directory identity treats a physical alias as redundant
+ok 30 - visual-check sidecar directory identity treats a physical alias as redundant
+  ---
+  duration_ms: 20.013695
+  type: 'test'
+  ...
+# Subtest: visual-check preserves unowned receipt, contact-sheet, and screenshot path collisions
+ok 31 - visual-check preserves unowned receipt, contact-sheet, and screenshot path collisions
+  ---
+  duration_ms: 7.351962
+  type: 'test'
+  ...
+# Subtest: visual-check preserves receipt, contact-sheet, and PNG claimants created after preflight
+ok 32 - visual-check preserves receipt, contact-sheet, and PNG claimants created after preflight
+  ---
+  duration_ms: 14.63595
+  type: 'test'
+  ...
+# Subtest: visual-check preserves receipt, contact-sheet, and PNG replacements made after preflight
+ok 33 - visual-check preserves receipt, contact-sheet, and PNG replacements made after preflight
+  ---
+  duration_ms: 27.708683
+  type: 'test'
+  ...
+# Subtest: visual-check preserves a regular successor swapped at the backup link boundary
+ok 34 - visual-check preserves a regular successor swapped at the backup link boundary
+  ---
+  duration_ms: 1079.527592
+  type: 'test'
+  ...
+# Subtest: visual-check preserves a directory swapped at the backup link boundary
+ok 35 - visual-check preserves a directory swapped at the backup link boundary
+  ---
+  duration_ms: 9.250485
+  type: 'test'
+  ...
+# Subtest: visual-check preserves a FIFO swapped at the backup link boundary
+ok 36 - visual-check preserves a FIFO swapped at the backup link boundary
+  ---
+  duration_ms: 1094.461055
+  type: 'test'
+  ...
+# Subtest: visual-check preserves a symlink swapped at the backup link boundary
+ok 37 - visual-check preserves a symlink swapped at the backup link boundary
+  ---
+  duration_ms: 1080.334315
+  type: 'test'
+  ...
+# Subtest: visual-check preserves an in-place evidence edit made after preflight
+ok 38 - visual-check preserves an in-place evidence edit made after preflight
+  ---
+  duration_ms: 13.747214
+  type: 'test'
+  ...
+# Subtest: visual-check preserves an in-place backup edit made before cleanup
+ok 39 - visual-check preserves an in-place backup edit made before cleanup
+  ---
+  duration_ms: 18.031925
+  type: 'test'
+  ...
+# Subtest: visual-check refuses hard-linked receipt, contact-sheet, and PNG evidence without mutation
+ok 40 - visual-check refuses hard-linked receipt, contact-sheet, and PNG evidence without mutation
+  ---
+  duration_ms: 18.777364
+  type: 'test'
+  ...
+# Subtest: visual-check rejects an lstat-to-open symlink substitution without following it
+ok 41 - visual-check rejects an lstat-to-open symlink substitution without following it
+  ---
+  duration_ms: 1074.682643
+  type: 'test'
+  ...
+# Subtest: visual-check rejects an lstat-to-open FIFO substitution without blocking
+ok 42 - visual-check rejects an lstat-to-open FIFO substitution without blocking
+  ---
+  duration_ms: 1086.815377
+  type: 'test'
+  ...
+# Subtest: visual-check run rejects an artifact changed to a FIFO before open
+ok 43 - visual-check run rejects an artifact changed to a FIFO before open
+  ---
+  duration_ms: 65.354373
+  type: 'test'
+  ...
+# Subtest: visual-check persist-failure rejects an artifact changed to a FIFO before open
+ok 44 - visual-check persist-failure rejects an artifact changed to a FIFO before open
+  ---
+  duration_ms: 67.410931
+  type: 'test'
+  ...
+# Subtest: visual-check rejects a previous receipt changed to a FIFO before its content open
+ok 45 - visual-check rejects a previous receipt changed to a FIFO before its content open
+  ---
+  duration_ms: 75.510124
+  type: 'test'
+  ...
+# Subtest: visual-check preserves existing evidence modes under a restrictive umask
+ok 46 - visual-check preserves existing evidence modes under a restrictive umask
+  ---
+  duration_ms: 18.993351
+  type: 'test'
+  ...
+# Subtest: visual-check never follows the former predictable temporary symlink
+ok 47 - visual-check never follows the former predictable temporary symlink
+  ---
+  duration_ms: 4.140538
+  type: 'test'
+  ...
+# Subtest: visual-check preserves absent and replaced paths that become symlinks after preflight
+ok 48 - visual-check preserves absent and replaced paths that become symlinks after preflight
+  ---
+  duration_ms: 9.94311
+  type: 'test'
+  ...
+# Subtest: visual-check rejects a screenshot candidate externally hard-linked before registration
+ok 49 - visual-check rejects a screenshot candidate externally hard-linked before registration
+  ---
+  duration_ms: 4.962702
+  type: 'test'
+  ...
+# Subtest: visual-check rolls back when the staged contact-sheet gains an external hard link during publish
+ok 50 - visual-check rolls back when the staged contact-sheet gains an external hard link during publish
+  ---
+  duration_ms: 4.687535
+  type: 'test'
+  ...
+# Subtest: visual-check rolls back when the staged receipt gains an external hard link during publish
+ok 51 - visual-check rolls back when the staged receipt gains an external hard link during publish
+  ---
+  duration_ms: 3.087752
+  type: 'test'
+  ...
+# Subtest: visual-check keeps staged evidence identity-bound across public link creation
+ok 52 - visual-check keeps staged evidence identity-bound across public link creation
+  ---
+  duration_ms: 1084.995551
+  type: 'test'
+  ...
+# Subtest: visual-check final set sweep preserves a replacement of the early contact sheet
+ok 53 - visual-check final set sweep preserves a replacement of the early contact sheet
+  ---
+  duration_ms: 1091.138075
+  type: 'test'
+  ...
+# Subtest: visual-check final set sweep preserves a replacement of the early first screenshot
+ok 54 - visual-check final set sweep preserves a replacement of the early first screenshot
+  ---
+  duration_ms: 1096.15247
+  type: 'test'
+  ...
+# Subtest: visual-check rollback preserves an in-place edit to an already published member
+ok 55 - visual-check rollback preserves an in-place edit to an already published member
+  ---
+  duration_ms: 1084.283549
+  type: 'test'
+  ...
+# Subtest: visual-check rollback preserves a successor swapped at the public removal boundary
+ok 56 - visual-check rollback preserves a successor swapped at the public removal boundary
+  ---
+  duration_ms: 1082.625059
+  type: 'test'
+  ...
+# Subtest: visual-check restore rollback preserves a successor swapped at its public cleanup boundary
+ok 57 - visual-check restore rollback preserves a successor swapped at its public cleanup boundary
+  ---
+  duration_ms: 1096.274107
+  type: 'test'
+  ...
+# Subtest: visual-check keeps slow Chrome startup inside one bounded gate invocation
+ok 58 - visual-check keeps slow Chrome startup inside one bounded gate invocation
+  ---
+  duration_ms: 25.914208
+  type: 'test'
+  ...
+# Subtest: visual-check reports committed cleanup warning after backup unlink failure
+ok 59 - visual-check reports committed cleanup warning after backup unlink failure
+  ---
+  duration_ms: 1086.678557
+  type: 'test'
+  ...
+# Subtest: visual-check reports committed cleanup warning after staging rmdir failure
+ok 60 - visual-check reports committed cleanup warning after staging rmdir failure
+  ---
+  duration_ms: 1086.453815
+  type: 'test'
+  ...
+# Subtest: public visual-check CLI reports a committed cleanup warning
+ok 61 - public visual-check CLI reports a committed cleanup warning
+  ---
+  duration_ms: 1253.044212
+  type: 'test'
+  ...
+# Subtest: visual-check retries transient remote ENOTEMPTY during staging cleanup
+ok 62 - visual-check retries transient remote ENOTEMPTY during staging cleanup
+  ---
+  duration_ms: 11.759682
+  type: 'test'
+  ...
+# Subtest: visual-check closes staged bindings before SMB cleanup for successful evidence set
+ok 63 - visual-check closes staged bindings before SMB cleanup for successful evidence set
+  ---
+  duration_ms: 14.404889
+  type: 'test'
+  ...
+# Subtest: visual-check closes staged bindings before SMB cleanup for failure receipt
+ok 64 - visual-check closes staged bindings before SMB cleanup for failure receipt
+  ---
+  duration_ms: 4.063117
+  type: 'test'
+  ...
+# Subtest: visual-check closes staged bindings before SMB cleanup for publication rollback
+ok 65 - visual-check closes staged bindings before SMB cleanup for publication rollback
+  ---
+  duration_ms: 10.581586
+  type: 'test'
+  ...
+# Subtest: visual-check reports a claimant retained by deferred staging cleanup
+ok 66 - visual-check reports a claimant retained by deferred staging cleanup
+  ---
+  duration_ms: 2146.657286
+  type: 'test'
+  ...
+# Subtest: visual-check rolls back when staged evidence changes after receipt binding
+ok 67 - visual-check rolls back when staged evidence changes after receipt binding
+  ---
+  duration_ms: 1077.790169
+  type: 'test'
+  ...
+# Subtest: visual-check preserves digest-mismatched evidence instead of treating its receipt as ownership
+ok 68 - visual-check preserves digest-mismatched evidence instead of treating its receipt as ownership
+  ---
+  duration_ms: 10.134581
+  type: 'test'
+  ...
+# Subtest: public visual-check CLI preserves an unowned contact-sheet path
+ok 69 - public visual-check CLI preserves an unowned contact-sheet path
+  ---
+  duration_ms: 88.270557
+  type: 'test'
+  ...
+# Subtest: visual-check fails closed without writes when sidecar directory identity is unknown
+ok 70 - visual-check fails closed without writes when sidecar directory identity is unknown
+  ---
+  duration_ms: 3.08649
+  type: 'test'
+  ...
+# Subtest: visual-check returns 1 and preserves evidence when any viewport overflows
+ok 71 - visual-check returns 1 and preserves evidence when any viewport overflows
+  ---
+  duration_ms: 6.176173
+  type: 'test'
+  ...
+# Subtest: vertical overflow fixes state the stacked page budget and the actionable target
+ok 72 - vertical overflow fixes state the stacked page budget and the actionable target
+  ---
+  duration_ms: 0.393665
+  type: 'test'
+  ...
+# Subtest: visual-check reports the page composition when a viewport overflows vertically
+ok 73 - visual-check reports the page composition when a viewport overflows vertically
+  ---
+  duration_ms: 5.989302
+  type: 'test'
+  ...
+# Subtest: visual-check accepts only Reader-declared readable vertical page scrolling
+ok 74 - visual-check accepts only Reader-declared readable vertical page scrolling
+  ---
+  duration_ms: 8.194875
+  type: 'test'
+  ...
+# Subtest: visual-check still rejects horizontal overflow and unreadable text in Reader scroll state
+ok 75 - visual-check still rejects horizontal overflow and unreadable text in Reader scroll state
+  ---
+  duration_ms: 14.762147
+  type: 'test'
+  ...
+# Subtest: visual-check refuses changed delivery evidence before launching a browser
+ok 76 - visual-check refuses changed delivery evidence before launching a browser
+  ---
+  duration_ms: 22.754903
+  type: 'test'
+  ...
+# Subtest: visual-check failure persistence refuses an unowned non-file evidence path
+ok 77 - visual-check failure persistence refuses an unowned non-file evidence path
+  ---
+  duration_ms: 1.156143
+  type: 'test'
+  ...
+# Subtest: visual-check rechecks delivery evidence after capture and discards screenshots on failure
+ok 78 - visual-check rechecks delivery evidence after capture and discards screenshots on failure
+  ---
+  duration_ms: 7.923661
+  type: 'test'
+  ...
+# Subtest: visual-check preserves a screenshot-path claimant after post-capture provenance failure
+ok 79 - visual-check preserves a screenshot-path claimant after post-capture provenance failure
+  ---
+  duration_ms: 5.664396
+  type: 'test'
+  ...
+# Subtest: visual-check returns 1 when the real reader projects node text below 6px
+ok 80 - visual-check returns 1 when the real reader projects node text below 6px
+  ---
+  duration_ms: 4.537856
+  type: 'test'
+  ...
+# Subtest: visual-check returns 1 when the navigation dock obscures the SVG legend
+ok 81 - visual-check returns 1 when the navigation dock obscures the SVG legend
+  ---
+  duration_ms: 5.928126
+  type: 'test'
+  ...
+# Subtest: visual-check returns 1 when the navigation dock enters the SVG stage
+ok 82 - visual-check returns 1 when the navigation dock enters the SVG stage
+  ---
+  duration_ms: 7.593922
+  type: 'test'
+  ...
+# Subtest: visual-check describes insufficient stage clearance without claiming an overlap
+ok 83 - visual-check describes insufficient stage clearance without claiming an overlap
+  ---
+  duration_ms: 6.872383
+  type: 'test'
+  ...
+# Subtest: visual-check returns 1 and removes misleading capture sidecars on screenshot failure
+ok 84 - visual-check returns 1 and removes misleading capture sidecars on screenshot failure
+  ---
+  duration_ms: 11.300569
+  type: 'test'
+  ...
+# Subtest: visual-check returns 2 with a truthful skipped receipt when Chrome is unavailable
+ok 85 - visual-check returns 2 with a truthful skipped receipt when Chrome is unavailable
+  ---
+  duration_ms: 2.903153
+  type: 'test'
+  ...
+# Subtest: a no-Chrome rerun retires captures only when the successful receipt proves ownership
+ok 86 - a no-Chrome rerun retires captures only when the successful receipt proves ownership
+  ---
+  duration_ms: 10.405013
+  type: 'test'
+  ...
+# Subtest: vertical workflow overflow reports measured frames and conditional reflow guidance without changing the artifact
+ok 87 - vertical workflow overflow reports measured frames and conditional reflow guidance without changing the artifact
+  ---
+  duration_ms: 10.372718
+  type: 'test'
+  ...
+# Subtest: visual-check reports local inspection cleanup failure alongside an evidence target conflict
+ok 88 - visual-check reports local inspection cleanup failure alongside an evidence target conflict
+  ---
+  duration_ms: 5.993844
+  type: 'test'
+  ...
+# Subtest: browser-check proves rendered behavior without creating screenshots or requiring perceptual review
+ok 89 - browser-check proves rendered behavior without creating screenshots or requiring perceptual review
+  ---
+  duration_ms: 3.009966
+  type: 'test'
+  ...
+# Subtest: browser-check fails when an endpoint theme does not resolve without needing image inspection
+ok 90 - browser-check fails when an endpoint theme does not resolve without needing image inspection
+  ---
+  duration_ms: 2.036959
+  type: 'test'
+  ...
+# Subtest: browser-check rejects a mismatched light theme at the 1600px intermediate viewport
+ok 91 - browser-check rejects a mismatched light theme at the 1600px intermediate viewport
+  ---
+  duration_ms: 3.015928
+  type: 'test'
+  ...
+# Subtest: browser-check rejects a mismatched light theme at the 1920px intermediate viewport
+ok 92 - browser-check rejects a mismatched light theme at the 1920px intermediate viewport
+  ---
+  duration_ms: 10.545026
+  type: 'test'
+  ...
+# Subtest: visual-check rejects a mismatched light theme at the 1600px intermediate viewport
+ok 93 - visual-check rejects a mismatched light theme at the 1600px intermediate viewport
+  ---
+  duration_ms: 4.128532
+  type: 'test'
+  ...
+# Subtest: visual-check rejects a mismatched light theme at the 1920px intermediate viewport
+ok 94 - visual-check rejects a mismatched light theme at the 1920px intermediate viewport
+  ---
+  duration_ms: 5.296838
+  type: 'test'
+  ...
+# Subtest: authored Architecture scroll requires readable unclipped document flow and preserves other modes
+ok 95 - authored Architecture scroll requires readable unclipped document flow and preserves other modes
+  ---
+  duration_ms: 32.309735
+  type: 'test'
+  ...
+1..95
+# tests 95
+# suites 0
+# pass 93
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 30656.496895

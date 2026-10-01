@@ -1,0 +1,29 @@
+
+> astro-archify@0.4.2 test
+> vitest --run
+
+
+ RUN  v4.1.11 <task-root>/downstream-astro
+
+ ❯ test/integration.test.js (23 tests | 1 failed) 1913ms
+     × every complete ```archify JSON example in README.md actually renders 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/integration.test.js > README examples > every complete ```archify JSON example in README.md actually renders
+AssertionError: expected 0 to be greater than 0
+ ❯ test/integration.test.js:273:29
+    271|     }
+    272|     // Guards against silently having zero examples checked (e.g. a fe…
+    273|     expect(examples.length).toBeGreaterThan(0);
+       |                             ^
+    274|
+    275|     for (const ir of examples) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 28 passed (29)
+   Start at  23:10:01
+   Duration  3.08s (transform 130ms, setup 0ms, import 711ms, tests 3.95s, environment 0ms)

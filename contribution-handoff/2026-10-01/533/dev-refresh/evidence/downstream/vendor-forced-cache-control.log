@@ -1,0 +1,38 @@
+
+> astro-archify-astro-demo@0.1.0 build
+> astro build --force
+
+23:25:06 [WARN] [content] data store cleared (force)
+23:25:06 [astro-archify] Setting up Archify integration
+23:25:07 [content] Syncing content
+23:25:08 [astro-archify] astro-archify: rendered lifecycle diagram in <task-root>\downstream-astro\astro-demo\src\content\docs\lifecycle.md
+23:25:08 [astro-archify] astro-archify: rendered dataflow diagram in <task-root>\downstream-astro\astro-demo\src\content\docs\dataflow.md
+23:25:08 [astro-archify] astro-archify: rendered sequence diagram in <task-root>\downstream-astro\astro-demo\src\content\docs\sequence.md
+23:25:08 [astro-archify] astro-archify: rendered architecture diagram in <task-root>\downstream-astro\astro-demo\src\content\docs\architecture.md
+23:25:08 [astro-archify] astro-archify: rendered workflow diagram in <task-root>\downstream-astro\astro-demo\src\content\docs\workflow.md
+23:25:08 [content] Synced content
+23:25:08 [types] Generated 2.21s
+23:25:08 [build] output: "static"
+23:25:08 [build] mode: "static"
+23:25:08 [build] directory: <task-root>\downstream-astro\astro-demo\dist\
+23:25:08 [build] Collecting build info...
+23:25:08 [build] ✓ Completed in 2.41s.
+23:25:08 [build] Building static entrypoints...
+23:25:09 [astro-archify] astro-archify: rendered architecture diagram in <task-root>\downstream-astro\astro-demo\src\pages\index.md
+23:25:09 [vite] ✓ built in 772ms
+23:25:09 [vite] ✓ built in 40ms
+23:25:09 [build] Rearranging server assets...
+
+ generating static routes
+23:25:09   ├─ /docs/architecture/index.html (+34ms)
+23:25:09   ├─ /docs/dataflow/index.html (+6ms)
+23:25:09   ├─ /docs/lifecycle/index.html (+7ms)
+23:25:09   ├─ /docs/sequence/index.html (+5ms)
+23:25:09   ├─ /docs/workflow/index.html (+6ms)
+23:25:09   ├─ /index.html (+8ms)
+23:25:09 ✓ Completed in 126ms.
+
+23:25:09 [build] ✓ Completed in 1.04s.
+23:25:09 [astro-archify] astro-archify: wrote 6 diagram artifact(s) to <task-root>\downstream-astro\astro-demo\dist\_archify
+23:25:09 [build] 6 page(s) built in 3.48s
+23:25:09 [build] Complete!

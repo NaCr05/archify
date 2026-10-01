@@ -1,0 +1,12 @@
+
+> astro-archify@0.4.2 test
+> vitest --run
+
+
+ RUN  v4.1.11 <task-root>/downstream-astro
+
+
+ Test Files  2 passed (2)
+      Tests  29 passed (29)
+   Start at  23:13:33
+   Duration  3.09s (transform 97ms, setup 0ms, import 583ms, tests 4.79s, environment 1ms)

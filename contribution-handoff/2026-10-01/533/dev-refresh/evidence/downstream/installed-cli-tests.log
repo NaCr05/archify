@@ -1,0 +1,136 @@
+
+> astro-archify@0.4.2 test
+> vitest --run
+
+
+ RUN  v4.1.11 <task-root>/downstream-astro
+
+ ❯ test/integration.test.js (23 tests | 2 failed) 2485ms
+     × renders a real diagram end-to-end with no options at all 421ms
+     × every complete ```archify JSON example in README.md actually renders 417ms
+ ❯ test/vendor-renderer.test.js (6 tests | 2 failed) 3244ms
+     × renders workflow example v1-workflow-700x400.workflow.json (schema v1 workflow backward-compat check) 415ms
+     × renders sequence example cache-miss-request.sequence.json 446ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/integration.test.js > astroArchify with the bundled (default) Archify renderer > renders a real diagram end-to-end with no options at all
+Error: expected archify iframe in rendered HTML
+ ❯ iframeSrc test/helpers.mjs:77:21
+     75| export function iframeSrc(html) {
+     76|   const match = html.match(/<iframe src="([^"]+)"/);
+     77|   if (!match) throw new Error('expected archify iframe in rendered HTM…
+       |                     ^
+     78|   return match[1];
+     79| }
+ ❯ test/integration.test.js:250:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  test/integration.test.js > README examples > every complete ```archify JSON example in README.md actually renders
+AssertionError: README example failed to render:
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Sample Web App"
+  },
+  "components": [
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "API",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        120,
+        60
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "Database",
+      "pos": [
+        260,
+        40
+      ],
+      "size": [
+        120,
+        60
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "api",
+      "to": "db",
+      "label": "SQL"
+    }
+  ]
+}: expected '<div class="archify-diagram-error" st…' not to contain 'archify-diagram-error'
+
+- Expected
++ Received
+
+- archify-diagram-error
++ <div class="archify-diagram-error" style="color:#b91c1c;padding:1rem;border:1px solid #b91c1c;border-radius:0.5rem;"><strong>Archify failed to render "architecture" diagram:</strong> <span>Archify failed to render a &quot;architecture&quot; diagram: architecture schema validation failed:
++   /meta must have required property &#39;output&#39; {&quot;missingProperty&quot;:&quot;output&quot;} Fix: add required property &quot;output&quot;.</span></div>
+
+ ❯ test/integration.test.js:279:92
+    277|       const { tree } = await process(markdown, {});
+    278|       const html = htmlNodes(tree)[0].value;
+    279|       expect(html, `README example failed to render:\n${JSON.stringify…
+       |                                                                                            ^
+    280|     }
+    281|   }, 20000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  test/vendor-renderer.test.js > bundled Archify renderer regression fixtures > renders workflow example v1-workflow-700x400.workflow.json (schema v1 workflow backward-compat check)
+AssertionError: fixture v1-workflow-700x400.workflow.json failed to render: expected '<div class="archify-diagram-error" st…' not to contain 'archify-diagram-error'
+
+- Expected
++ Received
+
+- archify-diagram-error
++ <div class="archify-diagram-error" style="color:#b91c1c;padding:1rem;border:1px solid #b91c1c;border-radius:0.5rem;"><strong>Archify failed to render "workflow" diagram:</strong> <span>Archify failed to render a &quot;workflow&quot; diagram: workflow schema validation failed:
++   /meta must have required property &#39;output&#39; {&quot;missingProperty&quot;:&quot;output&quot;} Fix: add required property &quot;output&quot;.</span></div>
+
+ ❯ test/vendor-renderer.test.js:54:60
+     52|       const html = htmlNodes(tree)[0].value;
+     53|
+     54|       expect(html, `fixture ${file} failed to render`).not.toContain('…
+       |                                                            ^
+     55|
+     56|       const src = iframeSrc(html);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  test/vendor-renderer.test.js > bundled Archify renderer regression fixtures > renders sequence example cache-miss-request.sequence.json
+AssertionError: fixture cache-miss-request.sequence.json failed to render: expected '<div class="archify-diagram-error" st…' not to contain 'archify-diagram-error'
+
+- Expected
++ Received
+
+- archify-diagram-error
++ <div class="archify-diagram-error" style="color:#b91c1c;padding:1rem;border:1px solid #b91c1c;border-radius:0.5rem;"><strong>Archify failed to render "sequence" diagram:</strong> <span>Archify failed to render a &quot;sequence&quot; diagram: Sequence layout validation failed:
++ - Sequence content ends at y=668, leaving no room for the legend below it — set meta.viewBox[1] to at least 766 or omit meta.viewBox so the canvas grows.</span></div>
+
+ ❯ test/vendor-renderer.test.js:54:60
+     52|       const html = htmlNodes(tree)[0].value;
+     53|
+     54|       expect(html, `fixture ${file} failed to render`).not.toContain('…
+       |                                                            ^
+     55|
+     56|       const src = iframeSrc(html);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  4 failed | 25 passed (29)
+   Start at  23:17:19
+   Duration  3.92s (transform 128ms, setup 0ms, import 635ms, tests 5.73s, environment 0ms)

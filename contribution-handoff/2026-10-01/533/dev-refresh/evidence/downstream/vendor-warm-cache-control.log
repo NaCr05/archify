@@ -1,0 +1,32 @@
+
+> astro-archify-astro-demo@0.1.0 build
+> astro build
+
+23:25:15 [astro-archify] Setting up Archify integration
+23:25:16 [content] Syncing content
+23:25:16 [content] Synced content
+23:25:16 [types] Generated 1.09s
+23:25:16 [build] output: "static"
+23:25:16 [build] mode: "static"
+23:25:16 [build] directory: <task-root>\downstream-astro\astro-demo\dist\
+23:25:16 [build] Collecting build info...
+23:25:16 [build] ✓ Completed in 1.27s.
+23:25:16 [build] Building static entrypoints...
+23:25:17 [astro-archify] astro-archify: rendered architecture diagram in <task-root>\downstream-astro\astro-demo\src\pages\index.md
+23:25:17 [vite] ✓ built in 884ms
+23:25:17 [vite] ✓ built in 36ms
+23:25:17 [build] Rearranging server assets...
+
+ generating static routes
+23:25:17   ├─ /docs/architecture/index.html (+26ms)
+23:25:17   ├─ /docs/dataflow/index.html (+4ms)
+23:25:17   ├─ /docs/lifecycle/index.html (+4ms)
+23:25:17   ├─ /docs/sequence/index.html (+6ms)
+23:25:17   ├─ /docs/workflow/index.html (+11ms)
+23:25:17   ├─ /index.html (+10ms)
+23:25:17 ✓ Completed in 104ms.
+
+23:25:17 [build] ✓ Completed in 1.13s.
+23:25:17 [astro-archify] astro-archify: wrote 1 diagram artifact(s) to <task-root>\downstream-astro\astro-demo\dist\_archify
+23:25:17 [build] 6 page(s) built in 2.43s
+23:25:17 [build] Complete!

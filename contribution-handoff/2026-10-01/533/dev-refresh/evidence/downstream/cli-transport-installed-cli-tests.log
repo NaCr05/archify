@@ -1,0 +1,37 @@
+
+> astro-archify@0.4.2 test
+> vitest --run
+
+
+ RUN  v4.1.11 <task-root>/downstream-astro
+
+ ❯ test/vendor-renderer.test.js (6 tests | 1 failed) 4643ms
+     × renders sequence example cache-miss-request.sequence.json 650ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/vendor-renderer.test.js > bundled Archify renderer regression fixtures > renders sequence example cache-miss-request.sequence.json
+AssertionError: fixture cache-miss-request.sequence.json failed to render: expected '<div class="archify-diagram-error" st…' not to contain 'archify-diagram-error'
+
+- Expected
++ Received
+
+- archify-diagram-error
++ <div class="archify-diagram-error" style="color:#b91c1c;padding:1rem;border:1px solid #b91c1c;border-radius:0.5rem;"><strong>Archify failed to render "sequence" diagram:</strong> <span>Archify failed to render a &quot;sequence&quot; diagram: Sequence layout validation failed:
++ - Sequence content ends at y=668, leaving no room for the legend below it — set meta.viewBox[1] to at least 766 or omit meta.viewBox so the canvas grows.</span></div>
+
+ ❯ test/vendor-renderer.test.js:54:60
+     52|       const html = htmlNodes(tree)[0].value;
+     53|
+     54|       expect(html, `fixture ${file} failed to render`).not.toContain('…
+       |                                                            ^
+     55|
+     56|       const src = iframeSrc(html);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 28 passed (29)
+   Start at  23:20:53
+   Duration  5.53s (transform 143ms, setup 0ms, import 823ms, tests 8.50s, environment 0ms)

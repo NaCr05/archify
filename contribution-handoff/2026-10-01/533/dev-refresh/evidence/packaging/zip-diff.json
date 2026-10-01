@@ -1,0 +1,10 @@
+{
+  "base": "470c07274c0f5bf5c9b33a8405022da7b8bc359d",
+  "candidate": "6a30f574831c428fa7de67504e7b240552a60d37",
+  "entries": 106,
+  "content_changed": [
+    "archify/package.json"
+  ],
+  "added": [],
+  "removed": []
+}

@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: adapter source lives only under integrations/deepseek-harness with no root workspace
+ok 1 - adapter source lives only under integrations/deepseek-harness with no root workspace
+  ---
+  duration_ms: 2.43989
+  type: 'test'
+  ...
+# Subtest: publishable manifest is @tt-a1i/archify-dsh@0.2.0 with a DSH bundle patch and no install surface
+ok 2 - publishable manifest is @tt-a1i/archify-dsh@0.2.0 with a DSH bundle patch and no install surface
+  ---
+  duration_ms: 1.047987
+  type: 'test'
+  ...
+# Subtest: bundle patch inserts one uniquely named filesystem Skill provider resolved from the installed package
+ok 3 - bundle patch inserts one uniquely named filesystem Skill provider resolved from the installed package
+  ---
+  duration_ms: 2.691152
+  type: 'test'
+  ...
+# Subtest: distribution acceptance reserves stdout for its machine-readable JSON receipt
+ok 4 - distribution acceptance reserves stdout for its machine-readable JSON receipt
+  ---
+  duration_ms: 0.617026
+  type: 'test'
+  ...
+# Subtest: pack and acceptance enforce the pinned-runtime contract before executing it
+ok 5 - pack and acceptance enforce the pinned-runtime contract before executing it
+  ---
+  duration_ms: 0.634574
+  type: 'test'
+  ...
+# Subtest: distribution receipt separates canonical ZIP bytes from cross-platform content checks
+ok 6 - distribution receipt separates canonical ZIP bytes from cross-platform content checks
+  ---
+  duration_ms: 0.638834
+  type: 'test'
+  ...
+# Subtest: the repository still has exactly one checked-in Archify SKILL.md and no generated DSH payload
+ok 7 - the repository still has exactly one checked-in Archify SKILL.md and no generated DSH payload
+  ---
+  duration_ms: 15.595073
+  type: 'test'
+  ...
+# Subtest: Archify core does not import, detect, or branch on DeepSeek Harness
+ok 8 - Archify core does not import, detect, or branch on DeepSeek Harness
+  ---
+  duration_ms: 23.397945
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 127.582403

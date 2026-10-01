@@ -1,0 +1,51 @@
+23:35:09 [WARN] [content] data store cleared (force)
+23:35:09 [astro-archify] Setting up Archify integration
+23:35:10 [content] Syncing content
+23:35:10 [astro-archify] astro-archify: rendered lifecycle diagram in <task-root>\downstream-astro\starlight-demo\src\content\docs\lifecycle.md
+23:35:10 [astro-archify] astro-archify: rendered dataflow diagram in <task-root>\downstream-astro\starlight-demo\src\content\docs\dataflow.md
+23:35:11 [astro-archify] astro-archify: rendered sequence diagram in <task-root>\downstream-astro\starlight-demo\src\content\docs\sequence.md
+23:35:11 [astro-archify] astro-archify: rendered workflow diagram in <task-root>\downstream-astro\starlight-demo\src\content\docs\workflow.md
+23:35:11 [astro-archify] astro-archify: rendered architecture diagram in <task-root>\downstream-astro\starlight-demo\src\content\docs\architecture.md
+23:35:11 [content] Synced content
+23:35:11 [types] Generated 1.41s
+23:35:11 [build] output: "static"
+23:35:11 [build] mode: "static"
+23:35:11 [build] directory: <task-root>\downstream-astro\starlight-demo\dist\
+23:35:11 [build] Collecting build info...
+23:35:11 [build] ✓ Completed in 1.70s.
+23:35:11 [build] Building static entrypoints...
+23:35:11 [astro-archify] astro-archify: rendered architecture diagram in <task-root>\downstream-astro\starlight-demo\src\content\docs\index.mdx
+23:35:11 [WARN] [vite] [MODULE_LEVEL_DIRECTIVE] The semantics of the module level directive "use astro:head-inject" in "src/content/docs/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   ╭─[ src/content/docs/index.mdx?astroPropagatedAssets:2:6 ]
+   │
+ 2 │               "use astro:head-inject";
+   │               ────────────┬───────────
+   │                           ╰───────────── module level directive may not be preserved
+   │
+   │ Help: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+───╯
+
+23:35:11 [vite] ✓ built in 841ms
+23:35:12 [vite] ✓ built in 62ms
+23:35:12 [build] Rearranging server assets...
+
+ generating static routes
+23:35:12 [WARN] [content] The collection "i18n" does not exist or is empty. Please check your content config file for errors.
+23:35:12   ├─ /404.html23:35:12 [WARN] [content] Entry docs → 404 was not found.
+ (+31ms)
+23:35:12   ├─ /architecture/index.html (+7ms)
+23:35:12   ├─ /dataflow/index.html (+4ms)
+23:35:12   ├─ /index.html (+11ms)
+23:35:12   ├─ /lifecycle/index.html (+4ms)
+23:35:12   ├─ /sequence/index.html (+4ms)
+23:35:12   ├─ /workflow/index.html (+6ms)
+23:35:12 ✓ Completed in 120ms.
+
+23:35:12 [build] ✓ Completed in 1.09s.
+23:35:12 [astro-archify] astro-archify: wrote 6 diagram artifact(s) to <task-root>\downstream-astro\starlight-demo\dist\_archify
+23:35:12 [starlight:pagefind] Building search index with Pagefind...
+23:35:12 [starlight:pagefind] Found 13 HTML files.
+23:35:12 [starlight:pagefind] Finished building search index in 92ms.
+23:35:12 [WARN] [@astrojs/sitemap] The Sitemap integration requires the `site` astro.config option. Skipping.
+23:35:12 [build] 7 page(s) built in 2.91s
+23:35:12 [build] Complete!

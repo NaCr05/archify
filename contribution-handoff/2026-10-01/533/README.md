@@ -1,5 +1,7 @@
 # PR #533: isolated installation contracts
 
+Follow-up: [full dev refresh, rebuilt ZIP, and real downstream trial](dev-refresh/README.md). The notes below preserve the earlier reproduction against the original PR head.
+
 ## Source and scope
 
 - Original PR head: `ecab25aa3ead5d02d686fe551f4e747b9cceef4a`.

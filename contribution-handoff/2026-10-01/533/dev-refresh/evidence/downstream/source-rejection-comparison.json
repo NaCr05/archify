@@ -1,0 +1,30 @@
+[
+  {
+    "type": "workflow",
+    "installedExit": 1,
+    "sourceExit": 1,
+    "title": "Legacy narrow workflow",
+    "diagnostic": "{\"schemaVersion\":1,\"ok\":false,\"source\":\"renderer\",\"error\":\"workflow schema validation failed:\\n  /meta must have required property 'output' {\\\"missingProperty\\\":\\\"output\\\"}\",\"diagnostics\":[{\"code\":\"schema/required\",\"severity\":\"error\",\"message\":\"/meta must have required property 'output' {\\\"missingProperty\\\":\\\"output\\\"}\",\"subject\":{\"diagramType\":\"workflow\",\"path\":\"/meta\"},\"evidence\":{\"keyword\":\"required\",\"missingProperty\":\"output\"},\"supportedFixes\":[\"add required property \\\"output\\\"\"]}]}"
+  },
+  {
+    "type": "architecture",
+    "installedExit": 1,
+    "sourceExit": 1,
+    "title": "Bundled renderer smoke test",
+    "diagnostic": "{\"schemaVersion\":1,\"ok\":false,\"source\":\"renderer\",\"error\":\"architecture schema validation failed:\\n  /meta must have required property 'output' {\\\"missingProperty\\\":\\\"output\\\"}\",\"diagnostics\":[{\"code\":\"schema/required\",\"severity\":\"error\",\"message\":\"/meta must have required property 'output' {\\\"missingProperty\\\":\\\"output\\\"}\",\"subject\":{\"diagramType\":\"architecture\",\"path\":\"/meta\"},\"evidence\":{\"keyword\":\"required\",\"missingProperty\":\"output\"},\"supportedFixes\":[\"add required property \\\"output\\\"\"]}]}"
+  },
+  {
+    "type": "sequence",
+    "installedExit": 1,
+    "sourceExit": 1,
+    "title": "Cache Miss Request Sequence",
+    "diagnostic": "{\"schemaVersion\":1,\"ok\":false,\"source\":\"renderer\",\"error\":\"Sequence layout validation failed:\\n- Sequence content ends at y=668, leaving no room for the legend below it — set meta.viewBox[1] to at least 766 or omit meta.viewBox so the canvas grows.\",\"diagnostics\":[{\"code\":\"layout/constraint\",\"severity\":\"error\",\"message\":\"Sequence content ends at y=668, leaving no room for the legend below it — set meta.viewBox[1] to at least 766 or omit meta.viewBox so the canvas grows.\",\"subject\":{\"diagramType\":\"sequence\"},\"evidence\":{},\"supportedFixes\":[]}]}"
+  },
+  {
+    "type": "architecture",
+    "installedExit": 1,
+    "sourceExit": 1,
+    "title": "Sample Web App",
+    "diagnostic": "{\"schemaVersion\":1,\"ok\":false,\"source\":\"renderer\",\"error\":\"architecture schema validation failed:\\n  /meta must have required property 'output' {\\\"missingProperty\\\":\\\"output\\\"}\",\"diagnostics\":[{\"code\":\"schema/required\",\"severity\":\"error\",\"message\":\"/meta must have required property 'output' {\\\"missingProperty\\\":\\\"output\\\"}\",\"subject\":{\"diagramType\":\"architecture\",\"path\":\"/meta\"},\"evidence\":{\"keyword\":\"required\",\"missingProperty\":\"output\"},\"supportedFixes\":[\"add required property \\\"output\\\"\"]}]}"
+  }
+]

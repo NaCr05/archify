@@ -1,0 +1,276 @@
+{
+  "astroSource": "1f5e15b210094f9f94ea95ef5c2b685fc810468a",
+  "archifySource": "6a30f574831c428fa7de67504e7b240552a60d37",
+  "node": "22.23.2",
+  "platform": "win32",
+  "steps": [
+    {
+      "name": "baseline-tests",
+      "code": 0,
+      "seconds": 4.4
+    },
+    {
+      "name": "astro-demo-install",
+      "code": 0,
+      "seconds": 128.1
+    },
+    {
+      "name": "astro-demo-baseline-build",
+      "code": 0,
+      "seconds": 7.4
+    },
+    {
+      "name": "starlight-demo-install",
+      "code": 0,
+      "seconds": 70.1
+    },
+    {
+      "name": "starlight-demo-baseline-build",
+      "code": 0,
+      "seconds": 12.1
+    },
+    {
+      "name": "install-verified-tarball",
+      "code": 0,
+      "seconds": 3.4
+    },
+    {
+      "name": "apply-cli-adapter",
+      "code": 0,
+      "seconds": 0.1
+    },
+    {
+      "name": "installed-cli-tests",
+      "code": 1,
+      "seconds": 5.4
+    },
+    {
+      "name": "installed-cli-tests",
+      "phase": "cli-transport",
+      "code": 1,
+      "seconds": 7.4
+    },
+    {
+      "name": "astro-demo-installed-build",
+      "phase": "cli-transport",
+      "code": 0,
+      "seconds": 7.7
+    },
+    {
+      "name": "installed-cli-tests",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 7.2
+    },
+    {
+      "name": "astro-demo-installed-build",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 6.8
+    },
+    {
+      "name": "starlight-demo-installed-build",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 13.5
+    },
+    {
+      "name": "parity-0",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-1",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.8
+    },
+    {
+      "name": "parity-2",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-3",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-4",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-5",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-6",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-7",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.7
+    },
+    {
+      "name": "parity-8",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.8
+    },
+    {
+      "name": "parity-9",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-10",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-11",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-12",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.8
+    },
+    {
+      "name": "parity-13",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.5
+    },
+    {
+      "name": "parity-14",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-15",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-16",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "parity-17",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.7
+    },
+    {
+      "name": "parity-18",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 1
+    },
+    {
+      "name": "parity-19",
+      "phase": "adapted",
+      "code": 0,
+      "seconds": 0.6
+    }
+  ],
+  "checkoutNormalization": {
+    "readmeCRLFtoTrackedLF": true
+  },
+  "baseline": [
+    {
+      "demo": "astro-demo",
+      "astroVersion": "7.3.5",
+      "diagrams": 6,
+      "iframes": 6,
+      "errorBlocks": 0
+    },
+    {
+      "demo": "starlight-demo",
+      "astroVersion": "7.3.5",
+      "diagrams": 6,
+      "iframes": 6,
+      "errorBlocks": 0
+    }
+  ],
+  "tarball": {
+    "filename": "tt-a1i-archify-3.0.2-dev.1.tgz",
+    "integrity": "sha512-1hGYrXj0O/kD2toJbsK3apoXavviAW8Rn4uS0Kx89/HLyRSnMjbKDCOY5BuDCZtC0CQqZ/XxfmGkFiZSWbgt1w==",
+    "sha256": "58959e7f501a4fd6cdd528c3c7c825237cabc41e6d1df9908d2e2f42c4653161"
+  },
+  "candidate": [
+    {
+      "demo": "astro-demo",
+      "astroVersion": "7.3.5",
+      "diagrams": 6,
+      "iframes": 6,
+      "errorBlocks": 0
+    },
+    {
+      "demo": "starlight-demo",
+      "astroVersion": "7.3.5",
+      "diagrams": 6,
+      "iframes": 6,
+      "errorBlocks": 0
+    }
+  ],
+  "publicCliInvocations": 20,
+  "diagramTypes": [
+    "architecture",
+    "dataflow",
+    "lifecycle",
+    "sequence",
+    "workflow"
+  ],
+  "vendorUnavailable": true,
+  "buildCoverage": [
+    {
+      "demo": "astro-demo",
+      "publicCliCalls": 6,
+      "diagramTypes": [
+        "architecture",
+        "dataflow",
+        "lifecycle",
+        "sequence",
+        "workflow"
+      ]
+    },
+    {
+      "demo": "starlight-demo",
+      "publicCliCalls": 6,
+      "diagramTypes": [
+        "architecture",
+        "dataflow",
+        "lifecycle",
+        "sequence",
+        "workflow"
+      ]
+    }
+  ],
+  "sourceParity": {
+    "successfulBytesMatched": 20,
+    "failureStatusesMatched": 0,
+    "compared": 20
+  }
+}

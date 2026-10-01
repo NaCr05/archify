@@ -1,0 +1,24 @@
+{
+  "source": "1f5e15b210094f9f94ea95ef5c2b685fc810468a",
+  "integration": "unmodified vendored implementation",
+  "forced": {
+    "name": "vendor-forced-cache-control",
+    "buildExit": 0,
+    "iframes": 6,
+    "diagrams": 6,
+    "missing": []
+  },
+  "warm": {
+    "name": "vendor-warm-cache-control",
+    "buildExit": 0,
+    "iframes": 6,
+    "diagrams": 1,
+    "missing": [
+      "/_archify/fa6085e7cbbfbb01.html",
+      "/_archify/93e86da6e734500a.html",
+      "/_archify/3492c62baa8d4d14.html",
+      "/_archify/dcbe2a7ff5766242.html",
+      "/_archify/18521476e65f275c.html"
+    ]
+  }
+}
