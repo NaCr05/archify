@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: renderWorkflow returns pinned repository evidence in both its result and CLI-equivalent HTML
+not ok 1 - renderWorkflow returns pinned repository evidence in both its result and CLI-equivalent HTML
+  ---
+  duration_ms: 145.613197
+  type: 'test'
+  location: '/tmp/archify-482-evidence-bMo7d2/checkout/archify/test/workflow-library-api-repository-evidence.test.mjs:48:1'
+  failureType: 'testCodeFailure'
+  error: 'rendered HTML must include verified repository evidence'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: ~
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/archify-482-evidence-bMo7d2/checkout/archify/test/workflow-library-api-repository-evidence.test.mjs:66:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: renderWorkflow classifies a missing repoRoot for authored repository evidence
+ok 2 - renderWorkflow classifies a missing repoRoot for authored repository evidence
+  ---
+  duration_ms: 42.574367
+  type: 'test'
+  ...
+# Subtest: renderWorkflow rejects a source absent from the pinned commit even when it exists locally
+ok 3 - renderWorkflow rejects a source absent from the pinned commit even when it exists locally
+  ---
+  duration_ms: 52.239889
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 2
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 448.605297

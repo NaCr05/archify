@@ -1,0 +1,118 @@
+TAP version 13
+# Subtest: renderWorkflow preserves brands and matches CLI HTML with default options
+ok 1 - renderWorkflow preserves brands and matches CLI HTML with default options
+  ---
+  duration_ms: 288.018104
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns brand failures matching CLI diagnostics with default options
+ok 2 - renderWorkflow returns brand failures matching CLI diagnostics with default options
+  ---
+  duration_ms: 136.953273
+  type: 'test'
+  ...
+# Subtest: renderWorkflow preserves brands and matches CLI HTML with removed skip option
+ok 3 - renderWorkflow preserves brands and matches CLI HTML with removed skip option
+  ---
+  duration_ms: 280.555142
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns brand failures matching CLI diagnostics with removed skip option
+ok 4 - renderWorkflow returns brand failures matching CLI diagnostics with removed skip option
+  ---
+  duration_ms: 172.381767
+  type: 'test'
+  ...
+# Subtest: renderWorkflow prepares its own clone even when the caller already prepared brands
+ok 5 - renderWorkflow prepares its own clone even when the caller already prepared brands
+  ---
+  duration_ms: 27.288606
+  type: 'test'
+  ...
+# Subtest: branded renders remain independent across repeated, concurrent and failed calls
+ok 6 - branded renders remain independent across repeated, concurrent and failed calls
+  ---
+  duration_ms: 109.426687
+  type: 'test'
+  ...
+# Subtest: renderWorkflow requires a parsed document object, not argv or a path
+ok 7 - renderWorkflow requires a parsed document object, not argv or a path
+  ---
+  duration_ms: 1.831217
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns rendered output and matches the compiler used underneath
+ok 8 - renderWorkflow returns rendered output and matches the compiler used underneath
+  ---
+  duration_ms: 83.64999
+  type: 'test'
+  ...
+# Subtest: renderWorkflow never mutates the caller's document and stays independent across repeated/concurrent calls
+ok 9 - renderWorkflow never mutates the caller's document and stays independent across repeated/concurrent calls
+  ---
+  duration_ms: 91.964561
+  type: 'test'
+  ...
+# Subtest: renderWorkflow never installs the CLI-only process-level diagnostics boundary
+ok 10 - renderWorkflow never installs the CLI-only process-level diagnostics boundary
+  ---
+  duration_ms: 18.90103
+  type: 'test'
+  ...
+# Subtest: renderWorkflow enforces guided-view and relationship-id contracts
+ok 11 - renderWorkflow enforces guided-view and relationship-id contracts
+  ---
+  duration_ms: 1.586773
+  type: 'test'
+  ...
+# Subtest: renderWorkflow reports a compiler-level failure as data, not an exception
+ok 12 - renderWorkflow reports a compiler-level failure as data, not an exception
+  ---
+  duration_ms: 1.279943
+  type: 'test'
+  ...
+# Subtest: a failed renderWorkflow call does not leak diagnostics into a later unrelated CLI failure
+ok 13 - a failed renderWorkflow call does not leak diagnostics into a later unrelated CLI failure
+  ---
+  duration_ms: 218.157905
+  type: 'test'
+  ...
+# Subtest: renderWorkflow stays advisory regardless of an ambient ARCHIFY_QUALITY_PROFILE the caller never asked for
+ok 14 - renderWorkflow stays advisory regardless of an ambient ARCHIFY_QUALITY_PROFILE the caller never asked for
+  ---
+  duration_ms: 116.710935
+  type: 'test'
+  ...
+# Subtest: renderWorkflow still honors an explicit qualityProfile argument under the same ambient env
+ok 15 - renderWorkflow still honors an explicit qualityProfile argument under the same ambient env
+  ---
+  duration_ms: 30.135255
+  type: 'test'
+  ...
+# Subtest: renderWorkflow returns pinned repository evidence in both its result and CLI-equivalent HTML
+ok 16 - renderWorkflow returns pinned repository evidence in both its result and CLI-equivalent HTML
+  ---
+  duration_ms: 405.399621
+  type: 'test'
+  ...
+# Subtest: renderWorkflow classifies a missing repoRoot for authored repository evidence
+ok 17 - renderWorkflow classifies a missing repoRoot for authored repository evidence
+  ---
+  duration_ms: 29.007369
+  type: 'test'
+  ...
+# Subtest: renderWorkflow rejects a source absent from the pinned commit even when it exists locally
+ok 18 - renderWorkflow rejects a source absent from the pinned commit even when it exists locally
+  ---
+  duration_ms: 35.64783
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1193.025973

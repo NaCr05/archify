@@ -1,0 +1,250 @@
+
+==> 1/10 Staging the clean package tree (scripts/stage-clean-skill.mjs)
+Source revision: 470c07274c0f5bf5c9b33a8405022da7b8bc359d
+  [ok] staged 106 files into /tmp/archify-pack-poc-P5si7N/staged
+
+==> 2/10 npm pack from the staged tree
+  [ok] packed tt-a1i-archify-3.0.2-dev.1.tgz
+Package: @tt-a1i/archify@3.0.2-dev.1
+Integrity: sha512-WKRvkstTEehdkxFCWOPVY9xUDph6neFfZGCxZR7jqF6PpeRyVirqvN6QuTgKzeWr/hR9SWBhGnlhM9uGiTH7rw==
+Packed files:
+  LICENSE
+  SKILL.md
+  THIRD_PARTY_NOTICES.md
+  assets/JetBrainsMono-OFL.txt
+  assets/template.html
+  bin/archify.mjs
+  bin/delivery-update.mjs
+  bin/finalize.mjs
+  bin/open-artifact.mjs
+  bin/preview.mjs
+  bin/recover-output.mjs
+  bin/visual-check.mjs
+  brand-marks/catalog.json
+  brand-marks/README.md
+  delta/architecture-delta.mjs
+  examples/agent-run.lifecycle.json
+  examples/agent-tool-call.workflow.json
+  examples/async-job-roundtrip.sequence.json
+  examples/brand-aware-delivery.architecture.json
+  examples/cache-miss-request.sequence.json
+  examples/checkout-platform.base.architecture.json
+  examples/checkout-platform.head.architecture.json
+  examples/dataflow-product-analytics.html
+  examples/deployment-release.lifecycle.json
+  examples/event-stream.dataflow.json
+  examples/holiday-planning.workflow.json
+  examples/incident-response.workflow.json
+  examples/lifecycle-agent-run.html
+  examples/locales/de.json
+  examples/locales/es.json
+  examples/locales/fr.json
+  examples/locales/fr.partial.json
+  examples/locales/it.json
+  examples/locales/ja.json
+  examples/locales/ko.json
+  examples/locales/pt.json
+  examples/locales/ru.json
+  examples/product-analytics.dataflow.json
+  examples/production-deployment.architecture.json
+  examples/release-delivery.workflow.json
+  examples/sequence-cache-miss-request.html
+  examples/web-app-rendered.html
+  examples/web-app.architecture.json
+  examples/workflow-agent-tool-call-rendered.html
+  migrations/workflow-v2.mjs
+  package.json
+  recipes/scenarios.mjs
+  references/architecture-layout-repair.md
+  references/authoring-contract.md
+  references/authoring-defaults.md
+  references/brand-marks.md
+  references/delivery-contract.md
+  references/repository-authoring.md
+  references/update-awareness.md
+  references/viewer-runtime.md
+  renderers/architecture/grid.mjs
+  renderers/architecture/labels.mjs
+  renderers/architecture/render-architecture.mjs
+  renderers/architecture/routing.mjs
+  renderers/dataflow/README.md
+  renderers/dataflow/render-dataflow.mjs
+  renderers/lifecycle/grid-routing.mjs
+  renderers/lifecycle/README.md
+  renderers/lifecycle/render-lifecycle.mjs
+  renderers/sequence/README.md
+  renderers/sequence/render-sequence.mjs
+  renderers/shared/atomic-output.mjs
+  renderers/shared/brand-marks.mjs
+  renderers/shared/cli.mjs
+  renderers/shared/desktop-readability.mjs
+  renderers/shared/diagnostics.mjs
+  renderers/shared/engineering-profiles.mjs
+  renderers/shared/generated-brand-marks.mjs
+  renderers/shared/generated-validators.mjs
+  renderers/shared/geometry.mjs
+  renderers/shared/i18n.mjs
+  renderers/shared/layout-report.mjs
+  renderers/shared/legend.mjs
+  renderers/shared/output-path.mjs
+  renderers/shared/path-semantics.mjs
+  renderers/shared/portable-path.mjs
+  renderers/shared/repository-evidence.mjs
+  renderers/shared/repository-location.mjs
+  renderers/shared/route-quality.mjs
+  renderers/shared/sidecar-path.mjs
+  renderers/shared/spatial-grid.mjs
+  renderers/shared/text-fit.mjs
+  renderers/shared/utils.mjs
+  renderers/shared/validator.mjs
+  renderers/workflow/README.md
+  renderers/workflow/render-workflow.mjs
+  renderers/workflow/workflow-compiler.mjs
+  renderers/workflow/workflow-migration-geometry.mjs
+  schemas/architecture.schema.json
+  schemas/common.schema.json
+  schemas/dataflow.schema.json
+  schemas/lifecycle.schema.json
+  schemas/README.md
+  schemas/sequence.schema.json
+  schemas/workflow.schema.json
+  scripts/check-render-output.mjs
+  scripts/check-update.mjs
+  scripts/render-examples.mjs
+  scripts/update-contract.mjs
+  skill-release.json
+
+==> 3/10 Extracting tarball into an isolated directory
+  [ok] extracted 105 files
+
+==> 4/10 Verifying packaged metadata (scoped name, bin-only, clean manifest)
+  [ok] name, bin-only surface, and clean manifest confirmed
+
+==> 5/10 Verifying bundled assets required by the shipped commands
+  [ok] bundled bin/archify.mjs
+  [ok] bundled bin/preview.mjs
+  [ok] bundled bin/visual-check.mjs
+  [ok] bundled bin/open-artifact.mjs
+  [ok] bundled renderers/shared/generated-validators.mjs
+  [ok] bundled renderers/shared/output-path.mjs
+  [ok] bundled delta/architecture-delta.mjs
+  [ok] bundled recipes/scenarios.mjs
+  [ok] bundled schemas/architecture.schema.json
+  [ok] bundled schemas/workflow.schema.json
+  [ok] bundled schemas/sequence.schema.json
+  [ok] bundled schemas/dataflow.schema.json
+  [ok] bundled schemas/lifecycle.schema.json
+  [ok] bundled examples/web-app.architecture.json
+  [ok] bundled examples/agent-tool-call.workflow.json
+  [ok] bundled examples/cache-miss-request.sequence.json
+  [ok] bundled examples/product-analytics.dataflow.json
+  [ok] bundled examples/agent-run.lifecycle.json
+  [ok] bundled examples/checkout-platform.base.architecture.json
+  [ok] bundled examples/checkout-platform.head.architecture.json
+  [ok] bundled assets/template.html
+  [ok] bundled assets/JetBrainsMono-OFL.txt
+  [ok] bundled scripts/check-render-output.mjs
+  [ok] bundled scripts/check-update.mjs
+  [ok] bundled scripts/render-examples.mjs
+  [ok] bundled scripts/update-contract.mjs
+  [ok] bundled SKILL.md
+  [ok] bundled THIRD_PARTY_NOTICES.md
+  [ok] bundled LICENSE
+  [ok] bundled skill-release.json
+  [ok] bundled package.json
+
+==> 6/10 Installing the same tarball locally and in an isolated global prefix
+
+added 1 package in 942ms
+  [ok] installed into /tmp/archify-pack-poc-P5si7N/install/node_modules/@tt-a1i/archify
+
+added 1 package in 1s
+  [ok] installed into an isolated global prefix containing a space
+
+==> 7/10 Running archify doctor outside the checkout for both installations
+Archify doctor
+
+[ok] Node.js v22.23.2 (requires >=18)
+[ok] Core template
+[ok] Example renderer
+[ok] Live preview runtime
+[ok] Visual-check runtime
+[ok] Finalize runtime
+[ok] Output path safety runtime
+[ok] Atomic output safety runtime
+[ok] Physical path semantics runtime
+[ok] Sidecar path naming runtime
+[ok] Portable path contract runtime
+[ok] Scenario recipe guide
+[ok] Progressive authoring references
+[ok] Architecture compare runtime and proof fixtures
+[ok] Standalone schema validators
+[ok] architecture renderer, schema, and example
+[ok] workflow renderer, schema, and example
+[ok] sequence renderer, schema, and example
+[ok] dataflow renderer, schema, and example
+[ok] lifecycle renderer, schema, and example
+
+Archify is ready.
+Archify doctor
+
+[ok] Node.js v22.23.2 (requires >=18)
+[ok] Core template
+[ok] Example renderer
+[ok] Live preview runtime
+[ok] Visual-check runtime
+[ok] Finalize runtime
+[ok] Output path safety runtime
+[ok] Atomic output safety runtime
+[ok] Physical path semantics runtime
+[ok] Sidecar path naming runtime
+[ok] Portable path contract runtime
+[ok] Scenario recipe guide
+[ok] Progressive authoring references
+[ok] Architecture compare runtime and proof fixtures
+[ok] Standalone schema validators
+[ok] architecture renderer, schema, and example
+[ok] workflow renderer, schema, and example
+[ok] sequence renderer, schema, and example
+[ok] dataflow renderer, schema, and example
+[ok] lifecycle renderer, schema, and example
+
+Archify is ready.
+  [ok] doctor reports a complete installation
+
+==> 8/10 Rendering and validating with the installed CLI
+  [ok] validate architecture
+  [ok] deliver architecture (receipt verified, artifact written)
+
+==> 9/10 Rendering all five installed examples through local and global CLI shims
+/tmp/archify-pack-poc-P5si7N/src-architecture.html
+/tmp/archify-pack-poc-P5si7N/installed-architecture.html
+  [ok] architecture: npx output byte-identical to source
+/tmp/archify-pack-poc-P5si7N/global-architecture.html
+  [ok] architecture: isolated global output byte-identical to source
+/tmp/archify-pack-poc-P5si7N/src-workflow.html
+/tmp/archify-pack-poc-P5si7N/installed-workflow.html
+  [ok] workflow: npx output byte-identical to source
+/tmp/archify-pack-poc-P5si7N/global-workflow.html
+  [ok] workflow: isolated global output byte-identical to source
+/tmp/archify-pack-poc-P5si7N/src-sequence.html
+/tmp/archify-pack-poc-P5si7N/installed-sequence.html
+  [ok] sequence: npx output byte-identical to source
+/tmp/archify-pack-poc-P5si7N/global-sequence.html
+  [ok] sequence: isolated global output byte-identical to source
+/tmp/archify-pack-poc-P5si7N/src-dataflow.html
+/tmp/archify-pack-poc-P5si7N/installed-dataflow.html
+  [ok] dataflow: npx output byte-identical to source
+/tmp/archify-pack-poc-P5si7N/global-dataflow.html
+  [ok] dataflow: isolated global output byte-identical to source
+/tmp/archify-pack-poc-P5si7N/src-lifecycle.html
+/tmp/archify-pack-poc-P5si7N/installed-lifecycle.html
+  [ok] lifecycle: npx output byte-identical to source
+/tmp/archify-pack-poc-P5si7N/global-lifecycle.html
+  [ok] lifecycle: isolated global output byte-identical to source
+
+==> 10/10 Checking machine-readable failures from both installed CLI paths
+  [ok] local: exit 1 and classified JSON diagnostics
+  [ok] global: exit 1 and classified JSON diagnostics
+
+Packaging PoC passed.

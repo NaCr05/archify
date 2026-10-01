@@ -1,0 +1,11 @@
+file:///tmp/archify-533-audit-M6WXJT/pr-533/scripts/package-smoke.mjs:121
+    throw new Error(`packaged skill must not declare dependency metadata: ${declaredDependencyField}`);
+          ^
+
+Error: packaged skill must not declare dependency metadata: overrides
+    at file:///tmp/archify-533-audit-M6WXJT/pr-533/scripts/package-smoke.mjs:121:11
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v22.23.2

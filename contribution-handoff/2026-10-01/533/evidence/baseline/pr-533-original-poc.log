@@ -1,0 +1,95 @@
+
+==> 1/9 Staging the clean package tree (scripts/stage-clean-skill.mjs)
+  [ok] staged 79 files into /tmp/archify-pack-poc-FVjsgy/staged
+
+==> 2/9 npm pack from the staged tree
+  [ok] packed tt-a1i-archify-2.17.0-dev.1.tgz
+
+==> 3/9 Extracting tarball into an isolated directory
+  [ok] extracted 79 files
+
+==> 4/9 Verifying packaged metadata (scoped name, bin-only, clean manifest)
+  [ok] name, bin-only surface, and clean manifest confirmed
+
+==> 5/9 Verifying bundled assets required by the shipped commands
+  [ok] bundled bin/archify.mjs
+  [ok] bundled bin/preview.mjs
+  [ok] bundled bin/visual-check.mjs
+  [ok] bundled bin/open-artifact.mjs
+  [ok] bundled renderers/shared/generated-validators.mjs
+  [ok] bundled renderers/shared/output-path.mjs
+  [ok] bundled delta/architecture-delta.mjs
+  [ok] bundled recipes/scenarios.mjs
+  [ok] bundled schemas/architecture.schema.json
+  [ok] bundled schemas/workflow.schema.json
+  [ok] bundled schemas/sequence.schema.json
+  [ok] bundled schemas/dataflow.schema.json
+  [ok] bundled schemas/lifecycle.schema.json
+  [ok] bundled examples/web-app.architecture.json
+  [ok] bundled examples/agent-tool-call.workflow.json
+  [ok] bundled examples/cache-miss-request.sequence.json
+  [ok] bundled examples/product-analytics.dataflow.json
+  [ok] bundled examples/agent-run.lifecycle.json
+  [ok] bundled examples/checkout-platform.base.architecture.json
+  [ok] bundled examples/checkout-platform.head.architecture.json
+  [ok] bundled assets/template.html
+  [ok] bundled assets/JetBrainsMono-OFL.txt
+  [ok] bundled scripts/check-render-output.mjs
+  [ok] bundled scripts/check-update.mjs
+  [ok] bundled scripts/render-examples.mjs
+  [ok] bundled scripts/update-contract.mjs
+  [ok] bundled SKILL.md
+  [ok] bundled THIRD_PARTY_NOTICES.md
+  [ok] bundled LICENSE
+  [ok] bundled skill-release.json
+  [ok] bundled package.json
+
+==> 6/9 Installing the tarball in an isolated prefix (no lifecycle scripts)
+
+added 1 package in 888ms
+  [ok] installed into /tmp/archify-pack-poc-FVjsgy/install/node_modules/@tt-a1i/archify
+
+==> 7/9 Running archify doctor from the installed package
+Archify doctor
+
+[ok] Node.js v22.23.2 (requires >=18)
+[ok] Core template
+[ok] Example renderer
+[ok] Live preview runtime
+[ok] Visual-check runtime
+[ok] Output path safety runtime
+[ok] Scenario recipe guide
+[ok] Progressive authoring references
+[ok] Architecture compare runtime and proof fixtures
+[ok] Standalone schema validators
+[ok] architecture renderer, schema, and example
+[ok] workflow renderer, schema, and example
+[ok] sequence renderer, schema, and example
+[ok] dataflow renderer, schema, and example
+[ok] lifecycle renderer, schema, and example
+
+Archify is ready.
+  [ok] doctor reports a complete installation
+
+==> 8/9 Rendering and validating with the installed CLI
+  [ok] validate architecture
+  [ok] deliver architecture (receipt verified, artifact written)
+
+==> 9/9 Rendering ALL 5 diagram types via npx and comparing against the source tree
+/tmp/archify-pack-poc-FVjsgy/src-architecture.html
+/tmp/archify-pack-poc-FVjsgy/installed-architecture.html
+  [ok] architecture: npx output byte-identical to source
+/tmp/archify-pack-poc-FVjsgy/src-workflow.html
+/tmp/archify-pack-poc-FVjsgy/installed-workflow.html
+  [ok] workflow: npx output byte-identical to source
+/tmp/archify-pack-poc-FVjsgy/src-sequence.html
+/tmp/archify-pack-poc-FVjsgy/installed-sequence.html
+  [ok] sequence: npx output byte-identical to source
+/tmp/archify-pack-poc-FVjsgy/src-dataflow.html
+/tmp/archify-pack-poc-FVjsgy/installed-dataflow.html
+  [ok] dataflow: npx output byte-identical to source
+/tmp/archify-pack-poc-FVjsgy/src-lifecycle.html
+/tmp/archify-pack-poc-FVjsgy/installed-lifecycle.html
+  [ok] lifecycle: npx output byte-identical to source
+
+Packaging PoC passed.

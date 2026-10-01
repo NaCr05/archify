@@ -1,0 +1,69 @@
+TAP version 13
+# Subtest: renderWorkflow returns pinned repository evidence in both its result and CLI-equivalent HTML
+not ok 1 - renderWorkflow returns pinned repository evidence in both its result and CLI-equivalent HTML
+  ---
+  duration_ms: 107.987916
+  type: 'test'
+  location: '/tmp/archify-482-evidence-bMo7d2/checkout/archify/test/workflow-library-api-repository-evidence.test.mjs:48:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of null (reading 'verified')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/archify-482-evidence-bMo7d2/checkout/archify/test/workflow-library-api-repository-evidence.test.mjs:56:25)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: renderWorkflow classifies a missing repoRoot for authored repository evidence
+not ok 2 - renderWorkflow classifies a missing repoRoot for authored repository evidence
+  ---
+  duration_ms: 80.58481
+  type: 'test'
+  location: '/tmp/archify-482-evidence-bMo7d2/checkout/archify/test/workflow-library-api-repository-evidence.test.mjs:85:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/archify-482-evidence-bMo7d2/checkout/archify/test/workflow-library-api-repository-evidence.test.mjs:89:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: renderWorkflow rejects a source absent from the pinned commit even when it exists locally
+not ok 3 - renderWorkflow rejects a source absent from the pinned commit even when it exists locally
+  ---
+  duration_ms: 63.914994
+  type: 'test'
+  location: '/tmp/archify-482-evidence-bMo7d2/checkout/archify/test/workflow-library-api-repository-evidence.test.mjs:96:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/archify-482-evidence-bMo7d2/checkout/archify/test/workflow-library-api-repository-evidence.test.mjs:103:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 443.007251
