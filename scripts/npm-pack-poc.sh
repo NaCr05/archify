@@ -10,6 +10,8 @@
 #
 # Usage: scripts/npm-pack-poc.sh
 # Requires: node >= 18, npm, git, tar.
+# Use this clean staging path for the package under test; running npm pack
+# directly in archify/ retains repository-only manifest fields.
 #
 # Note: a bare `archify` argument to npm pack/npm view is resolved as a registry
 # spec, not a folder — it silently packs whatever `archify` currently sits on
@@ -30,29 +32,39 @@ log()  { printf '\n\033[1;36m==> %s\033[0m\n' "$*"; }
 ok()   { printf '\033[1;32m  [ok]\033[0m %s\n' "$*"; }
 fail() { printf '\033[1;31m  [FAIL]\033[0m %s\n' "$*" >&2; exit 1; }
 
-log "1/9 Staging the clean package tree (scripts/stage-clean-skill.mjs)"
+log "1/10 Staging the clean package tree (scripts/stage-clean-skill.mjs)"
+printf 'Source revision: %s\n' "$(git rev-parse HEAD)"
 staged="${work}/staged"
 node scripts/stage-clean-skill.mjs --dest "$staged" >/dev/null \
   || fail "clean-skill staging failed"
 ok "staged $(find "$staged" -type f | wc -l | tr -d ' ') files into ${staged}"
 
-log "2/9 npm pack from the staged tree"
+log "2/10 npm pack from the staged tree"
 # --pack-destination keeps the tarball out of the repository working tree.
-tarball_path="$(npm pack --silent --pack-destination "$work" "$staged" | tail -n1)"
+npm pack --json --pack-destination "$work" "$staged" > "${work}/pack.json"
+tarball_path="$(node -e 'const fs = require("node:fs"); console.log(JSON.parse(fs.readFileSync(process.argv[1], "utf8"))[0].filename);' "${work}/pack.json")"
 tarball="${work}/${tarball_path}"
 [ -f "$tarball" ] || fail "npm pack did not produce a tarball"
 case "$tarball_path" in
   tt-a1i-archify-*.tgz) ok "packed ${tarball_path}" ;;
   *) fail "packed the wrong package: ${tarball_path} (expected tt-a1i-archify-*.tgz)" ;;
 esac
+node -e '
+  const fs = require("node:fs");
+  const [packed] = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+  console.log(`Package: ${packed.name}@${packed.version}`);
+  console.log(`Integrity: ${packed.integrity}`);
+  console.log("Packed files:");
+  for (const entry of packed.files) console.log(`  ${entry.path}`);
+' "${work}/pack.json"
 
-log "3/9 Extracting tarball into an isolated directory"
+log "3/10 Extracting tarball into an isolated directory"
 extract_dir="${work}/package"
 mkdir -p "$extract_dir"
 tar -xzf "$tarball" -C "$extract_dir"
 ok "extracted $(find "$extract_dir/package" -type f | wc -l | tr -d ' ') files"
 
-log "4/9 Verifying packaged metadata (scoped name, bin-only, clean manifest)"
+log "4/10 Verifying packaged metadata (scoped name, bin-only, clean manifest)"
 node -e '
   const fs = require("node:fs");
   const pkg = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
@@ -69,7 +81,7 @@ node -e '
 ' "${extract_dir}/package/package.json" || fail "packaged metadata violates the packaging constraints"
 ok "name, bin-only surface, and clean manifest confirmed"
 
-log "5/9 Verifying bundled assets required by the shipped commands"
+log "5/10 Verifying bundled assets required by the shipped commands"
 missing=0
 # Ground truth is the archify doctor check list (bin/archify.mjs commandDoctor):
 # every path below is one doctor requires to declare an installation "ready".
@@ -115,28 +127,41 @@ package.json
 EOF
 [ "$missing" -eq 0 ] || fail "${missing} required asset(s) missing from the tarball"
 
-log "6/9 Installing the tarball in an isolated prefix (no lifecycle scripts)"
+log "6/10 Installing the same tarball locally and in an isolated global prefix"
 install_dir="${work}/install"
+global_dir="${work}/global prefix"
 mkdir -p "$install_dir"
 npm install --silent --no-fund --no-audit --ignore-scripts --loglevel=error \
   "${tarball}" --prefix "$install_dir"
 ok "installed into ${install_dir}/node_modules/${PKG_DIR_NAME}"
 bin="${install_dir}/node_modules/${PKG_DIR_NAME}/bin/archify.mjs"
+npm install --silent --no-fund --no-audit --ignore-scripts --loglevel=error \
+  --global --prefix "$global_dir" "$tarball"
+global_bin="${global_dir}/bin/archify"
+# npm places Windows global shims directly in the prefix, not its bin/ child.
+if [ ! -f "$global_bin" ]; then global_bin="${global_dir}/archify"; fi
+[ -f "$global_bin" ] || fail "global installation did not create the archify shim"
+global_package="${global_dir}/lib/node_modules/${PKG_DIR_NAME}"
+if [ ! -d "$global_package" ]; then global_package="${global_dir}/node_modules/${PKG_DIR_NAME}"; fi
+ok "installed into an isolated global prefix containing a space"
 
-log "7/9 Running archify doctor from the installed package"
-node "$bin" doctor || fail "archify doctor reported an incomplete installation"
+log "7/10 Running archify doctor outside the checkout for both installations"
+(cd "$install_dir" && node "$bin" doctor) \
+  || fail "archify doctor reported an incomplete local installation"
+(cd "$work" && "$global_bin" doctor) \
+  || fail "archify doctor reported an incomplete global installation"
 ok "doctor reports a complete installation"
 
-log "8/9 Rendering and validating with the installed CLI"
-input="${extract_dir}/package/examples/web-app.architecture.json"
+log "8/10 Rendering and validating with the installed CLI"
+input="${install_dir}/node_modules/${PKG_DIR_NAME}/examples/web-app.architecture.json"
 output="${work}/rendered/poc.html"
 mkdir -p "$(dirname "$output")"
 
-node "$bin" validate architecture "$input" >/dev/null \
+(cd "$install_dir" && node "$bin" validate architecture "$input") >/dev/null \
   || fail "archify validate failed"
 ok "validate architecture"
 
-node "$bin" deliver architecture "$input" "$output" --json > "${work}/receipt.json" \
+(cd "$install_dir" && node "$bin" deliver architecture "$input" "$output" --json) > "${work}/receipt.json" \
   || fail "archify deliver failed"
 node -e '
   const fs = require("node:fs");
@@ -146,7 +171,7 @@ node -e '
 ' "${work}/receipt.json" || fail "delivery receipt failed verification"
 ok "deliver architecture (receipt verified, artifact written)"
 
-log "9/9 Rendering ALL 5 diagram types via npx and comparing against the source tree"
+log "9/10 Rendering all five installed examples through local and global CLI shims"
 # Exercises the installed CLI exactly like a consumer would: npx from an
 # isolated project directory outside the source checkout. The packed output
 # must be byte-identical to a render straight from the repository sources.
@@ -157,9 +182,11 @@ declare -A fixture=(
   [dataflow]="product-analytics.dataflow.json"
   [lifecycle]="agent-run.lifecycle.json"
 )
-repo_input_for() { printf '%s/archify/examples/%s' "$repo_root" "$1"; }
 for type in architecture workflow sequence dataflow lifecycle; do
-  input="$(repo_input_for "${fixture[$type]}")"
+  relative="examples/${fixture[$type]}"
+  input="${install_dir}/node_modules/${PKG_DIR_NAME}/${relative}"
+  cmp -s "${repo_root}/archify/${relative}" "$input" \
+    || fail "installed example differs from source: ${relative}"
   node "${repo_root}/archify/bin/archify.mjs" render "$type" "$input" "${work}/src-${type}.html" \
     || fail "source render failed for ${type}"
   (cd "${work}/install" \
@@ -170,6 +197,38 @@ for type in architecture workflow sequence dataflow lifecycle; do
   else
     fail "${type}: installed render differs from the source render"
   fi
+  global_input="${global_package}/${relative}"
+  cmp -s "${repo_root}/archify/${relative}" "$global_input" \
+    || fail "globally installed example differs from source: ${relative}"
+  (cd "$work" && "$global_bin" render "$type" "$global_input" "${work}/global-${type}.html") \
+    || fail "global archify render ${type} failed outside the checkout"
+  cmp -s "${work}/src-${type}.html" "${work}/global-${type}.html" \
+    || fail "${type}: global render differs from the source render"
+  ok "${type}: isolated global output byte-identical to source"
+done
+
+log "10/10 Checking machine-readable failures from both installed CLI paths"
+printf '{}\n' > "${work}/invalid.workflow.json"
+for invocation in local global; do
+  set +e
+  if [ "$invocation" = local ]; then
+    (cd "$install_dir" && npx --no-install archify validate workflow "${work}/invalid.workflow.json" --json) \
+      > "${work}/${invocation}-failure.json" 2> "${work}/${invocation}-failure.stderr"
+  else
+    (cd "$work" && "$global_bin" validate workflow "${work}/invalid.workflow.json" --json) \
+      > "${work}/${invocation}-failure.json" 2> "${work}/${invocation}-failure.stderr"
+  fi
+  status=$?
+  set -e
+  [ "$status" -eq 1 ] || fail "${invocation}: expected invalid-diagram exit 1, got ${status}"
+  node -e '
+    const fs = require("node:fs");
+    const receipt = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+    if (receipt.ok !== false || !receipt.diagnostics?.some((entry) => typeof entry.code === "string")) {
+      throw new Error("invalid diagram must return a classified JSON failure");
+    }
+  ' "${work}/${invocation}-failure.json" || fail "${invocation}: invalid JSON failure receipt"
+  ok "${invocation}: exit 1 and classified JSON diagnostics"
 done
 
 printf '\n\033[1;32mPackaging PoC passed.\033[0m\n'
