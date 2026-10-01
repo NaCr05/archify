@@ -36,6 +36,7 @@ function repositoryFixture() {
     name: 'archify-fixture',
     scripts: { test: 'node --test' },
     devDependencies: { ajv: '1.0.0' },
+    overrides: { 'fast-uri': '^3.1.7' },
   }));
   write(root, 'archify/package-lock.json', '{}\n');
   write(root, 'archify/skill-release.json', '{}\n');

@@ -8,7 +8,9 @@
 # the tarball into an isolated temporary directory, and verifies that every
 # asset the shipped commands need was bundled.
 #
-# Usage: scripts/npm-pack-poc.sh
+# Usage: bash scripts/npm-pack-poc.sh [artifact-directory]
+# The optional directory must not exist; after all checks pass it receives the
+# exact tested tarball, npm pack metadata, and the tested source revision.
 # Requires: node >= 18, npm, git, tar.
 # Use this clean staging path for the package under test; running npm pack
 # directly in archify/ retains repository-only manifest fields.
@@ -19,6 +21,20 @@
 # directory path used below is always explicit and local.
 
 set -euo pipefail
+
+if [ "$#" -gt 1 ]; then
+  printf 'Usage: bash scripts/npm-pack-poc.sh [artifact-directory]\n' >&2
+  exit 1
+fi
+# Resolve a relative output against the caller's directory before entering the
+# repository. Absolute paths work in both POSIX shells and Git Bash.
+artifact_dir="${1:-}"
+if [ -n "$artifact_dir" ]; then
+  case "$artifact_dir" in
+    /*|[A-Za-z]:*) ;;
+    *) artifact_dir="$PWD/$artifact_dir" ;;
+  esac
+fi
 
 cd "$(dirname "$0")/.."
 
@@ -31,6 +47,10 @@ trap 'rm -rf "$work"' EXIT
 log()  { printf '\n\033[1;36m==> %s\033[0m\n' "$*"; }
 ok()   { printf '\033[1;32m  [ok]\033[0m %s\n' "$*"; }
 fail() { printf '\033[1;31m  [FAIL]\033[0m %s\n' "$*" >&2; exit 1; }
+
+if [ -n "$artifact_dir" ] && { [ -e "$artifact_dir" ] || [ -L "$artifact_dir" ]; }; then
+  fail "artifact directory already exists: $artifact_dir"
+fi
 
 log "1/10 Staging the clean package tree (scripts/stage-clean-skill.mjs)"
 printf 'Source revision: %s\n' "$(git rev-parse HEAD)"
@@ -230,5 +250,12 @@ for invocation in local global; do
   ' "${work}/${invocation}-failure.json" || fail "${invocation}: invalid JSON failure receipt"
   ok "${invocation}: exit 1 and classified JSON diagnostics"
 done
+
+if [ -n "$artifact_dir" ]; then
+  mkdir -- "$artifact_dir"
+  cp -- "$tarball" "${work}/pack.json" "$artifact_dir/"
+  git rev-parse HEAD > "$artifact_dir/source-revision.txt"
+  ok "retained the verified tarball and metadata in $artifact_dir"
+fi
 
 printf '\n\033[1;32mPackaging PoC passed.\033[0m\n'
