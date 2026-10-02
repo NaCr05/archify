@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: npm package source records a clean commit and allows excluded untracked artifacts
+ok 1 - npm package source records a clean commit and allows excluded untracked artifacts
+  ---
+  duration_ms: 153.704265
+  type: 'test'
+  ...
+# Subtest: npm package source rejects unstaged tracked changes
+ok 2 - npm package source rejects unstaged tracked changes
+  ---
+  duration_ms: 77.818353
+  type: 'test'
+  ...
+# Subtest: npm package source rejects staged tracked changes
+ok 3 - npm package source rejects staged tracked changes
+  ---
+  duration_ms: 98.09744
+  type: 'test'
+  ...
+# Subtest: npm package source rejects index-only tracked changes
+ok 4 - npm package source rejects index-only tracked changes
+  ---
+  duration_ms: 89.118354
+  type: 'test'
+  ...
+# Subtest: npm package source rejects added tracked changes
+ok 5 - npm package source rejects added tracked changes
+  ---
+  duration_ms: 86.14348
+  type: 'test'
+  ...
+# Subtest: npm package source rejects deleted tracked changes
+ok 6 - npm package source rejects deleted tracked changes
+  ---
+  duration_ms: 83.886451
+  type: 'test'
+  ...
+# Subtest: npm package source rejects packaging-tool tracked changes
+ok 7 - npm package source rejects packaging-tool tracked changes
+  ---
+  duration_ms: 77.833681
+  type: 'test'
+  ...
+# Subtest: npm package source rejects a different clean HEAD after capturing the original revision
+ok 8 - npm package source rejects a different clean HEAD after capturing the original revision
+  ---
+  duration_ms: 79.517407
+  type: 'test'
+  ...
+# Subtest: npm package source fails closed when Git cannot resolve a commit
+ok 9 - npm package source fails closed when Git cannot resolve a commit
+  ---
+  duration_ms: 39.609679
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 875.473661

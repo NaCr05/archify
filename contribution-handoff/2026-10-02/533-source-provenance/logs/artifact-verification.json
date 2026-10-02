@@ -1,0 +1,34 @@
+{
+  "source": "0e79602e3550ee3dfd1b542aee20472843e3a7b6",
+  "artifacts": {
+    "windows": {
+      "source": "0e79602e3550ee3dfd1b542aee20472843e3a7b6",
+      "filename": "tt-a1i-archify-3.0.2-dev.1.tgz",
+      "version": "3.0.2-dev.1",
+      "sha256": "58959e7f501a4fd6cdd528c3c7c825237cabc41e6d1df9908d2e2f42c4653161",
+      "integrity": "sha512-1hGYrXj0O/kD2toJbsK3apoXavviAW8Rn4uS0Kx89/HLyRSnMjbKDCOY5BuDCZtC0CQqZ/XxfmGkFiZSWbgt1w==",
+      "bytes": 1770252,
+      "files": 105
+    },
+    "linux": {
+      "source": "0e79602e3550ee3dfd1b542aee20472843e3a7b6",
+      "filename": "tt-a1i-archify-3.0.2-dev.1.tgz",
+      "version": "3.0.2-dev.1",
+      "sha256": "84add661c91e669b874e7ac6b37b59b3cd5acf3c86d5b5e60b7675210cab2387",
+      "integrity": "sha512-DwUDScUiPXtcwiAt6vjYEbRZyB58ooLi2q6gYl6hNfO1UbYPmpGhaCLaFfKgv5Q6zLe9Wnuc2tFYpHg3cXfM2w==",
+      "bytes": 1770259,
+      "files": 105
+    }
+  },
+  "cross_host_file_bytes_identical": true,
+  "cross_host_mode_differences": [
+    "package/bin/archify.mjs"
+  ],
+  "windows_tarball_identical_to_previous_handoff": true,
+  "baseline_reproduction": {
+    "recorded_source": "6a30f574831c428fa7de67504e7b240552a60d37",
+    "packed_cli_sha256": "6c632f3f101d005e90e1e0823f7836909dcc1c3fdc527689d0196a8736c27b9c",
+    "committed_cli_sha256": "97788086acaac4122aafc56c48acfe5fde1979d6aaa67db73aa1f4ab70b34390",
+    "uncommitted_edit_in_retained_tarball": true
+  }
+}
