@@ -108,6 +108,13 @@ artifact_parent="$(mktemp -d)"
 bash scripts/npm-pack-poc.sh "$artifact_parent/verified-package"
 ```
 
+The npm proof requires a clean tracked checkout, including staged changes;
+commit or stash them first. Untracked files remain excluded by the stager.
+It captures the source revision before staging and verifies that the revision,
+index and tracked files remain unchanged after staging and before reporting
+success or retaining artifacts. `source-revision.txt` records that captured
+revision. Run the proof without editing or switching the source checkout.
+
 The script packs the clean staging tree, prints the package file list and
 integrity, then tests that tarball through local/npx and isolated-global CLI
 installs outside the checkout. Only after all checks pass does the optional,

@@ -53,10 +53,15 @@ if [ -n "$artifact_dir" ] && { [ -e "$artifact_dir" ] || [ -L "$artifact_dir" ];
 fi
 
 log "1/10 Staging the clean package tree (scripts/stage-clean-skill.mjs)"
-printf 'Source revision: %s\n' "$(git rev-parse HEAD)"
+source_revision="$(node scripts/verify-npm-package-source.mjs "$repo_root")" \
+  || fail "package source verification failed"
+readonly source_revision
+printf 'Source revision: %s\n' "$source_revision"
 staged="${work}/staged"
 node scripts/stage-clean-skill.mjs --dest "$staged" >/dev/null \
   || fail "clean-skill staging failed"
+node scripts/verify-npm-package-source.mjs "$repo_root" "$source_revision" >/dev/null \
+  || fail "package source changed while staging"
 ok "staged $(find "$staged" -type f | wc -l | tr -d ' ') files into ${staged}"
 
 log "2/10 npm pack from the staged tree"
@@ -251,10 +256,13 @@ for invocation in local global; do
   ok "${invocation}: exit 1 and classified JSON diagnostics"
 done
 
+node scripts/verify-npm-package-source.mjs "$repo_root" "$source_revision" >/dev/null \
+  || fail "package source changed during verification"
+
 if [ -n "$artifact_dir" ]; then
   mkdir -- "$artifact_dir"
   cp -- "$tarball" "${work}/pack.json" "$artifact_dir/"
-  git rev-parse HEAD > "$artifact_dir/source-revision.txt"
+  printf '%s\n' "$source_revision" > "$artifact_dir/source-revision.txt"
   ok "retained the verified tarball and metadata in $artifact_dir"
 fi
 
