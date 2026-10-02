@@ -116,6 +116,35 @@ test('rectsOverlap: positive gap flags rects within that gap as too close', () =
   assert.equal(rectsOverlap(rect(0, 0, 10, 10), rect(17, 0, 10, 10), 8), true);
 });
 
+test('rectsOverlap: a clearance the solver measured short of by one ulp is met (#583)', () => {
+  // The column solver separates neighbouring centers by width/2 + gap + width/2,
+  // and the clearance check re-derives the same distance from the left node's x
+  // and width. Centers 873.6 and 1041.6 are 167.99999999999988631 apart, so the
+  // check's sum lands 1.14e-13px past the node it was built to clear.
+  const left = rect(873.6 - 80, 93, 160, 52);
+  const right = rect(1041.6 - 80, 93, 160, 52);
+  assert.ok(
+    left.x + left.width + 8 > right.x,
+    'the reproduction must reach the check as a float shortfall, not as a clean gap',
+  );
+  assert.equal(rectsOverlap(left, right, 8), false);
+  assert.equal(rectsOverlap(right, left, 8), false, 'the swapped pair must agree');
+  // The same float error appears down a column, so all four separations need it.
+  const above = rect(93, 873.6 - 80, 52, 160);
+  const below = rect(93, 1041.6 - 80, 52, 160);
+  assert.ok(above.y + above.height + 8 > below.y);
+  assert.equal(rectsOverlap(above, below, 8), false);
+  assert.equal(rectsOverlap(below, above, 8), false);
+});
+
+test('rectsOverlap: the numeric tolerance stays far below a repairable shortfall', () => {
+  // The tolerance covers float error, not a shortfall an author could act on:
+  // 0.001px under the minimum still reports, so widening it tenfold breaks here.
+  assert.equal(rectsOverlap(rect(0, 0, 160, 52), rect(167.999, 0, 160, 52), 8), true);
+  assert.equal(rectsOverlap(rect(0, 0, 160, 52), rect(167.9, 0, 160, 52), 8), true);
+  assert.equal(rectsOverlap(rect(0, 0, 160, 52), rect(168, 0, 160, 52), 8), false);
+});
+
 test('rectsOverlap: negative gap shrinks the hit box (label-collision convention)', () => {
   // gap -2 means rects must overlap by MORE than 2px to count — a 1px sliver
   // does not. This is the sign convention the label checks rely on.
@@ -169,6 +198,14 @@ test('label-route clearance locks tangent, sub-threshold, boundary, and reversed
     assert.ok(Math.abs(segmentRectClearance(reversed, box) - clearance) < 0.000001);
     assert.ok(Math.abs(segmentRectIntersectionLength(reversed, box) - intersection) < 0.000001);
   }
+});
+
+test('near-zero segments preserve the existing label clearance threshold', () => {
+  const q = 100 - 3.999899999 / Math.sqrt(2);
+  const segment = { start: [q - 0.0001, q + 0.0001], end: [q + 0.0001, q - 0.0001] };
+  const box = rect(100, 100, 20, 20);
+  assert.ok(segmentRectClearance(segment, box) + 0.0001 >= 4);
+  assert.ok(segmentRectClearance({ start: segment.end, end: segment.start }, box) + 0.0001 >= 4);
 });
 
 test('collectLabelRouteClearance exempts only the owning relationship at an exact threshold', () => {
@@ -449,6 +486,25 @@ test('cleanCrossingProblems exempts shared endpoints', () => {
   assert.deepEqual(problems, []);
 });
 
+test('cleanCrossingProblems selectively checks automatic shared-endpoint interior crossings', () => {
+  const relations = [{ from: 'a', to: 'hub', automatic: true }, { from: 'b', to: 'hub', automatic: true }];
+  const paths = [
+    [[20, 20], [80, 20], [80, 80], [140, 80]],
+    [[20, 100], [120, 100], [120, 40], [140, 40]],
+  ];
+  const options = {
+    relations,
+    endpointIds: new Set(['a', 'b', 'hub']),
+    pathFor: (relation) => ({ points: paths[relations.indexOf(relation)] }),
+    diagramType: 'workflow', relationCollection: 'edges', profile: 'showcase',
+    includeSharedEndpoints: (left, right) => left.automatic && right.automatic,
+  };
+  assert.equal(cleanCrossingProblems(options).length, 1);
+  assert.deepEqual(cleanCrossingProblems({ ...options, profile: 'standard' }), []);
+  relations[1].automatic = false;
+  assert.deepEqual(cleanCrossingProblems(options), [], 'one authored route preserves the legacy exemption');
+});
+
 test('cleanCrossingProblems exempts endpoint touches and collinear corridors', () => {
   const relations = [
     { from: 'a', to: 'b' },
@@ -514,6 +570,36 @@ test('ambiguous corridor gate exempts shared endpoints, point touches, and overl
     { relation: { from: 'h', to: 'i' }, relationIndex: 4, points: [[98, 60], [110, 60]] },
   ];
   assert.deepEqual(collectAmbiguousCorridors({ routedRelations }), []);
+});
+
+test('shared-endpoint counterflow opt-in detects reverse trunks while preserving same-direction branches', () => {
+  const first = { from: 'a', to: 'hub', automatic: true };
+  const second = { from: 'hub', to: 'b', automatic: true };
+  const paths = [ [[60, 20], [60, 100]], [[60, 100], [60, 49], [140, 49]] ];
+  const options = {
+    routedRelations: [first, second].map((relation, index) => ({ relation, points: paths[index] })),
+    includeSharedEndpointCounterflow: (left, right) => left.automatic && right.automatic,
+  };
+  const hits = collectAmbiguousCorridors(options);
+  assert.equal(hits.length, 1);
+  assert.equal(hits[0].overlapLength, 51);
+  assert.deepEqual(hits[0].overlapStart, [60, 49]);
+  assert.deepEqual(hits[0].overlapEnd, [60, 100]);
+  assert.equal(cleanAmbiguousCorridorProblems({
+    relations: [first, second], endpointIds: new Set(['a', 'hub', 'b']),
+    pathFor: (relation) => ({ points: paths[relation === first ? 0 : 1] }),
+    diagramType: 'workflow', relationCollection: 'edges', profile: 'showcase',
+    includeSharedEndpointCounterflow: options.includeSharedEndpointCounterflow,
+  }).length, 1, 'compiler wrapper forwards the selective policy');
+  second.automatic = false;
+  assert.deepEqual(collectAmbiguousCorridors(options), [], 'mixed automatic and authored routes retain compatibility');
+  second.automatic = true;
+  options.routedRelations[1].points = [[60, 49], [60, 100], [140, 100]];
+  assert.deepEqual(collectAmbiguousCorridors(options), [], 'same-direction trunks are permitted');
+  assert.equal(collectAmbiguousCorridors({ ...options, includeSharedEndpoints: () => true }).length, 1,
+    'existing independent-port policy remains stricter');
+  options.routedRelations[1].points = [[60, 100], [60, 93], [140, 93]];
+  assert.deepEqual(collectAmbiguousCorridors(options), [], 'less than 8px remains below the overlap floor');
 });
 
 test('ambiguous corridor gate keeps standard renderable', () => {
@@ -1137,7 +1223,7 @@ test('applyTemplate preserves dollar sequences in titles', () => {
 <title>[PROJECT NAME] Architecture Diagram</title>
 <h1>[PROJECT NAME] Architecture</h1>
 <p class="subtitle">[Subtitle description]</p>
-<!-- ARCHIFY:GUIDED_VIEWS_DATA -->
+    <!-- ARCHIFY:I18N_DATA -->
       <!-- ARCHIFY:SVG_SLOT_START --><svg></svg>      <!-- ARCHIFY:SVG_SLOT_END -->
     <!-- ARCHIFY:CARDS_SLOT_START --><div></div>    <!-- ARCHIFY:CARDS_SLOT_END -->`;
   const html = applyTemplate(template, {
@@ -1155,7 +1241,7 @@ test('applyTemplate omits the subtitle row when no subtitle is authored', () => 
 <title>[PROJECT NAME] Architecture Diagram</title>
 <h1>[PROJECT NAME] Architecture</h1>
 <p class="subtitle">[Subtitle description]</p>
-<!-- ARCHIFY:GUIDED_VIEWS_DATA -->
+    <!-- ARCHIFY:I18N_DATA -->
       <!-- ARCHIFY:SVG_SLOT_START --><svg></svg>      <!-- ARCHIFY:SVG_SLOT_END -->
     <!-- ARCHIFY:CARDS_SLOT_START --><div></div>    <!-- ARCHIFY:CARDS_SLOT_END -->`;
   const html = applyTemplate(template, {
@@ -1173,7 +1259,7 @@ test('applyTemplate requires the new evidence slot only when evidence is present
 <title>[PROJECT NAME] Architecture Diagram</title>
 <h1>[PROJECT NAME] Architecture</h1>
 <p class="subtitle">[Subtitle description]</p>
-<!-- ARCHIFY:GUIDED_VIEWS_DATA -->
+    <!-- ARCHIFY:I18N_DATA -->
       <!-- ARCHIFY:SVG_SLOT_START --><svg></svg>      <!-- ARCHIFY:SVG_SLOT_END -->
     <!-- ARCHIFY:CARDS_SLOT_START --><div></div>    <!-- ARCHIFY:CARDS_SLOT_END -->`;
   assert.doesNotThrow(() => applyTemplate(legacyTemplate, {

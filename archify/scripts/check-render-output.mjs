@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
-import { collectAmbiguousCorridors, collectArrowheadCollisions, collectBorderRuns, collectLabelCanvasOverflow, collectLabelRouteClearance, collectRouteRhythmIssues, describeLabelCanvasOverflow, formatRect, minimumLabelRouteClearance, routeBudgetMetrics } from '../renderers/shared/geometry.mjs';
+import { collectAmbiguousCorridors, collectArrowheadCollisions, collectBorderRuns, collectLabelCanvasOverflow, collectLabelRouteClearance, collectRouteRhythmIssues, describeLabelCanvasOverflow, formatRect, forwardCollinearAnalysisSegments, minimumLabelRouteClearance, routeBudgetMetrics } from '../renderers/shared/geometry.mjs';
 import {
   DESKTOP_READABILITY_VIEWPORT,
   DESKTOP_READER_DIAGRAM_WIDTH,
@@ -109,6 +109,7 @@ if (svgMatches.length === 1) {
   const svgRoot = svg.match(/<svg\b[^>]*>/i)?.[0] || '';
   const svgAttrs = parseAttrs(svgRoot);
   const qualityProfile = svgAttrs['data-quality-profile'] || 'standard';
+  const workflowV2 = svgAttrs['data-layout-contract'] === 'readable-v2';
   const qualityGatesEnforced = svgAttrs['data-quality-gates'] !== 'advisory';
   const nonFiniteAttrs = collectNonFiniteAttrs(svg);
   addCheck('finite_svg', nonFiniteAttrs.length === 0, nonFiniteAttrs);
@@ -122,16 +123,15 @@ if (svgMatches.length === 1) {
     viewBoxHeight: viewBoxSize(svgAttrs)[1],
     readerFit: svgAttrs['data-reader-fit'] || null,
     diagramType: svgAttrs['data-diagram-type'] || null,
-    hasGuidedViews: /class="guided-views/.test(html),
   });
-  const arrows = collectArrows(beforeLegend);
+  const arrows = collectArrows(beforeLegend, workflowV2);
   const diagonal = arrows.flatMap((arrow) => diagonalStraightSegments(arrow).map((segment) => ({ arrow, ...segment })));
   addCheck(
     'orthogonal_arrows',
     diagonal.length === 0,
     diagonal.map(({ arrow, segmentIndex }) => `${arrow.kind} ${arrow.index} segment ${segmentIndex + 1}: expected an orthogonal segment or an explicitly authored direct straight route; ${arrow.raw}`),
   );
-  const measuredRelationshipCrossings = collectRelationshipCrossings(arrows);
+  const measuredRelationshipCrossings = collectRelationshipCrossings(arrows, workflowV2);
   const resolvedCrossovers = measuredRelationshipCrossings.filter((hit) => (
     hit.left.crossoverHalo && hit.right.crossoverHalo
   ));
@@ -154,19 +154,26 @@ if (svgMatches.length === 1) {
     .map((arrow) => ({ relation: arrow, relationIndex: arrow.index, points: arrow.routePoints }));
   const nodeRects = svgAttrs.transform ? [] : collectUntransformedNodeRects(beforeLegend);
   const routeMetrics = routeBudgetMetrics({ routedRelations: routedRelationships });
+  // Architecture marks only one of its two Reader fits with its type.
+  const crowdedSides = svgAttrs['data-diagram-type'] === 'architecture' || svgAttrs['data-reader-primary-text'] === '14'
+    ? crowdedNodeSides(arrows, nodeRects) : [];
   const routeRhythmIssues = collectRouteRhythmIssues({ routedRelations: routedRelationships });
   const ambiguousCorridors = collectAmbiguousCorridors({
     routedRelations: routedRelationships,
-    includeSharedEndpoints: (left, right) => left.independentPorts && right.independentPorts,
+    includeSharedEndpoints: (left, right) => workflowV2 || (left.independentPorts && right.independentPorts),
+    allowShortWorkflowTrunks: workflowV2,
+    includeSharedEndpointCounterflow: (left, right) => left.automaticWorkflowRoute && right.automaticWorkflowRoute,
   });
   const arrowheadCollisions = collectArrowheadCollisions({
-    routedRelations: routedRelationships.filter((entry) => entry.relation.independentPorts),
+    routedRelations: routedRelationships.filter((entry) => workflowV2 || entry.relation.independentPorts),
+    allowShortWorkflowTrunks: workflowV2,
   });
   const relationshipLabels = collectRelationshipLabelMasks(beforeLegend, arrows);
   const leadingSpace = collectArchitectureLeadingSpace({
     svgAttrs, fragment: beforeLegend, nodeRects, frames: compositionFrames,
     arrows, labels: relationshipLabels,
   });
+  const sequenceColumnSpace = collectSequenceColumnSpace({ svgAttrs, fragment: beforeLegend, nodeRects, arrows });
   const labelClearanceThreshold = qualityProfile === 'showcase' ? 4 : 2;
   const labelRouteMeasurements = collectLabelRouteClearance({
     labels: relationshipLabels,
@@ -236,11 +243,16 @@ if (svgMatches.length === 1) {
     // These are review evidence, not new pass/fail thresholds: a short, clear
     // crossover can be preferable to a long crossing-free detour.
     routeReview: {
-      crossings: resolvedCrossovers.map((hit) => ({
-        left: relationshipRecord(hit.left),
-        right: relationshipRecord(hit.right),
-        point: hit.point,
-      })),
+      crossings: resolvedCrossovers.map((hit) => {
+        const shared = [hit.left.from, hit.left.to].find((id) => id && (id === hit.right.from || id === hit.right.to));
+        return {
+          left: relationshipRecord(hit.left),
+          right: relationshipRecord(hit.right),
+          point: hit.point,
+          ...(shared ? { sharedNode: shared } : {}),
+        };
+      }),
+      ...(crowdedSides.length ? { crowdedSides } : {}),
       detours: routedRelationships.flatMap((entry) => {
         const metrics = routeBudgetMetrics({ routedRelations: [entry] });
         const blockers = directCorridorBlockers(entry.relation, nodeRects);
@@ -253,6 +265,7 @@ if (svgMatches.length === 1) {
       }),
     },
     leadingSpace,
+    ...(sequenceColumnSpace ? { sequenceColumnSpace } : {}),
     desktopReadability: desktopReadability.evidence,
     issues: [
       ...containerBorderRuns.map((hit) => ({
@@ -420,7 +433,7 @@ console.log(JSON.stringify({ ok, file: htmlPath, artifact, checks, composition }
 // Let pending stdout writes drain: large receipts are asynchronous when piped.
 process.exitCode = ok ? 0 : 1;
 
-function collectArrows(fragment) {
+function collectArrows(fragment, useActualPoints = false) {
   const arrows = [];
   let index = 0;
   let previousTag = null;
@@ -472,10 +485,16 @@ function collectArrows(fragment) {
         && (tag[1].toLowerCase() === 'line' || /^\s*M\s+[-+\d.eE]+\s+[-+\d.eE]+\s+L\s+[-+\d.eE]+\s+[-+\d.eE]+\s*$/.test(attrs.d || '')),
       crossoverHalo: verifiedCrossoverHalo,
       independentPorts: verifiedCrossoverHalo && attrs['data-composition-independent'] === 'true',
+      // Compatibility with first-round exports lacking a root layout contract.
+      // Readable-v2's root contract supersedes this narrower automatic-pair rule.
+      // This marker never certifies a crossover halo or waives a quality rule.
+      automaticWorkflowRoute: attrs['data-composition-routing'] === 'workflow-v2-auto',
       width: routeStrokeWidth,
+      variant: raw.match(/\ba-(default|emphasis|security|dashed)\b/)?.[1] || 'default',
+      role: attrs['data-edge-role'],
       segments,
       borderSegments,
-      routePoints: parseRoutePoints(attrs['data-composition-points']) || (
+      routePoints: (!useActualPoints && parseRoutePoints(attrs['data-composition-points'])) || (
         borderSegments.length ? [borderSegments[0].start, ...borderSegments.map((segment) => segment.end)] : []
       ),
       from: attrs['data-edge-from'] || attrs['data-composition-edge-from'],
@@ -556,17 +575,24 @@ function parseRoutePoints(value) {
   return points.length >= 2 && points.every(isPoint) ? points : null;
 }
 
-function collectRelationshipCrossings(arrows) {
-  const relationships = arrows.filter((arrow) => arrow.from && arrow.to && arrow.segments.length);
+function collectRelationshipCrossings(arrows, includeSharedEndpoints = false) {
+  const relationships = arrows.filter((arrow) => arrow.from && arrow.to && arrow.segments.length).map(arrow => ({
+    ...arrow,
+    // Readable-v2 routePoints come from the visible path, never its metadata.
+    // A straight-through via is not a visual endpoint; preserve real bends.
+    segments: includeSharedEndpoints ? forwardCollinearAnalysisSegments(arrow.routePoints) : arrow.segments,
+  }));
   const crossings = [];
   for (let leftIndex = 0; leftIndex < relationships.length; leftIndex += 1) {
     const left = relationships[leftIndex];
     for (let rightIndex = leftIndex + 1; rightIndex < relationships.length; rightIndex += 1) {
       const right = relationships[rightIndex];
       // A shared semantic endpoint does not make an interior X a junction
-      // when both generated paths promise independent automatic ports.
+      // when both paths opt into automatic workflow or independent-port checks.
       if ([left.from, left.to].some((id) => id === right.from || id === right.to)
-          && (!left.independentPorts || !right.independentPorts)) continue;
+          && !includeSharedEndpoints
+          && !(left.independentPorts && right.independentPorts)
+          && !(left.automaticWorkflowRoute && right.automaticWorkflowRoute)) continue;
       let point = null;
       for (const leftSegment of left.segments) {
         for (const rightSegment of right.segments) {
@@ -632,6 +658,34 @@ function directCorridorBlockers(relation, nodes) {
   return nodes.filter((node) => node !== from && node !== to
     && node.box[axis] < high && node.box[axis] + node.box[axis + 2] > low
     && node.box[cross] < a[cross] && node.box[cross] + node.box[cross + 2] > a[cross]);
+}
+
+// Automatic ports need a 16px corner gutter and 14px between neighbours, so a
+// side facing more counterparts than that fits pushes routes onto other sides.
+function crowdedNodeSides(arrows, nodes) {
+  const byId = new Map(nodes.map((node) => [node.id, node]));
+  const demand = new Map();
+  for (const arrow of arrows) {
+    const from = byId.get(arrow.from);
+    const to = byId.get(arrow.to);
+    if (!from || !to || from === to) continue;
+    for (const [node, other] of [[from, to], [to, from]]) {
+      const [x, y, w, h] = node.box;
+      const dx = other.box[0] + other.box[2] / 2 - (x + w / 2);
+      const dy = other.box[1] + other.box[3] / 2 - (y + h / 2);
+      const side = dx !== 0 && Math.abs(dx) >= Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy > 0 ? 'bottom' : 'top');
+      const key = `${node.id}\u0000${side}`;
+      const entry = demand.get(key) || { node, side, relationships: 0 };
+      entry.relationships += 1;
+      demand.set(key, entry);
+    }
+  }
+  return [...demand.values()].flatMap(({ node, side, relationships }) => {
+    const sidePx = side === 'left' || side === 'right' ? node.box[3] : node.box[2];
+    const neededPx = 32 + 14 * (relationships - 1);
+    return relationships > 1 && sidePx < neededPx
+      ? [{ node: node.id, label: node.label, side, relationships, sidePx, neededPx }] : [];
+  });
 }
 
 function relationshipRecord(arrow) {
@@ -732,6 +786,76 @@ function collectArchitectureLeadingSpace({ svgAttrs, fragment, nodeRects, frames
     canvasHeight: height,
     typicalNodeHeight,
     reviewSuggested: gap > 2 * typicalNodeHeight && ratio > 0.2,
+  };
+}
+
+// Advisory only: fixed columns are a compatibility contract. Measure semantic
+// content, including long labels/notes, rather than treating every wide canvas
+// as wasted space. Auto-sized segment frames do not add a participant column.
+function collectSequenceColumnSpace({ svgAttrs, fragment, nodeRects, arrows }) {
+  const columnFit = svgAttrs['data-sequence-column-fit'];
+  if (!['fixed', 'spread'].includes(columnFit)) return null;
+  const evidence = { measured: false, reviewSuggested: false, columnFit };
+  if (svgAttrs.transform || /<tspan\b/i.test(fragment)) return evidence;
+  // Brand badges stay inside their participant box. Ignore only that subtree's
+  // transforms, including the preset path or nested fallback icon's scale.
+  const brandGroups = [];
+  for (const token of fragment.matchAll(SVG_TAG_TOKEN)) {
+    if (!token[2]) continue;
+    const name = token[2].toLowerCase();
+    if (token[1]) {
+      if (name === 'g') brandGroups.pop();
+      continue;
+    }
+    const attrs = parseAttrs(token[0]);
+    const inBrand = brandGroups.at(-1) === true || (name === 'g'
+      && Boolean(attrs['data-brand-mark'])
+      && String(attrs.class || '').split(/\s+/).includes('brand-mark'));
+    if (!inBrand && attrs.transform && ['g', 'path', 'line', 'rect', 'text'].includes(name)
+        && !(name === 'g' && attrs['data-semantic-sigil'])) return evidence;
+    if (name === 'g' && !/\/\s*>$/.test(token[0])) brandGroups.push(inBrand);
+  }
+  const [originX, , width, height] = viewBoxRect(svgAttrs);
+  if (![originX, width, height].every(Number.isFinite) || width <= 0 || height <= 0) return evidence;
+  const nodeCount = [...fragment.matchAll(/<g\b[^>]*\bdata-node-id=/gi)].length;
+  if (!nodeRects.length || nodeCount !== nodeRects.length) return evidence;
+  const semanticArrows = arrows.filter((arrow) => arrow.from && arrow.to);
+  if (semanticArrows.some((arrow) => !arrow.routePoints.length)) return evidence;
+  const rightEdges = nodeRects.map((node) => node.box[0] + node.box[2]);
+  for (const arrow of semanticArrows) {
+    for (const point of arrow.routePoints) rightEdges.push(point[0]);
+  }
+  // Label plates, activations and segment titles also reserve horizontal room.
+  for (const match of fragment.matchAll(/<rect\b[^>]*>/gi)) {
+    const attrs = parseAttrs(match[0]);
+    if (!String(attrs.class || '').split(/\s+/).includes('c-mask')) continue;
+    rightEdges.push(numberAttr(attrs, 'x') + numberAttr(attrs, 'width'));
+  }
+  for (const match of fragment.matchAll(/<text\b([^>]*)>([\s\S]*?)<\/text>/gi)) {
+    const box = textBox(parseAttrs(match[1]), stripTags(match[2]).trim());
+    if (!box) return evidence;
+    rightEdges.push(box.x2);
+  }
+  if (!rightEdges.every(Number.isFinite)) return evidence;
+  const occupiedRight = Math.max(...rightEdges);
+  const gap = Math.max(0, originX + width - occupiedRight);
+  const ratio = gap / width;
+  const widths = nodeRects.map((node) => node.box[2]).sort((a, b) => a - b);
+  const typicalParticipantWidth = widths[Math.floor(widths.length / 2)];
+  return {
+    measured: true,
+    columnFit,
+    participantCount: nodeCount,
+    occupiedRight: Math.round(occupiedRight * 10) / 10,
+    viewBoxLeft: originX,
+    canvasWidth: width,
+    emptyRightPx: Math.round(gap * 10) / 10,
+    emptyRightRatio: Math.round(ratio * 1000) / 1000,
+    typicalParticipantWidth,
+    // Avoid stretching a small conversation merely to fill its canvas. These
+    // conservative review thresholds never contribute errors or warnings.
+    reviewSuggested: columnFit === 'fixed' && nodeCount >= 4
+      && gap > 2 * typicalParticipantWidth && ratio > 0.25,
   };
 }
 

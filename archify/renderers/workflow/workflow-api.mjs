@@ -60,7 +60,7 @@ async function renderWorkflowInternal({
     return { ok: false, error: error.message, diagnostics: error.archifyDiagnostics };
   }
 
-  const compiled = compileWorkflow({ workflow: diagram, qualityProfile });
+  const compiled = compileWorkflow({ workflow: diagram, qualityProfile, sourceEvidence });
   if (!compiled.ok) {
     return { ok: false, error: compiled.error, diagnostics: compiled.diagnostics, receipt: compiled.receipt };
   }

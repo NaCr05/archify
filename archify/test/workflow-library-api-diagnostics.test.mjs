@@ -47,9 +47,9 @@ test('a failed renderWorkflow call does not leak diagnostics into a later unrela
     assert.ok(failed.diagnostics.some(({ code }) => code === 'schema/required'));
 
     const broken = workflow();
-    broken.meta.views = [{ id: 'view', label: 'View', focus: ['missing'] }];
+    broken.edges[0].to = 'missing';
     const alsoFailed = await renderWorkflow({ workflow: broken });
-    assert.deepEqual(alsoFailed.diagnostics.map(({ code }) => code), ['guided-view/invalid']);
+    assert.deepEqual(alsoFailed.diagnostics.map(({ code }) => code), ['workflow/unknown-edge-endpoint']);
 
     const ok = await renderWorkflow({ workflow: workflow() });
     assert.equal(ok.ok, true, JSON.stringify(ok.diagnostics));

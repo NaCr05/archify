@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generator": "scripts/build-gallery.mjs",
-  "archifyVersion": "2.17.0-dev.1",
+  "archifyVersion": "3.0.2-dev.1",
   "entryCount": 11,
   "checkCount": 99,
   "entries": [
@@ -13,24 +13,16 @@
       "input": "gallery/sources/agent-tool-call.workflow.json",
       "artifact": "gallery/artifacts/agent-tool-call.workflow.html",
       "focus": "planner",
-      "view": "happy-path",
-      "viewCount": 3,
-      "viewIds": [
-        "happy-path",
-        "safety-gate",
-        "evidence-loop"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 2,
       "visualPreset": "signal-flow",
       "animation": "trace",
       "engineeringProfile": null,
       "nodeCount": 12,
       "edgeCount": 11,
-      "artifactBytes": 845486,
-      "artifactSha256": "c7c09a3d5224721a7b0e45800ba02bfcec51fe38a7b388aa162a9273d7e50286",
-      "sourceBytes": 5687,
-      "sourceSha256": "4d3f6c23de2ca7d306e05d0041a9506833bb5a164a2bddc2d1984cf4da3ee90c",
+      "artifactBytes": 767776,
+      "artifactSha256": "7d086f7f0af593759c56dd82e0b952bcb1a27a64f960cfc7226f905aa2d010dc",
+      "sourceBytes": 4939,
+      "sourceSha256": "d67965d50872c97e4ff3476271e645bf19fab6b3ab44e111bdb44b063e3aa36f",
       "checks": [
         {
           "name": "single_svg",
@@ -156,24 +148,16 @@
       "input": "gallery/sources/production-deployment.architecture.json",
       "artifact": "gallery/artifacts/production-deployment.architecture.html",
       "focus": "gateway",
-      "view": "request-boundary",
-      "viewCount": 3,
-      "viewIds": [
-        "request-boundary",
-        "state-ownership",
-        "async-operations"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "blueprint",
       "animation": "trace",
       "engineeringProfile": "deployment-ownership",
       "nodeCount": 12,
       "edgeCount": 12,
-      "artifactBytes": 848888,
-      "artifactSha256": "fad9f0001cb523c3852e7f74be0fb7f77a71393bc362049ae8969e0f77007413",
-      "sourceBytes": 5476,
-      "sourceSha256": "ec484aa8576664fdb207b543fa49486b23273faccb7a5071e1a0becfb48c22eb",
+      "artifactBytes": 770503,
+      "artifactSha256": "46bc35a5978fd96e842104527342ccb524b0e9d5cadb1dfbc5dac38d7095bc41",
+      "sourceBytes": 4734,
+      "sourceSha256": "cb54bad2dfd0c2d02aa5b496bde6839789a0f07f23062343c4458b8d38806c13",
       "checks": [
         {
           "name": "single_svg",
@@ -297,24 +281,16 @@
       "input": "gallery/sources/cache-miss-request.sequence.json",
       "artifact": "gallery/artifacts/cache-miss.sequence.html",
       "focus": "redis",
-      "view": "cache-fallback",
-      "viewCount": 3,
-      "viewIds": [
-        "request-and-auth",
-        "cache-fallback",
-        "return-and-trace"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "classic",
       "animation": "trace",
       "engineeringProfile": null,
       "nodeCount": 7,
       "edgeCount": 12,
-      "artifactBytes": 840598,
-      "artifactSha256": "d77771ad5640aad0a2d9e4f080de0511824a032aceb2bb4f2f7c0956c7190833",
-      "sourceBytes": 4374,
-      "sourceSha256": "9a799a3661c16cd6ab4f6373ff6a04da95a9ab70d93b0a349b668466f4912fd7",
+      "artifactBytes": 762316,
+      "artifactSha256": "590cf92f58921658398953fbf28795cbf054053bf89c2e9f23acd0c827693a53",
+      "sourceBytes": 3805,
+      "sourceSha256": "f8486daa803fff6c295cecca4604c561fbbf9acb2e83326022b5a87639e8afe6",
       "checks": [
         {
           "name": "single_svg",
@@ -398,6 +374,18 @@
           "measured": false,
           "reviewSuggested": false
         },
+        "sequenceColumnSpace": {
+          "measured": true,
+          "columnFit": "spread",
+          "participantCount": 7,
+          "occupiedRight": 1040,
+          "viewBoxLeft": 0,
+          "canvasWidth": 1080,
+          "emptyRightPx": 40,
+          "emptyRightRatio": 0.037,
+          "typicalParticipantWidth": 113,
+          "reviewSuggested": false
+        },
         "desktopReadability": {
           "budgetBasis": "legacy-930",
           "readerContract": "declared-wide-v1",
@@ -427,24 +415,16 @@
       "input": "gallery/sources/release-delivery.workflow.json",
       "artifact": "gallery/artifacts/release-delivery.workflow.html",
       "focus": "approval",
-      "view": "approval-to-production",
-      "viewCount": 3,
-      "viewIds": [
-        "commit-to-checks",
-        "approval-to-production",
-        "rollback-path"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "classic",
       "animation": "trace",
       "engineeringProfile": null,
       "nodeCount": 10,
       "edgeCount": 10,
-      "artifactBytes": 841702,
-      "artifactSha256": "b257560e70dbdb97389352ffb3b57507d0ac724759cd6d154f55ac8f8f81f66c",
-      "sourceBytes": 5164,
-      "sourceSha256": "e5c880417eac1623923c3dd5461e0c78acd762e1621a28bd53fc14a84cad6a91",
+      "artifactBytes": 763290,
+      "artifactSha256": "6a3fc44eb7b266bde68b92159b32db8ba08f9fab5e513d612da53e1a29988c82",
+      "sourceBytes": 4510,
+      "sourceSha256": "dbd5c174af66296caec372e7214cf4df7158b50a563508e16826b95ab8d1cd6c",
       "checks": [
         {
           "name": "single_svg",
@@ -559,10 +539,10 @@
             "wideRatio": 1.55,
             "svgWidthPx": 1346,
             "svgHeightPx": 1683,
-            "fixedChromePx": 187,
-            "pageHeightPx": 1870,
-            "overflowPx": 970,
-            "detail": "[composition/viewport-height] Preserve every node, relationship, and label. This 720x900 canvas (ratio 0.8) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 1683px tall at the full 1346px width and the page reaches 1870px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 464 at this width, or spread content sideways so the width is at least 1395 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
+            "fixedChromePx": 126,
+            "pageHeightPx": 1809,
+            "overflowPx": 909,
+            "detail": "[composition/viewport-height] Preserve every node, relationship, and label. This 720x900 canvas (ratio 0.8) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 1683px tall at the full 1346px width and the page reaches 1809px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 464 at this width, or spread content sideways so the width is at least 1395 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
           }
         ]
       }
@@ -575,24 +555,16 @@
       "input": "gallery/sources/incident-response.workflow.json",
       "artifact": "gallery/artifacts/incident-response.workflow.html",
       "focus": "triage",
-      "view": "mitigate-and-verify",
-      "viewCount": 3,
-      "viewIds": [
-        "detect-and-triage",
-        "mitigate-and-verify",
-        "escalate-and-communicate"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "signal-flow",
       "animation": "trace",
       "engineeringProfile": null,
       "nodeCount": 11,
       "edgeCount": 10,
-      "artifactBytes": 839021,
-      "artifactSha256": "b53445393bd0e48a3a41dfd8f3e9f72a5ae638ab5ca8c97892cfa3490b887b14",
-      "sourceBytes": 5375,
-      "sourceSha256": "5c760c82eee545dfb7da38a4e628059d7891af4cfbfc13c8a7009ea64f69aa1b",
+      "artifactBytes": 760610,
+      "artifactSha256": "fdfa06be4f0d9728f844ccfde5910fa4b4ed8f2d268be41e05b7a95535fd834b",
+      "sourceBytes": 4723,
+      "sourceSha256": "630be98449925d2716ecb8439f404b2bff5fe65ba905b0ad0baea6d96890c526",
       "checks": [
         {
           "name": "single_svg",
@@ -753,10 +725,10 @@
             "wideRatio": 1.55,
             "svgWidthPx": 1346,
             "svgHeightPx": 1683,
-            "fixedChromePx": 187,
-            "pageHeightPx": 1870,
-            "overflowPx": 970,
-            "detail": "[composition/viewport-height] Preserve every node, relationship, and label. This 720x900 canvas (ratio 0.8) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 1683px tall at the full 1346px width and the page reaches 1870px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 464 at this width, or spread content sideways so the width is at least 1395 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
+            "fixedChromePx": 126,
+            "pageHeightPx": 1809,
+            "overflowPx": 909,
+            "detail": "[composition/viewport-height] Preserve every node, relationship, and label. This 720x900 canvas (ratio 0.8) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 1683px tall at the full 1346px width and the page reaches 1809px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 464 at this width, or spread content sideways so the width is at least 1395 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
           }
         ]
       }
@@ -769,24 +741,16 @@
       "input": "gallery/sources/product-analytics.dataflow.json",
       "artifact": "gallery/artifacts/product-analytics.dataflow.html",
       "focus": "consent",
-      "view": "consent-boundary",
-      "viewCount": 3,
-      "viewIds": [
-        "collection-path",
-        "consent-boundary",
-        "analytics-consumers"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "classic",
       "animation": "trace",
       "engineeringProfile": null,
       "nodeCount": 10,
       "edgeCount": 10,
-      "artifactBytes": 842953,
-      "artifactSha256": "13fb237bc9bdb46fff6a0bb974705feb25f99d7c70ae39f6b208631f7472455c",
-      "sourceBytes": 5618,
-      "sourceSha256": "91411404fb4828a3b7ea358f3a7b9877781c9e9dc9c04b42b6eb4a757281b59f",
+      "artifactBytes": 764610,
+      "artifactSha256": "498dad656e49542b27fd4c08d83adf0e50809255517fee1bf21a86f172103fd0",
+      "sourceBytes": 5035,
+      "sourceSha256": "8a635db9e51a5b1a8d2955b9d66f5b9a450e0a298432ce8f2e2f0be11f372e05",
       "checks": [
         {
           "name": "single_svg",
@@ -912,24 +876,16 @@
       "input": "gallery/sources/async-job-roundtrip.sequence.json",
       "artifact": "gallery/artifacts/async-job-roundtrip.sequence.html",
       "focus": "queue",
-      "view": "work-and-retry",
-      "viewCount": 3,
-      "viewIds": [
-        "accept-and-enqueue",
-        "work-and-retry",
-        "observe-final-state"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "signal-flow",
       "animation": "trace",
       "engineeringProfile": null,
       "nodeCount": 7,
       "edgeCount": 14,
-      "artifactBytes": 839716,
-      "artifactSha256": "df73f428311962d3a78d487feed6e9928f20473665b8afa4b06be27e0a656904",
-      "sourceBytes": 4370,
-      "sourceSha256": "545f20920c89b69c2bb1f15508d5543fddbeb15cffba61e102206e04bd5a5cd9",
+      "artifactBytes": 761402,
+      "artifactSha256": "48f43ccbe702462a339ae3fd4743c38ac90fac261a24ff90a0853db01a38f8f5",
+      "sourceBytes": 3766,
+      "sourceSha256": "b8c6c52f1763ede2933c77deb8da59b3e06917bc41d27e66df896136456b859a",
       "checks": [
         {
           "name": "single_svg",
@@ -1013,6 +969,18 @@
           "measured": false,
           "reviewSuggested": false
         },
+        "sequenceColumnSpace": {
+          "measured": true,
+          "columnFit": "fixed",
+          "participantCount": 7,
+          "occupiedRight": 753,
+          "viewBoxLeft": 0,
+          "canvasWidth": 820,
+          "emptyRightPx": 67,
+          "emptyRightRatio": 0.082,
+          "typicalParticipantWidth": 86,
+          "reviewSuggested": false
+        },
         "desktopReadability": {
           "budgetBasis": "legacy-930",
           "readerContract": "declared-wide-v1",
@@ -1044,10 +1012,10 @@
             "wideRatio": 1.55,
             "svgWidthPx": 1346,
             "svgHeightPx": 1510,
-            "fixedChromePx": 187,
-            "pageHeightPx": 1697,
-            "overflowPx": 797,
-            "detail": "[composition/viewport-height] Preserve every node, relationship, and label. This 820x920 canvas (ratio 0.89) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 1510px tall at the full 1346px width and the page reaches 1697px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 529 at this width, or spread content sideways so the width is at least 1426 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
+            "fixedChromePx": 126,
+            "pageHeightPx": 1636,
+            "overflowPx": 736,
+            "detail": "[composition/viewport-height] Preserve every node, relationship, and label. This 820x920 canvas (ratio 0.89) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 1510px tall at the full 1346px width and the page reaches 1636px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 529 at this width, or spread content sideways so the width is at least 1426 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
           }
         ]
       }
@@ -1060,24 +1028,16 @@
       "input": "gallery/sources/event-stream.dataflow.json",
       "artifact": "gallery/artifacts/event-stream.dataflow.html",
       "focus": "orders",
-      "view": "order-transit",
-      "viewCount": 3,
-      "viewIds": [
-        "order-transit",
-        "payment-transit",
-        "failure-and-replay"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "signal-flow",
       "animation": "trace",
       "engineeringProfile": null,
       "nodeCount": 12,
       "edgeCount": 12,
-      "artifactBytes": 846951,
-      "artifactSha256": "cf7027f5cf5152e3983a0190cfe3c6e2f12b7b05bcb8e4748c3904b0c2313380",
-      "sourceBytes": 5433,
-      "sourceSha256": "a92d6597ddbe164f395da32a7d4b33cfae08edd7d9600a6fb45a2058e5bbb43e",
+      "artifactBytes": 768530,
+      "artifactSha256": "8cdd38dc599f78bc6f8dca392b38dcb76b3159efdc3a734a9a8b814d82e358c7",
+      "sourceBytes": 4769,
+      "sourceSha256": "3bdd77674282009c7c68d588cf8a3c495bc98a3be1b9c45327fd1801a6f83a23",
       "checks": [
         {
           "name": "single_svg",
@@ -1204,10 +1164,10 @@
             "wideRatio": 1.55,
             "svgWidthPx": 1346,
             "svgHeightPx": 972,
-            "fixedChromePx": 187,
-            "pageHeightPx": 1159,
-            "overflowPx": 259,
-            "detail": "[composition/viewport-height] Preserve every node, relationship, and label. This 1080x780 canvas (ratio 1.38) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 972px tall at the full 1346px width and the page reaches 1159px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 696 at this width, or spread content sideways so the width is at least 1209 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
+            "fixedChromePx": 126,
+            "pageHeightPx": 1098,
+            "overflowPx": 198,
+            "detail": "[composition/viewport-height] Preserve every node, relationship, and label. This 1080x780 canvas (ratio 1.38) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 972px tall at the full 1346px width and the page reaches 1098px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 696 at this width, or spread content sideways so the width is at least 1209 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
           }
         ]
       }
@@ -1220,24 +1180,16 @@
       "input": "gallery/sources/agent-run.lifecycle.json",
       "artifact": "gallery/artifacts/agent-run.lifecycle.html",
       "focus": "approval",
-      "view": "main-lifecycle",
-      "viewCount": 3,
-      "viewIds": [
-        "main-lifecycle",
-        "human-waits",
-        "recovery-and-exits"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "classic",
       "animation": "trace",
       "engineeringProfile": null,
       "nodeCount": 10,
       "edgeCount": 6,
-      "artifactBytes": 836030,
-      "artifactSha256": "e9995951afa396d6fbe5504452ff1f577598f167340853c7adee8b7bc59ac2f8",
-      "sourceBytes": 4044,
-      "sourceSha256": "7c0ad72ee7affbd6c6e4758b7520d61ddd4508c917acf36beabcad3ee7ca3ba7",
+      "artifactBytes": 758920,
+      "artifactSha256": "99dfa39c258ed8009c1b312dde565fad3f81eaf9ffa181fcd0dd6cc818722040",
+      "sourceBytes": 3405,
+      "sourceSha256": "230242a7557663877766c43a9fe7cffe8b4fb66e4866457dccd24c63175b4917",
       "checks": [
         {
           "name": "single_svg",
@@ -1399,24 +1351,16 @@
       "input": "gallery/sources/deployment-release.lifecycle.json",
       "artifact": "gallery/artifacts/deployment-release.lifecycle.html",
       "focus": "live",
-      "view": "rollback-outcomes",
-      "viewCount": 3,
-      "viewIds": [
-        "promotion-rail",
-        "approval-gate",
-        "rollback-outcomes"
-      ],
-      "guidedPlayback": true,
-      "schemaVersion": 1,
+      "schemaVersion": 2,
       "visualPreset": "signal-flow",
       "animation": "trace",
       "engineeringProfile": null,
       "nodeCount": 11,
-      "edgeCount": 6,
-      "artifactBytes": 837572,
-      "artifactSha256": "2baf3211e07acfb17d8d38ac13c150dd3b55a2ecbf38527cfc3ec5f1b2212251",
-      "sourceBytes": 4274,
-      "sourceSha256": "735c2c5819266e6ea2a71775b6eefce98b53030ce90cb721dc8e1d022ce5be71",
+      "edgeCount": 11,
+      "artifactBytes": 765975,
+      "artifactSha256": "24279a5e329c5e0de5e1f8ecefd3d0f799e1381f9cb9779abe4db5c8cae8d3f7",
+      "sourceBytes": 3507,
+      "sourceSha256": "f565a8acfebdb21453e2bccd82d3760b4736e38fe194fb2f0804b57817eba813",
       "checks": [
         {
           "name": "single_svg",
@@ -1461,7 +1405,7 @@
         "status": "pass",
         "summary": {
           "errors": 0,
-          "warnings": 1
+          "warnings": 0
         },
         "metrics": {
           "properCrossings": 0,
@@ -1471,16 +1415,16 @@
           "containerBorderRuns": 0,
           "labelRouteClearanceIssues": 0,
           "labelCanvasOverflowIssues": 0,
-          "minLabelRouteClearance": null,
+          "minLabelRouteClearance": 21,
           "desktopReadabilityIssues": 0,
-          "viewportHeightIssues": 1,
-          "minProjectedNodeTextPx": 6.642857142857143,
-          "maxBends": 0,
+          "viewportHeightIssues": 0,
+          "minProjectedNodeTextPx": 6.91449814126394,
+          "maxBends": 2,
           "routesOverSuggestedBends": 0,
           "maxStretch": 1,
           "routesOverSuggestedStretch": 0,
-          "minSegmentPx": 90,
-          "minInteriorSegmentPx": null,
+          "minSegmentPx": 60,
+          "minInteriorSegmentPx": 174,
           "shortSegmentCount": 0,
           "shortEndpointSegmentCount": 0,
           "shortInteriorSegmentCount": 0,
@@ -1514,29 +1458,11 @@
             "kind": "node",
             "id": "queued"
           },
-          "minimumSourceTextPx": 7,
-          "minimumProjectedTextPx": 6.642857142857143,
-          "semanticTextCount": 22
+          "minimumSourceTextPx": 8,
+          "minimumProjectedTextPx": 6.91449814126394,
+          "semanticTextCount": 24
         },
-        "issues": [
-          {
-            "severity": "warning",
-            "code": "composition/viewport-height",
-            "readerFit": null,
-            "viewBoxWidth": 980,
-            "viewBoxHeight": 680,
-            "viewportWidth": 1440,
-            "viewportHeight": 900,
-            "ratio": 1.44,
-            "wideRatio": 1.55,
-            "svgWidthPx": 1346,
-            "svgHeightPx": 934,
-            "fixedChromePx": 187,
-            "pageHeightPx": 1121,
-            "overflowPx": 221,
-            "detail": "[composition/viewport-height] Preserve every node, relationship, and label. This 980x680 canvas (ratio 1.44) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 934px tall at the full 1346px width and the page reaches 1121px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 632 at this width, or spread content sideways so the width is at least 1054 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
-          }
-        ]
+        "issues": []
       }
     },
     {
@@ -1547,24 +1473,16 @@
       "input": "gallery/sources/web-app.architecture.json",
       "artifact": "gallery/artifacts/web-app.architecture.html",
       "focus": "api",
-      "view": "request-path",
-      "viewCount": 3,
-      "viewIds": [
-        "request-path",
-        "identity-and-cache",
-        "async-work"
-      ],
-      "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "classic",
       "animation": "static",
       "engineeringProfile": null,
       "nodeCount": 10,
       "edgeCount": 9,
-      "artifactBytes": 840657,
-      "artifactSha256": "a444a42d69a8bb3493e91a71d28924adc1b41f6faa22ae5c6b0d1b60c598b6b3",
-      "sourceBytes": 3793,
-      "sourceSha256": "483350f5297df682aba4e4a0fa491307ce3d3abd725ae4df07fab177490752cf",
+      "artifactBytes": 762316,
+      "artifactSha256": "3ed638ac7f2ce0e99b3e2ff3c520b703d368eca7fbd223e9ee94d54e257c189a",
+      "sourceBytes": 3197,
+      "sourceSha256": "95e051b27a9e4a3307e194c0f666fca4af51470be7e2228d400ff48aea5b353b",
       "checks": [
         {
           "name": "single_svg",

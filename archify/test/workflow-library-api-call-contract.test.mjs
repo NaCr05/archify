@@ -82,18 +82,18 @@ test('renderWorkflow never installs the CLI-only process-level diagnostics bound
   assert.equal(globalThis[BOUNDARY_KEY], undefined);
 });
 
-test('renderWorkflow enforces guided-view and relationship-id contracts', async () => {
+test('renderWorkflow enforces relationship-id and edge-endpoint contracts', async () => {
   const duplicateEdgeIds = workflow();
   duplicateEdgeIds.edges.push({ id: 'ab', from: 'b', to: 'a', label: 'reply' });
   const viaLibrary = await renderWorkflow({ workflow: duplicateEdgeIds });
   assert.equal(viaLibrary.ok, false);
   assert.deepEqual(viaLibrary.diagnostics.map((entry) => entry.code), ['relationship/duplicate-id']);
 
-  const unknownFocus = workflow();
-  unknownFocus.meta.views = [{ id: 'view-1', label: 'View 1', focus: ['does-not-exist'] }];
-  const result = await renderWorkflow({ workflow: unknownFocus });
+  const unknownEndpoint = workflow();
+  unknownEndpoint.edges[0].to = 'does-not-exist';
+  const result = await renderWorkflow({ workflow: unknownEndpoint });
   assert.equal(result.ok, false);
-  assert.deepEqual(result.diagnostics.map((entry) => entry.code), ['guided-view/invalid']);
+  assert.deepEqual(result.diagnostics.map((entry) => entry.code), ['workflow/unknown-edge-endpoint']);
 });
 
 test('renderWorkflow reports a compiler-level failure as data, not an exception', async () => {
