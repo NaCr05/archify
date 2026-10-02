@@ -1,0 +1,67 @@
+TAP version 13
+# Subtest: preview: direct force closes an unfinished HTTP request
+ok 1 - preview: direct force closes an unfinished HTTP request # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.338939
+  ...
+# Subtest: preview: escalated force closes an unfinished HTTP request
+ok 2 - preview: escalated force closes an unfinished HTTP request # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.164946
+  ...
+# Subtest: preview: force closes SSE clients and remains idempotent
+ok 3 - preview: force closes SSE clients and remains idempotent # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.152666
+  ...
+# Subtest: preview: force closes HTTP while killing an active delivery without publishing it
+ok 4 - preview: force closes HTTP while killing an active delivery without publishing it # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.054351
+  ...
+# Subtest: preview CLI: second Ctrl-C exits despite an unfinished HTTP request
+ok 5 - preview CLI: second Ctrl-C exits despite an unfinished HTTP request # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.116831
+  ...
+# Subtest: preview: force preserves recovery material at the real delivery snapshot window
+not ok 6 - preview: force preserves recovery material at the real delivery snapshot window
+  ---
+  duration_ms: 1201.461673
+  location: 'file://<linux-test-root>/base/archify/test/preview-ready-publication.repro.test.mjs:187:3'
+  failureType: 'testCodeFailure'
+  error: 'ENOENT: no such file or directory, open'
+  code: 'ENOENT'
+  stack: |-
+    Object.openSync (node:fs:596:3)
+    Object.readFileSync (node:fs:464:35)
+    file://<linux-test-root>/base/archify/test/preview-ready-publication.repro.test.mjs:245:47
+    Array.map (<anonymous>)
+    TestContext.<anonymous> (file://<linux-test-root>/base/archify/test/preview-ready-publication.repro.test.mjs:245:30)
+    async Test.run (node:internal/test_runner/test:632:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:374:7)
+  ...
+# Subtest: preview: force preserves recovery material at the real delivery receipt window
+not ok 7 - preview: force preserves recovery material at the real delivery receipt window
+  ---
+  duration_ms: 2179.27438
+  location: 'file://<linux-test-root>/base/archify/test/preview-ready-publication.repro.test.mjs:187:3'
+  failureType: 'testCodeFailure'
+  error: 'Unexpected end of JSON input'
+  code: 'ERR_TEST_FAILURE'
+  name: 'SyntaxError'
+  stack: |-
+    JSON.parse (<anonymous>)
+    TestContext.<anonymous> (file://<linux-test-root>/base/archify/test/preview-ready-publication.repro.test.mjs:246:51)
+    async Test.run (node:internal/test_runner/test:632:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:374:7)
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 0
+# fail 2
+# cancelled 0
+# skipped 5
+# todo 0
+# duration_ms 3465.162093

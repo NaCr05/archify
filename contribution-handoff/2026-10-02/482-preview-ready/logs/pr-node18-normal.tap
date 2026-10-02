@@ -1,0 +1,45 @@
+TAP version 13
+# Subtest: preview: direct force closes an unfinished HTTP request
+ok 1 - preview: direct force closes an unfinished HTTP request
+  ---
+  duration_ms: 476.208255
+  ...
+# Subtest: preview: escalated force closes an unfinished HTTP request
+ok 2 - preview: escalated force closes an unfinished HTTP request
+  ---
+  duration_ms: 476.674288
+  ...
+# Subtest: preview: force closes SSE clients and remains idempotent
+ok 3 - preview: force closes SSE clients and remains idempotent
+  ---
+  duration_ms: 363.136885
+  ...
+# Subtest: preview: force closes HTTP while killing an active delivery without publishing it
+ok 4 - preview: force closes HTTP while killing an active delivery without publishing it
+  ---
+  duration_ms: 111.113545
+  ...
+# Subtest: preview CLI: second Ctrl-C exits despite an unfinished HTTP request
+ok 5 - preview CLI: second Ctrl-C exits despite an unfinished HTTP request
+  ---
+  duration_ms: 491.960072
+  ...
+# Subtest: preview: force preserves recovery material at the real delivery snapshot window
+ok 6 - preview: force preserves recovery material at the real delivery snapshot window
+  ---
+  duration_ms: 1242.355276
+  ...
+# Subtest: preview: force preserves recovery material at the real delivery receipt window
+ok 7 - preview: force preserves recovery material at the real delivery receipt window
+  ---
+  duration_ms: 1504.306541
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4769.073984

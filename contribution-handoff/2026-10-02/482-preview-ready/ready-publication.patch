@@ -1,0 +1,38 @@
+diff --git a/archify/test/preview-force-stop.test.mjs b/archify/test/preview-force-stop.test.mjs
+index 7ab2f2a..4ddab3e 100644
+--- a/archify/test/preview-force-stop.test.mjs
++++ b/archify/test/preview-force-stop.test.mjs
+@@ -187,18 +187,22 @@ for (const window of ['snapshot', 'receipt']) {
+   test(`preview: force preserves recovery material at the real delivery ${window} window`, { timeout: 20000 }, async () => {
+     const data = fixture();
+     const ready = path.join(data.root, 'delivery.ready');
++    const readyTemporary = `${ready}.tmp`;
+     const deliveryCli = path.join(data.root, 'paused-delivery.mjs');
+     const cli = path.join(skillRoot, 'bin/archify.mjs');
+     const previous = Buffer.from('<!doctype html><title>Previous verified artifact</title>');
+     fs.writeFileSync(data.output, previous);
+     // Pause a real deliver at a deterministic boundary, without publishing its
+     // receipt to Preview. No environment changes leak into other tests.
++    // Publish the ready marker only after its contents are complete: observing
++    // a file's creation does not mean another process has finished writing it.
+     fs.writeFileSync(deliveryCli, window === 'receipt' ? `
+       import fs from 'node:fs';
+       import { spawnSync } from 'node:child_process';
+       const result = spawnSync(process.execPath, [${JSON.stringify(cli)}, ...process.argv.slice(2)], { encoding: 'utf8' });
+       if (result.status !== 0) { process.stderr.write(result.stderr); process.exit(result.status || 1); }
+-      fs.writeFileSync(${JSON.stringify(ready)}, result.stdout);
++      fs.writeFileSync(${JSON.stringify(readyTemporary)}, result.stdout);
++      fs.renameSync(${JSON.stringify(readyTemporary)}, ${JSON.stringify(ready)});
+       setInterval(() => {}, 1000);
+     ` : `
+       import fs from 'node:fs';
+@@ -208,7 +212,8 @@ for (const window of ['snapshot', 'receipt']) {
+       fs.writeFileSync = function (target, ...args) {
+         const result = write.call(this, target, ...args);
+         if (typeof target === 'string' && path.basename(target) === 'specification.snapshot.json') {
+-          write(${JSON.stringify(ready)}, target);
++          write(${JSON.stringify(readyTemporary)}, target);
++          fs.renameSync(${JSON.stringify(readyTemporary)}, ${JSON.stringify(ready)});
+           Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0);
+         }
+         return result;

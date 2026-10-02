@@ -1,0 +1,256 @@
+TAP version 13
+# Subtest: preview contract: the skill keeps live preview explicit, desktop-only, and last-good
+ok 1 - preview contract: the skill keeps live preview explicit, desktop-only, and last-good
+  ---
+  duration_ms: 0.819554
+  type: 'test'
+  ...
+# Subtest: preview contract: all README languages document the same optional command without changing the hero
+ok 2 - preview contract: all README languages document the same optional command without changing the hero
+  ---
+  duration_ms: 0.227629
+  type: 'test'
+  ...
+# Subtest: preview contract: the canonical delivery reference owns no-leak and zero-dependency boundaries
+ok 3 - preview contract: the canonical delivery reference owns no-leak and zero-dependency boundaries
+  ---
+  duration_ms: 0.239719
+  type: 'test'
+  ...
+# Subtest: preview: direct force closes an unfinished HTTP request
+ok 4 - preview: direct force closes an unfinished HTTP request
+  ---
+  duration_ms: 391.392915
+  type: 'test'
+  ...
+# Subtest: preview: escalated force closes an unfinished HTTP request
+ok 5 - preview: escalated force closes an unfinished HTTP request
+  ---
+  duration_ms: 418.30194
+  type: 'test'
+  ...
+# Subtest: preview: force closes SSE clients and remains idempotent
+ok 6 - preview: force closes SSE clients and remains idempotent
+  ---
+  duration_ms: 293.645866
+  type: 'test'
+  ...
+# Subtest: preview: force closes HTTP while killing an active delivery without publishing it
+ok 7 - preview: force closes HTTP while killing an active delivery without publishing it
+  ---
+  duration_ms: 106.419996
+  type: 'test'
+  ...
+# Subtest: preview CLI: second Ctrl-C exits despite an unfinished HTTP request
+ok 8 - preview CLI: second Ctrl-C exits despite an unfinished HTTP request
+  ---
+  duration_ms: 455.835253
+  type: 'test'
+  ...
+# Subtest: preview: force preserves recovery material at the real delivery snapshot window
+ok 9 - preview: force preserves recovery material at the real delivery snapshot window
+  ---
+  duration_ms: 1218.626634
+  type: 'test'
+  ...
+# Subtest: preview: force preserves recovery material at the real delivery receipt window
+ok 10 - preview: force preserves recovery material at the real delivery receipt window
+  ---
+  duration_ms: 1650.282709
+  type: 'test'
+  ...
+# Subtest: preview: rejects destructive or unsupported startup targets before watching
+ok 11 - preview: rejects destructive or unsupported startup targets before watching
+  ---
+  duration_ms: 5.114212
+  type: 'test'
+  ...
+# Subtest: preview: invalid candidates preserve the last verified artifact and repair automatically
+ok 12 - preview: invalid candidates preserve the last verified artifact and repair automatically
+  ---
+  duration_ms: 1261.642978
+  type: 'test'
+  ...
+# Subtest: preview: content digests suppress identical writes and a burst publishes only its stable tail
+ok 13 - preview: content digests suppress identical writes and a burst publishes only its stable tail
+  ---
+  duration_ms: 1874.56782
+  type: 'test'
+  ...
+# Subtest: preview: a superseded slow candidate can never become a published revision
+ok 14 - preview: a superseded slow candidate can never become a published revision
+  ---
+  duration_ms: 728.65517
+  type: 'test'
+  ...
+# Subtest: preview: each delivery reads the immutable bytes bound to its observed digest
+ok 15 - preview: each delivery reads the immutable bytes bound to its observed digest
+  ---
+  duration_ms: 344.788107
+  type: 'test'
+  ...
+# Subtest: preview: commit rechecks the live digest when watcher and poll have not seen a newer save
+ok 16 - preview: commit rechecks the live digest when watcher and poll have not seen a newer save
+  ---
+  duration_ms: 1431.289362
+  type: 'test'
+  ...
+# Subtest: preview: an in-place content change to the staged commit candidate is not published
+ok 17 - preview: an in-place content change to the staged commit candidate is not published
+  ---
+  duration_ms: 266.412895
+  type: 'test'
+  ...
+# Subtest: preview: an in-place mode change to the staged commit candidate is not published
+ok 18 - preview: an in-place mode change to the staged commit candidate is not published
+  ---
+  duration_ms: 269.331444
+  type: 'test'
+  ...
+# Subtest: preview: replacing the staged commit candidate preserves the claimant
+ok 19 - preview: replacing the staged commit candidate preserves the claimant
+  ---
+  duration_ms: 264.431066
+  type: 'test'
+  ...
+# Subtest: preview: a candidate swapped at publication cannot replace the last good artifact
+ok 20 - preview: a candidate swapped at publication cannot replace the last good artifact
+  ---
+  duration_ms: 266.040033
+  type: 'test'
+  ...
+# Subtest: preview: replacing the delivered source candidate preserves the claimant
+ok 21 - preview: replacing the delivered source candidate preserves the claimant
+  ---
+  duration_ms: 1331.957675
+  type: 'test'
+  ...
+# Subtest: preview: a delivery candidate replaced by a symlink is rejected without following it
+ok 22 - preview: a delivery candidate replaced by a symlink is rejected without following it
+  ---
+  duration_ms: 1333.166663
+  type: 'test'
+  ...
+# Subtest: preview: a delivery candidate replaced by a FIFO is rejected without blocking
+ok 23 - preview: a delivery candidate replaced by a FIFO is rejected without blocking
+  ---
+  duration_ms: 1340.07899
+  type: 'test'
+  ...
+# Subtest: preview: publishing through an existing output symlink preserves the link and updates its target
+ok 24 - preview: publishing through an existing output symlink preserves the link and updates its target
+  ---
+  duration_ms: 267.571002
+  type: 'test'
+  ...
+# Subtest: preview: cleanup stays bound to the physical output parent after a directory alias is redirected
+ok 25 - preview: cleanup stays bound to the physical output parent after a directory alias is redirected
+  ---
+  duration_ms: 1.96202
+  type: 'test'
+  ...
+# Subtest: preview: cleanup retries transient remote ENOTEMPTY
+ok 26 - preview: cleanup retries transient remote ENOTEMPTY
+  ---
+  duration_ms: 8.036762
+  type: 'test'
+  ...
+# Subtest: preview: publishing through a dangling output symlink creates its target without replacing the link
+ok 27 - preview: publishing through a dangling output symlink creates its target without replacing the link
+  ---
+  duration_ms: 265.652383
+  type: 'test'
+  ...
+# Subtest: preview: recreating an output symlink to the same target fails the commit even when its inode is reused
+ok 28 - preview: recreating an output symlink to the same target fails the commit even when its inode is reused
+  ---
+  duration_ms: 300.57781
+  type: 'test'
+  ...
+# Subtest: preview: a concurrently claimed absent output is preserved and fails the commit
+ok 29 - preview: a concurrently claimed absent output is preserved and fails the commit
+  ---
+  duration_ms: 258.402492
+  type: 'test'
+  ...
+# Subtest: preview: a concurrent replacement of an existing output is preserved and fails the commit
+ok 30 - preview: a concurrent replacement of an existing output is preserved and fails the commit
+  ---
+  duration_ms: 263.235865
+  type: 'test'
+  ...
+# Subtest: preview: a hardlinked existing output is unsupported before delivery starts
+ok 31 - preview: a hardlinked existing output is unsupported before delivery starts
+  ---
+  duration_ms: 3.71223
+  type: 'test'
+  ...
+# Subtest: preview: stopping drains an active delivery without publishing it
+ok 32 - preview: stopping drains an active delivery without publishing it
+  ---
+  duration_ms: 482.884567
+  type: 'test'
+  ...
+# Subtest: preview: stopping has a bounded kill path for a delivery that never exits
+ok 33 - preview: stopping has a bounded kill path for a delivery that never exits
+  ---
+  duration_ms: 253.16559
+  type: 'test'
+  ...
+# Subtest: preview: checker failures keep their actionable detail instead of a generic stage only
+ok 34 - preview: checker failures keep their actionable detail instead of a generic stage only
+  ---
+  duration_ms: 49.215462
+  type: 'test'
+  ...
+# Subtest: preview: all five typed renderers reach a verified first revision
+ok 35 - preview: all five typed renderers reach a verified first revision
+  ---
+  duration_ms: 1545.12654
+  type: 'test'
+  ...
+# Subtest: preview: polling continues after an asynchronous watcher error
+ok 36 - preview: polling continues after an asynchronous watcher error
+  ---
+  duration_ms: 657.913784
+  type: 'test'
+  ...
+# Subtest: preview: watcher accepts an existing file alias with a different basename
+ok 37 - preview: watcher accepts an existing file alias with a different basename
+  ---
+  duration_ms: 1007.475796
+  type: 'test'
+  ...
+# Subtest: preview: watcher accepts case-variant basenames on a case-insensitive filesystem
+ok 38 - preview: watcher accepts case-variant basenames on a case-insensitive filesystem # SKIP the test volume is case-sensitive
+  ---
+  duration_ms: 0.78994
+  type: 'test'
+  ...
+# Subtest: preview: canonical watch target observes edits through a directory alias
+ok 39 - preview: canonical watch target observes edits through a directory alias
+  ---
+  duration_ms: 634.695892
+  type: 'test'
+  ...
+# Subtest: preview: Windows 8.3 short path observes edits through the canonical watcher
+ok 40 - preview: Windows 8.3 short path observes edits through the canonical watcher # SKIP Windows-only 8.3 path regression
+  ---
+  duration_ms: 0.307197
+  type: 'test'
+  ...
+# Subtest: preview: native watch-target resolution failure closes startup resources
+ok 41 - preview: native watch-target resolution failure closes startup resources
+  ---
+  duration_ms: 1.638511
+  type: 'test'
+  ...
+1..41
+# tests 41
+# suites 0
+# pass 39
+# fail 0
+# cancelled 0
+# skipped 2
+# todo 0
+# duration_ms 16849.843901
