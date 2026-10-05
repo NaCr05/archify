@@ -1,0 +1,8 @@
+
+ RUN  v4.1.11 <workspace>/work/archify-followup-20261005/downstream-astro
+
+
+ Test Files  2 passed (2)
+      Tests  32 passed (32)
+   Start at  09:21:03
+   Duration  2.76s (transform 74ms, setup 0ms, import 397ms, tests 4.29s, environment 0ms)

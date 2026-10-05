@@ -1,0 +1,202 @@
+TAP version 13
+# Subtest: clean staging entry detection accepts a physical alias and fails closed when identity is unknown
+ok 1 - clean staging entry detection accepts a physical alias and fails closed when identity is unknown # SKIP hard-link aliases unavailable: EXDEV
+  ---
+  duration_ms: 1.904739
+  type: 'test'
+  ...
+# Subtest: clean staging rejects a packaged notice that diverges from the repository notice
+ok 2 - clean staging rejects a packaged notice that diverges from the repository notice
+  ---
+  duration_ms: 21.122767
+  type: 'test'
+  ...
+# Subtest: clean staging requires shared path runtimes only when packaged code imports them
+ok 3 - clean staging requires shared path runtimes only when packaged code imports them
+  ---
+  duration_ms: 15.889334
+  type: 'test'
+  ...
+# Subtest: clean staging rejects byte-identical but incomplete repository and packaged notices
+ok 4 - clean staging rejects byte-identical but incomplete repository and packaged notices
+  ---
+  duration_ms: 13.274225
+  type: 'test'
+  ...
+# Subtest: clean staging preserves index modes and strips repository-only package metadata
+ok 5 - clean staging preserves index modes and strips repository-only package metadata
+  ---
+  duration_ms: 18.560678
+  type: 'test'
+  ...
+# Subtest: clean staging records Git index modes in a manifest outside the staged tree
+ok 6 - clean staging records Git index modes in a manifest outside the staged tree
+  ---
+  duration_ms: 18.941032
+  type: 'test'
+  ...
+# Subtest: clean staging refuses to write the mode manifest inside the staged tree
+ok 7 - clean staging refuses to write the mode manifest inside the staged tree
+  ---
+  duration_ms: 8.95912
+  type: 'test'
+  ...
+# Subtest: clean staging refuses an existing mode manifest path and leaves it untouched
+ok 8 - clean staging refuses an existing mode manifest path and leaves it untouched
+  ---
+  duration_ms: 9.660143
+  type: 'test'
+  ...
+# Subtest: clean staging never adopts a claimant that wins destination-root creation
+ok 9 - clean staging never adopts a claimant that wins destination-root creation
+  ---
+  duration_ms: 15.098533
+  type: 'test'
+  ...
+# Subtest: clean staging never overwrites or recursively removes a claimant file
+ok 10 - clean staging never overwrites or recursively removes a claimant file
+  ---
+  duration_ms: 13.050263
+  type: 'test'
+  ...
+# Subtest: clean staging preserves a file claimant swapped at the retirement syscall boundary
+ok 11 - clean staging preserves a file claimant swapped at the retirement syscall boundary
+  ---
+  duration_ms: 14.826792
+  type: 'test'
+  ...
+# Subtest: clean staging preserves a directory claimant swapped at the retirement syscall boundary
+ok 12 - clean staging preserves a directory claimant swapped at the retirement syscall boundary
+  ---
+  duration_ms: 22.771871
+  type: 'test'
+  ...
+# Subtest: clean staging detects a destination-ancestor swap before writing through the opened descriptor
+ok 13 - clean staging detects a destination-ancestor swap before writing through the opened descriptor
+  ---
+  duration_ms: 12.357499
+  type: 'test'
+  ...
+# Subtest: clean staging rejects a mode manifest that aliases the staged tree through a symlinked ancestor
+ok 14 - clean staging rejects a mode manifest that aliases the staged tree through a symlinked ancestor
+  ---
+  duration_ms: 9.130005
+  type: 'test'
+  ...
+# Subtest: clean staging rejects a symlink in a tracked file ancestor before copying bytes
+ok 15 - clean staging rejects a symlink in a tracked file ancestor before copying bytes
+  ---
+  duration_ms: 12.290077
+  type: 'test'
+  ...
+# Subtest: clean staging rejects tracked symlinks before reading through them
+ok 16 - clean staging rejects tracked symlinks before reading through them
+  ---
+  duration_ms: 12.007399
+  type: 'test'
+  ...
+# Subtest: clean staging snapshots unstaged tracked bytes before a source ancestor can be swapped
+ok 17 - clean staging snapshots unstaged tracked bytes before a source ancestor can be swapped
+  ---
+  duration_ms: 17.424944
+  type: 'test'
+  ...
+# Subtest: clean staging rejects a source ancestor swapped during preflight traversal
+ok 18 - clean staging rejects a source ancestor swapped during preflight traversal
+  ---
+  duration_ms: 12.279265
+  type: 'test'
+  ...
+# Subtest: clean staging reports the Git spawn error when Git cannot start
+ok 19 - clean staging reports the Git spawn error when Git cannot start
+  ---
+  duration_ms: 40.598781
+  type: 'test'
+  ...
+# Subtest: clean staging applies font disclosures to snapshot contents (fontPath=null)
+ok 20 - clean staging applies font disclosures to snapshot contents (fontPath=null)
+  ---
+  duration_ms: 14.405169
+  type: 'test'
+  ...
+# Subtest: clean staging applies font disclosures to snapshot contents (fontPath=archify/assets/template.html)
+ok 21 - clean staging applies font disclosures to snapshot contents (fontPath=archify/assets/template.html)
+  ---
+  duration_ms: 26.115334
+  type: 'test'
+  ...
+# Subtest: clean staging applies font disclosures to snapshot contents (fontPath=archify/examples/standalone.html)
+ok 22 - clean staging applies font disclosures to snapshot contents (fontPath=archify/examples/standalone.html)
+  ---
+  duration_ms: 30.468793
+  type: 'test'
+  ...
+# Subtest: npm package source records a clean commit and allows excluded untracked artifacts
+ok 23 - npm package source records a clean commit and allows excluded untracked artifacts
+  ---
+  duration_ms: 90.99034
+  type: 'test'
+  ...
+# Subtest: npm package source rejects unstaged tracked changes
+ok 24 - npm package source rejects unstaged tracked changes
+  ---
+  duration_ms: 52.14717
+  type: 'test'
+  ...
+# Subtest: npm package source rejects staged tracked changes
+ok 25 - npm package source rejects staged tracked changes
+  ---
+  duration_ms: 49.076851
+  type: 'test'
+  ...
+# Subtest: npm package source rejects index-only tracked changes
+ok 26 - npm package source rejects index-only tracked changes
+  ---
+  duration_ms: 56.00316
+  type: 'test'
+  ...
+# Subtest: npm package source rejects added tracked changes
+ok 27 - npm package source rejects added tracked changes
+  ---
+  duration_ms: 47.542848
+  type: 'test'
+  ...
+# Subtest: npm package source rejects deleted tracked changes
+ok 28 - npm package source rejects deleted tracked changes
+  ---
+  duration_ms: 52.066305
+  type: 'test'
+  ...
+# Subtest: npm package source rejects packaging-tool tracked changes
+ok 29 - npm package source rejects packaging-tool tracked changes
+  ---
+  duration_ms: 58.278163
+  type: 'test'
+  ...
+# Subtest: npm package source rejects a different clean HEAD after capturing the original revision
+ok 30 - npm package source rejects a different clean HEAD after capturing the original revision
+  ---
+  duration_ms: 52.720153
+  type: 'test'
+  ...
+# Subtest: npm package source fails closed when Git cannot resolve a commit
+ok 31 - npm package source fails closed when Git cannot resolve a commit
+  ---
+  duration_ms: 32.815975
+  type: 'test'
+  ...
+# Subtest: repository runner discovers every test suite from an unrelated working directory
+ok 32 - repository runner discovers every test suite from an unrelated working directory
+  ---
+  duration_ms: 39.979497
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 573.735996

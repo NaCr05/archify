@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: pack command emits a real npm tarball with the expected identity and file list
+ok 1 - pack command emits a real npm tarball with the expected identity and file list
+  ---
+  duration_ms: 7454.634647
+  type: 'test'
+  ...
+# Subtest: packed Skill payload remains byte-identical to the declared immutable source commit
+ok 2 - packed Skill payload remains byte-identical to the declared immutable source commit
+  ---
+  duration_ms: 7066.409742
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 14570.939598

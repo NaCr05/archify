@@ -1,0 +1,52 @@
+{
+  "node": "22.23.2",
+  "platform": "win32",
+  "archifyHead": "23fd1d9edcebefb191ff2b6bcd72752b8d850649",
+  "package": "@tt-a1i/archify@3.0.2-dev.1",
+  "vendorUnavailable": true,
+  "builds": [
+    {
+      "demo": "astro-demo",
+      "diagrams": 6,
+      "iframes": 6,
+      "publicCliCalls": 6,
+      "types": [
+        "architecture",
+        "dataflow",
+        "lifecycle",
+        "sequence",
+        "workflow"
+      ]
+    },
+    {
+      "demo": "starlight-demo",
+      "diagrams": 6,
+      "iframes": 6,
+      "publicCliCalls": 6,
+      "types": [
+        "architecture",
+        "dataflow",
+        "lifecycle",
+        "sequence",
+        "workflow"
+      ]
+    }
+  ],
+  "warmBuilds": [
+    {
+      "demo": "astro-demo",
+      "diagrams": 6,
+      "iframes": 6,
+      "errorBlocks": 0,
+      "danglingTargets": 0
+    },
+    {
+      "demo": "starlight-demo",
+      "diagrams": 6,
+      "iframes": 6,
+      "errorBlocks": 0,
+      "danglingTargets": 0
+    }
+  ],
+  "byteIdenticalRenders": 22
+}

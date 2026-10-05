@@ -1,0 +1,147 @@
+diff --git a/astro-archify-integration.js b/astro-archify-integration.js
+index f289a6e..fe921f6 100644
+--- a/astro-archify-integration.js
++++ b/astro-archify-integration.js
+@@ -1,6 +1,7 @@
+ import { spawn } from 'node:child_process';
+ import { createHash } from 'node:crypto';
+-import { existsSync } from 'node:fs';
++import { existsSync, readFileSync } from 'node:fs';
++import { createRequire } from 'node:module';
+ import { mkdir, mkdtemp, readdir, readFile, writeFile, rm } from 'node:fs/promises';
+ import { tmpdir } from 'node:os';
+ import { dirname, isAbsolute, join, resolve } from 'node:path';
+@@ -12,12 +13,18 @@ const OUT_DIR_PATTERN = /^[a-zA-Z0-9_-]+$/;
+ const ARTIFACT_ID_PATTERN = /^[0-9a-f]{16}$/;
+ 
+ /**
+- * Archify's own renderer + viewer, vendored into this package (see
+- * vendor/archify/NOTICE.md for provenance and what was copied). Resolved
+- * relative to this file so it works regardless of where astro-archify ends
+- * up inside node_modules.
++ * Resolve the installed package's declared public CLI bin. This reads package
++ * metadata only; it does not import renderer internals into the Astro process.
+  */
+-const DEFAULT_RENDERER_ROOT = fileURLToPath(new URL('./vendor/archify/', import.meta.url));
++const require = createRequire(import.meta.url);
++function installedCliPath() {
++  const manifestPath = require.resolve('@tt-a1i/archify/package.json');
++  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
++  if (typeof manifest.bin?.archify !== 'string') {
++    throw new Error('The installed Archify package does not declare an archify bin.');
++  }
++  return resolve(dirname(manifestPath), manifest.bin.archify);
++}
+ 
+ /**
+  * Helper function to HTML-escape text content
+@@ -176,7 +183,7 @@ function runProcess(command, args, { env, timeout } = {}) {
+  * down the whole Astro build if imported in-process.
+  */
+ async function renderArchifyDiagram({ rendererRoot, type, source, quality, timeout }) {
+-  const scriptPath = rendererScriptPath(rendererRoot, type);
++  const scriptPath = rendererRoot ? rendererScriptPath(rendererRoot, type) : installedCliPath();
+   if (!existsSync(scriptPath)) {
+     throw new Error(
+       `could not find Archify's "${type}" renderer at "${scriptPath}". If you set a custom ` +
+@@ -190,13 +197,25 @@ async function renderArchifyDiagram({ rendererRoot, type, source, quality, timeo
+   const outputPath = join(dir, 'output.html');
+ 
+   try {
++    if (!rendererRoot) {
++      const cliInput = JSON.parse(source);
++      // The public CLI validates the full IR. The integration already owns
++      // output delivery; supply its temporary filename only when omitted.
++      if (cliInput.meta && !Object.hasOwn(cliInput.meta, 'output')) {
++        cliInput.meta.output = 'output.html';
++      }
++      source = JSON.stringify(cliInput);
++    }
+     await writeFile(inputPath, source, 'utf8');
+ 
+     const env = {
+       ARCHIFY_DIAGNOSTIC_FORMAT: 'json',
+       ...(quality ? { ARCHIFY_QUALITY_PROFILE: quality } : {})
+     };
+-    const result = await runProcess(process.execPath, [scriptPath, inputPath, outputPath], { env, timeout });
++    const args = rendererRoot
++      ? [scriptPath, inputPath, outputPath]
++      : [scriptPath, 'render', type, inputPath, outputPath, ...(quality ? ['--quality', quality] : [])];
++    const result = await runProcess(process.execPath, args, { env, timeout });
+ 
+     if (result.spawnError) {
+       throw new Error(`could not start Archify's renderer: ${result.spawnError.message}`);
+@@ -429,7 +448,7 @@ function satteriArchifyPlugin(options = {}) {
+  */
+ export default function astroArchify(options = {}) {
+   const {
+-    rendererRoot = DEFAULT_RENDERER_ROOT,
++    rendererRoot,
+     quality,
+     strict = false,
+     height = 480,
+diff --git a/astro-demo/astro.config.mjs b/astro-demo/astro.config.mjs
+index 3e946ad..4606551 100644
+--- a/astro-demo/astro.config.mjs
++++ b/astro-demo/astro.config.mjs
+@@ -4,7 +4,7 @@ import archify from 'astro-archify';
+ export default defineConfig({
+   integrations: [
+     archify({
+-      quality: 'showcase'
++      quality: 'showcase', strict: true
+     })
+   ]
+ });
+diff --git a/astro-demo/src/content/docs/sequence.md b/astro-demo/src/content/docs/sequence.md
+index 787e11b..e52f927 100644
+--- a/astro-demo/src/content/docs/sequence.md
++++ b/astro-demo/src/content/docs/sequence.md
+@@ -14,7 +14,7 @@ Archify's own `cache-miss-request.sequence.json` example (reused here under Arch
+   "meta": {
+     "title": "Cache Miss Request Sequence",
+     "output": "examples/sequence-cache-miss-request.html",
+-    "viewBox": [820, 760],
++    "viewBox": [820, 800],
+     "animation": "trace",
+     "quality_profile": "showcase",
+     "views": [
+diff --git a/starlight-demo/astro.config.mjs b/starlight-demo/astro.config.mjs
+index 0d265e1..292d5dd 100644
+--- a/starlight-demo/astro.config.mjs
++++ b/starlight-demo/astro.config.mjs
+@@ -4,7 +4,7 @@ import archify from 'astro-archify';
+ 
+ export default defineConfig({
+   integrations: [
+-    archify({ quality: 'showcase' }),
++    archify({ quality: 'showcase', strict: true }),
+     starlight({
+       title: 'astro-archify',
+       description:
+diff --git a/starlight-demo/src/content/docs/sequence.md b/starlight-demo/src/content/docs/sequence.md
+index 787e11b..e52f927 100644
+--- a/starlight-demo/src/content/docs/sequence.md
++++ b/starlight-demo/src/content/docs/sequence.md
+@@ -14,7 +14,7 @@ Archify's own `cache-miss-request.sequence.json` example (reused here under Arch
+   "meta": {
+     "title": "Cache Miss Request Sequence",
+     "output": "examples/sequence-cache-miss-request.html",
+-    "viewBox": [820, 760],
++    "viewBox": [820, 800],
+     "animation": "trace",
+     "quality_profile": "showcase",
+     "views": [
+diff --git a/test/fixtures/archify-examples/cache-miss-request.sequence.json b/test/fixtures/archify-examples/cache-miss-request.sequence.json
+index 3a5d502..cae755e 100644
+--- a/test/fixtures/archify-examples/cache-miss-request.sequence.json
++++ b/test/fixtures/archify-examples/cache-miss-request.sequence.json
+@@ -4,7 +4,7 @@
+   "meta": {
+     "title": "Cache Miss Request Sequence",
+     "output": "examples/sequence-cache-miss-request.html",
+-    "viewBox": [820, 760],
++    "viewBox": [820, 800],
+     "animation": "trace",
+     "quality_profile": "showcase",
+     "views": [

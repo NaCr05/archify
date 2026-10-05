@@ -1,0 +1,394 @@
+{
+  "checked_at": "2026-10-05T01:43:14.306Z",
+  "repository": "NaCr05/archify",
+  "current_upstream_dev": "107b4fb18e8c76dbaac21657d84209f2be0cdeed",
+  "scope": "Candidate validation in the contributor fork; original PR heads have not adopted these candidates.",
+  "runs": [
+    {
+      "pr": 533,
+      "id": 37251488198,
+      "sha": "630959ad9b474eb8ec641878395c9bf7a04ca009",
+      "url": "https://github.com/NaCr05/archify/actions/runs/37251488198",
+      "jobs": [
+        {
+          "id": 111579861616,
+          "name": "scope",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579861616"
+        },
+        {
+          "id": 111579916423,
+          "name": "zip-freshness",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916423"
+        },
+        {
+          "id": 111579916495,
+          "name": "package smoke (macos-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916495"
+        },
+        {
+          "id": 111579916502,
+          "name": "published-update-manifest",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916502"
+        },
+        {
+          "id": 111579916513,
+          "name": "Windows test portability (Node 22)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916513"
+        },
+        {
+          "id": 111579916517,
+          "name": "webm-artifact",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916517"
+        },
+        {
+          "id": 111579916530,
+          "name": "Windows test portability (Node 24)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916530"
+        },
+        {
+          "id": 111579916552,
+          "name": "npm package proof (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916552"
+        },
+        {
+          "id": 111579916553,
+          "name": "npm package proof (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916553"
+        },
+        {
+          "id": 111579916555,
+          "name": "package smoke (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916555"
+        },
+        {
+          "id": 111579916576,
+          "name": "package smoke (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916576"
+        },
+        {
+          "id": 111579916597,
+          "name": "website",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916597"
+        },
+        {
+          "id": 111579916611,
+          "name": "test (20)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916611"
+        },
+        {
+          "id": 111579916655,
+          "name": "test (24)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916655"
+        },
+        {
+          "id": 111579916708,
+          "name": "test (22)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916708"
+        },
+        {
+          "id": 111579916766,
+          "name": "test (18)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916766"
+        },
+        {
+          "id": 111579916997,
+          "name": "npm package proof (macos-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916997"
+        },
+        {
+          "id": 111581508056,
+          "name": "deploy-pages",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111581508056"
+        }
+      ],
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-10-05T01:35:58Z"
+    },
+    {
+      "pr": 533,
+      "id": 37251488224,
+      "sha": "630959ad9b474eb8ec641878395c9bf7a04ca009",
+      "url": "https://github.com/NaCr05/archify/actions/runs/37251488224",
+      "jobs": [
+        {
+          "id": 111579861098,
+          "name": "DSH package contract",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488224/job/111579861098"
+        },
+        {
+          "id": 111579980385,
+          "name": "DSH distribution acceptance",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488224/job/111579980385"
+        },
+        {
+          "id": 111579981405,
+          "name": "adapter release (${{ matrix.os }})",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37251488224/job/111579981405"
+        }
+      ],
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-10-05T01:28:38Z"
+    },
+    {
+      "pr": 482,
+      "id": 37250858273,
+      "sha": "1ed8f29758423f4d1cd36de845e7dd3acd4139bb",
+      "url": "https://github.com/NaCr05/archify/actions/runs/37250858273",
+      "jobs": [
+        {
+          "id": 111577987526,
+          "name": "scope",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111577987526"
+        },
+        {
+          "id": 111578047030,
+          "name": "webm-artifact",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047030"
+        },
+        {
+          "id": 111578047058,
+          "name": "Windows test portability (Node 22)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047058"
+        },
+        {
+          "id": 111578047078,
+          "name": "Windows test portability (Node 24)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047078"
+        },
+        {
+          "id": 111578047091,
+          "name": "package smoke (macos-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047091"
+        },
+        {
+          "id": 111578047095,
+          "name": "test (24)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047095"
+        },
+        {
+          "id": 111578047100,
+          "name": "zip-freshness",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047100"
+        },
+        {
+          "id": 111578047102,
+          "name": "published-update-manifest",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047102"
+        },
+        {
+          "id": 111578047122,
+          "name": "test (18)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047122"
+        },
+        {
+          "id": 111578047127,
+          "name": "test (20)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047127"
+        },
+        {
+          "id": 111578047155,
+          "name": "test (22)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047155"
+        },
+        {
+          "id": 111578047165,
+          "name": "package smoke (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047165"
+        },
+        {
+          "id": 111578047170,
+          "name": "package smoke (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047170"
+        },
+        {
+          "id": 111578047910,
+          "name": "website",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047910"
+        },
+        {
+          "id": 111579841139,
+          "name": "deploy-pages",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111579841139"
+        }
+      ],
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "failure",
+      "updated_at": "2026-10-05T01:27:12Z"
+    }
+  ],
+  "original_prs": [
+    {
+      "number": 533,
+      "url": "https://github.com/tt-a1i/archify/pull/533",
+      "head": "6a30f574831c428fa7de67504e7b240552a60d37",
+      "base_ref": "dev",
+      "state": "open",
+      "merged": false,
+      "mergeable": false,
+      "mergeable_state": "dirty"
+    },
+    {
+      "number": 482,
+      "url": "https://github.com/tt-a1i/archify/pull/482",
+      "head": "473ecc0299165520aa4f8047aa82ca8890674d91",
+      "base_ref": "dev",
+      "state": "open",
+      "merged": false,
+      "mergeable": false,
+      "mergeable_state": "dirty"
+    }
+  ],
+  "fork_failures": [
+    {
+      "pr": 533,
+      "job_id": 111579916513,
+      "name": "Windows test portability (Node 22)",
+      "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916513",
+      "excerpts": [
+        "2026-10-05T01:28:10.7884236Z AssertionError [ERR_ASSERTION]: repository root through drive-letter case alias exited 1\r",
+        "2026-10-05T01:28:10.7888539Z   \"error\": \"Evidence repository origin \\\"https://github.com/NaCr05/archify\\\" does not match \\\"https://github.com/tt-a1i/archify\\\".\",\r",
+        "2026-10-05T01:28:10.7889963Z       \"code\": \"repository-evidence/origin-mismatch\",\r",
+        "2026-10-05T01:28:10.7891792Z       \"message\": \"Evidence repository origin \\\"https://github.com/NaCr05/archify\\\" does not match \\\"https://github.com/tt-a1i/archify\\\".\",\r"
+      ]
+    },
+    {
+      "pr": 533,
+      "job_id": 111579916530,
+      "name": "Windows test portability (Node 24)",
+      "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916530",
+      "excerpts": [
+        "2026-10-05T01:28:08.0228422Z AssertionError [ERR_ASSERTION]: repository root through drive-letter case alias exited 1\r",
+        "2026-10-05T01:28:08.0234130Z   \"error\": \"Evidence repository origin \\\"https://github.com/NaCr05/archify\\\" does not match \\\"https://github.com/tt-a1i/archify\\\".\",\r",
+        "2026-10-05T01:28:08.0235890Z       \"code\": \"repository-evidence/origin-mismatch\",\r",
+        "2026-10-05T01:28:08.0237487Z       \"message\": \"Evidence repository origin \\\"https://github.com/NaCr05/archify\\\" does not match \\\"https://github.com/tt-a1i/archify\\\".\",\r"
+      ]
+    },
+    {
+      "pr": 533,
+      "job_id": 111579916502,
+      "name": "published-update-manifest",
+      "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916502",
+      "excerpts": [
+        "2026-10-05T01:27:43.1203010Z gh: Not Found (HTTP 404)"
+      ]
+    },
+    {
+      "pr": 482,
+      "job_id": 111578047058,
+      "name": "Windows test portability (Node 22)",
+      "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047058",
+      "excerpts": [
+        "2026-10-05T01:18:28.2271378Z AssertionError [ERR_ASSERTION]: repository root through drive-letter case alias exited 1\r",
+        "2026-10-05T01:18:28.2274591Z   \"error\": \"Evidence repository origin \\\"https://github.com/NaCr05/archify\\\" does not match \\\"https://github.com/tt-a1i/archify\\\".\",\r",
+        "2026-10-05T01:18:28.2275668Z       \"code\": \"repository-evidence/origin-mismatch\",\r",
+        "2026-10-05T01:18:28.2276966Z       \"message\": \"Evidence repository origin \\\"https://github.com/NaCr05/archify\\\" does not match \\\"https://github.com/tt-a1i/archify\\\".\",\r"
+      ]
+    },
+    {
+      "pr": 482,
+      "job_id": 111578047078,
+      "name": "Windows test portability (Node 24)",
+      "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047078",
+      "excerpts": [
+        "2026-10-05T01:18:24.7634624Z AssertionError [ERR_ASSERTION]: repository root through drive-letter case alias exited 1\r",
+        "2026-10-05T01:18:24.7646108Z   \"error\": \"Evidence repository origin \\\"https://github.com/NaCr05/archify\\\" does not match \\\"https://github.com/tt-a1i/archify\\\".\",\r",
+        "2026-10-05T01:18:24.7692777Z       \"code\": \"repository-evidence/origin-mismatch\",\r",
+        "2026-10-05T01:18:24.7694850Z       \"message\": \"Evidence repository origin \\\"https://github.com/NaCr05/archify\\\" does not match \\\"https://github.com/tt-a1i/archify\\\".\",\r"
+      ]
+    },
+    {
+      "pr": 482,
+      "job_id": 111578047102,
+      "name": "published-update-manifest",
+      "url": "https://github.com/NaCr05/archify/actions/runs/37250858273/job/111578047102",
+      "excerpts": [
+        "2026-10-05T01:18:32.5840278Z gh: Not Found (HTTP 404)"
+      ]
+    }
+  ],
+  "bash_32": {
+    "job_id": 111579916997,
+    "url": "https://github.com/NaCr05/archify/actions/runs/37251488198/job/111579916997",
+    "excerpts": [
+      "2026-10-05T01:27:48.7033660Z GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)",
+      "2026-10-05T01:27:49.2065460Z Source revision: 630959ad9b474eb8ec641878395c9bf7a04ca009"
+    ]
+  }
+}

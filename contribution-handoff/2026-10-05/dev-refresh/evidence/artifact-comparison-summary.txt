@@ -1,0 +1,55 @@
+{
+  "artifacts": {
+    "windows": {
+      "source": "630959ad9b474eb8ec641878395c9bf7a04ca009",
+      "filename": "tt-a1i-archify-3.0.2-dev.1.tgz",
+      "version": "3.0.2-dev.1",
+      "files": 145,
+      "size": 3873727,
+      "sha256": "c12641496f7f245364c1d55f321fd88c97d96f8ef3522b006f0470f1b0b20bb5",
+      "integrity": "sha512-NG0hbYDq3ngetQBnAD24IPZXtth35tO1nfB8cuYt2D4L5jHIzYO1pUmifspleM2Xtxj3ym56zHyHv2P5DgisjA==",
+      "identical_to_consumer_trial_revision_23fd1d9": true
+    },
+    "linux": {
+      "source": "630959ad9b474eb8ec641878395c9bf7a04ca009",
+      "filename": "tt-a1i-archify-3.0.2-dev.1.tgz",
+      "version": "3.0.2-dev.1",
+      "files": 145,
+      "size": 3873734,
+      "sha256": "1c0815809447c92cf2d3446cdc1af637ec3798ee93644d9f32fa7d4cfe3c6274",
+      "integrity": "sha512-+pwSCsBfTeIi/EhATyIKGm91jXddP66Vz8rtRxDETSqySiFVLZJE1wa57wmR4FHSIG9jxdggFxdffXel85g7+w==",
+      "identical_to_consumer_trial_revision_23fd1d9": true
+    }
+  },
+  "identical_file_contents": true,
+  "mode_differences": [
+    {
+      "path": "package/bin/archify.mjs",
+      "windows": "0o644",
+      "linux": "0o755"
+    }
+  ],
+  "hosted": {
+    "npm-package-proof-Linux": {
+      "source": "630959ad9b474eb8ec641878395c9bf7a04ca009",
+      "sha256": "1c0815809447c92cf2d3446cdc1af637ec3798ee93644d9f32fa7d4cfe3c6274",
+      "integrity": "sha512-+pwSCsBfTeIi/EhATyIKGm91jXddP66Vz8rtRxDETSqySiFVLZJE1wa57wmR4FHSIG9jxdggFxdffXel85g7+w==",
+      "files": 145,
+      "same_file_contents_as_local_proof": true
+    },
+    "npm-package-proof-Windows": {
+      "source": "630959ad9b474eb8ec641878395c9bf7a04ca009",
+      "sha256": "c12641496f7f245364c1d55f321fd88c97d96f8ef3522b006f0470f1b0b20bb5",
+      "integrity": "sha512-NG0hbYDq3ngetQBnAD24IPZXtth35tO1nfB8cuYt2D4L5jHIzYO1pUmifspleM2Xtxj3ym56zHyHv2P5DgisjA==",
+      "files": 145,
+      "same_file_contents_as_local_proof": true
+    },
+    "npm-package-proof-macOS": {
+      "source": "630959ad9b474eb8ec641878395c9bf7a04ca009",
+      "sha256": "1c0815809447c92cf2d3446cdc1af637ec3798ee93644d9f32fa7d4cfe3c6274",
+      "integrity": "sha512-+pwSCsBfTeIi/EhATyIKGm91jXddP66Vz8rtRxDETSqySiFVLZJE1wa57wmR4FHSIG9jxdggFxdffXel85g7+w==",
+      "files": 145,
+      "same_file_contents_as_local_proof": true
+    }
+  }
+}

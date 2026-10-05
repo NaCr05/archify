@@ -1,0 +1,741 @@
+[
+  {
+    "id": "@tt-a1i/archify@3.0.2-dev.1",
+    "name": "@tt-a1i/archify",
+    "version": "3.0.2-dev.1",
+    "size": 3873727,
+    "unpackedSize": 15854798,
+    "shasum": "bc96ea0b5e36bd54fdc226f7fe06c49d2e0c04b5",
+    "integrity": "sha512-NG0hbYDq3ngetQBnAD24IPZXtth35tO1nfB8cuYt2D4L5jHIzYO1pUmifspleM2Xtxj3ym56zHyHv2P5DgisjA==",
+    "filename": "tt-a1i-archify-3.0.2-dev.1.tgz",
+    "files": [
+      {
+        "path": "LICENSE",
+        "size": 1102,
+        "mode": 420
+      },
+      {
+        "path": "SKILL.md",
+        "size": 14066,
+        "mode": 420
+      },
+      {
+        "path": "THIRD_PARTY_NOTICES.md",
+        "size": 5248,
+        "mode": 420
+      },
+      {
+        "path": "assets/JetBrainsMono-OFL.txt",
+        "size": 4398,
+        "mode": 420
+      },
+      {
+        "path": "assets/template.html",
+        "size": 736487,
+        "mode": 420
+      },
+      {
+        "path": "bin/archify.mjs",
+        "size": 268391,
+        "mode": 420
+      },
+      {
+        "path": "bin/delivery-update.mjs",
+        "size": 3702,
+        "mode": 420
+      },
+      {
+        "path": "bin/finalize.mjs",
+        "size": 40634,
+        "mode": 420
+      },
+      {
+        "path": "bin/open-artifact.mjs",
+        "size": 4144,
+        "mode": 420
+      },
+      {
+        "path": "bin/preview.mjs",
+        "size": 36566,
+        "mode": 420
+      },
+      {
+        "path": "bin/recover-output.mjs",
+        "size": 1367,
+        "mode": 420
+      },
+      {
+        "path": "bin/visual-check.mjs",
+        "size": 112914,
+        "mode": 420
+      },
+      {
+        "path": "brand-marks/catalog.json",
+        "size": 14162,
+        "mode": 420
+      },
+      {
+        "path": "brand-marks/README.md",
+        "size": 1449,
+        "mode": 420
+      },
+      {
+        "path": "delta/architecture-delta.mjs",
+        "size": 78582,
+        "mode": 420
+      },
+      {
+        "path": "examples/agent-run.lifecycle.json",
+        "size": 3405,
+        "mode": 420
+      },
+      {
+        "path": "examples/agent-tool-call.workflow.json",
+        "size": 4939,
+        "mode": 420
+      },
+      {
+        "path": "examples/archify-dev-activity.timeline.json",
+        "size": 4460,
+        "mode": 420
+      },
+      {
+        "path": "examples/archify-repository.tree.json",
+        "size": 4368,
+        "mode": 420
+      },
+      {
+        "path": "examples/async-job-roundtrip.sequence.json",
+        "size": 3766,
+        "mode": 420
+      },
+      {
+        "path": "examples/brand-aware-delivery.architecture.json",
+        "size": 2789,
+        "mode": 420
+      },
+      {
+        "path": "examples/cache-miss-request.sequence.json",
+        "size": 3805,
+        "mode": 420
+      },
+      {
+        "path": "examples/checkout-platform.base.architecture.json",
+        "size": 2279,
+        "mode": 420
+      },
+      {
+        "path": "examples/checkout-platform.head.architecture.json",
+        "size": 2413,
+        "mode": 420
+      },
+      {
+        "path": "examples/checkout-request.waterfall.json",
+        "size": 1209,
+        "mode": 420
+      },
+      {
+        "path": "examples/class-payment-processors-rendered.html",
+        "size": 790498,
+        "mode": 420
+      },
+      {
+        "path": "examples/class-payments-rendered.html",
+        "size": 763745,
+        "mode": 420
+      },
+      {
+        "path": "examples/dataflow-product-analytics.html",
+        "size": 773115,
+        "mode": 420
+      },
+      {
+        "path": "examples/deployment-release.lifecycle.json",
+        "size": 3507,
+        "mode": 420
+      },
+      {
+        "path": "examples/erd-orders-rendered.html",
+        "size": 785316,
+        "mode": 420
+      },
+      {
+        "path": "examples/event-stream.dataflow.json",
+        "size": 4769,
+        "mode": 420
+      },
+      {
+        "path": "examples/example-rebuild.waterfall.json",
+        "size": 4617,
+        "mode": 420
+      },
+      {
+        "path": "examples/holiday-planning.workflow.json",
+        "size": 3019,
+        "mode": 420
+      },
+      {
+        "path": "examples/incident-response.workflow.json",
+        "size": 4723,
+        "mode": 420
+      },
+      {
+        "path": "examples/lifecycle-agent-run.html",
+        "size": 767425,
+        "mode": 420
+      },
+      {
+        "path": "examples/locales/de.json",
+        "size": 28709,
+        "mode": 420
+      },
+      {
+        "path": "examples/locales/fr.json",
+        "size": 29522,
+        "mode": 420
+      },
+      {
+        "path": "examples/locales/fr.partial.json",
+        "size": 959,
+        "mode": 420
+      },
+      {
+        "path": "examples/locales/it.json",
+        "size": 29044,
+        "mode": 420
+      },
+      {
+        "path": "examples/locales/ja.json",
+        "size": 32775,
+        "mode": 420
+      },
+      {
+        "path": "examples/locales/pt.json",
+        "size": 28688,
+        "mode": 420
+      },
+      {
+        "path": "examples/locales/ru.json",
+        "size": 37262,
+        "mode": 420
+      },
+      {
+        "path": "examples/orders.erd.json",
+        "size": 7321,
+        "mode": 420
+      },
+      {
+        "path": "examples/payment-incident.timeline.json",
+        "size": 1445,
+        "mode": 420
+      },
+      {
+        "path": "examples/payment-platform.tree.json",
+        "size": 1214,
+        "mode": 420
+      },
+      {
+        "path": "examples/payment-processors.class.json",
+        "size": 7321,
+        "mode": 420
+      },
+      {
+        "path": "examples/payments.class.json",
+        "size": 2828,
+        "mode": 420
+      },
+      {
+        "path": "examples/product-analytics.dataflow.json",
+        "size": 5035,
+        "mode": 420
+      },
+      {
+        "path": "examples/production-deployment.architecture.json",
+        "size": 4734,
+        "mode": 420
+      },
+      {
+        "path": "examples/release-delivery.workflow.json",
+        "size": 4510,
+        "mode": 420
+      },
+      {
+        "path": "examples/sequence-cache-miss-request.html",
+        "size": 770821,
+        "mode": 420
+      },
+      {
+        "path": "examples/subscription-billing-rendered.html",
+        "size": 806373,
+        "mode": 420
+      },
+      {
+        "path": "examples/subscription-billing.erd.json",
+        "size": 11817,
+        "mode": 420
+      },
+      {
+        "path": "examples/timeline-archify-dev-activity-rendered.html",
+        "size": 791099,
+        "mode": 420
+      },
+      {
+        "path": "examples/timeline-payment-incident-rendered.html",
+        "size": 761067,
+        "mode": 420
+      },
+      {
+        "path": "examples/tree-archify-repository-rendered.html",
+        "size": 794735,
+        "mode": 420
+      },
+      {
+        "path": "examples/tree-payment-platform-rendered.html",
+        "size": 764553,
+        "mode": 420
+      },
+      {
+        "path": "examples/waterfall-checkout-request-rendered.html",
+        "size": 762408,
+        "mode": 420
+      },
+      {
+        "path": "examples/waterfall-example-rebuild-rendered.html",
+        "size": 791508,
+        "mode": 420
+      },
+      {
+        "path": "examples/web-app-rendered.html",
+        "size": 770821,
+        "mode": 420
+      },
+      {
+        "path": "examples/web-app.architecture.json",
+        "size": 3197,
+        "mode": 420
+      },
+      {
+        "path": "examples/workflow-agent-tool-call-rendered.html",
+        "size": 776281,
+        "mode": 420
+      },
+      {
+        "path": "locales/en.json",
+        "size": 27500,
+        "mode": 420
+      },
+      {
+        "path": "locales/es.json",
+        "size": 29627,
+        "mode": 420
+      },
+      {
+        "path": "locales/ko.json",
+        "size": 30979,
+        "mode": 420
+      },
+      {
+        "path": "locales/manifest.json",
+        "size": 201,
+        "mode": 420
+      },
+      {
+        "path": "locales/README.md",
+        "size": 1582,
+        "mode": 420
+      },
+      {
+        "path": "locales/zh-CN.json",
+        "size": 27195,
+        "mode": 420
+      },
+      {
+        "path": "migrations/workflow-v2.mjs",
+        "size": 9204,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 946,
+        "mode": 420
+      },
+      {
+        "path": "recipes/scenarios.mjs",
+        "size": 41520,
+        "mode": 420
+      },
+      {
+        "path": "references/architecture-layout-repair.md",
+        "size": 4449,
+        "mode": 420
+      },
+      {
+        "path": "references/authoring-contract.md",
+        "size": 37043,
+        "mode": 420
+      },
+      {
+        "path": "references/authoring-defaults.md",
+        "size": 7825,
+        "mode": 420
+      },
+      {
+        "path": "references/brand-marks.md",
+        "size": 3811,
+        "mode": 420
+      },
+      {
+        "path": "references/delivery-contract.md",
+        "size": 42979,
+        "mode": 420
+      },
+      {
+        "path": "references/repository-authoring.md",
+        "size": 6578,
+        "mode": 420
+      },
+      {
+        "path": "references/update-awareness.md",
+        "size": 1358,
+        "mode": 420
+      },
+      {
+        "path": "references/viewer-runtime.md",
+        "size": 3235,
+        "mode": 420
+      },
+      {
+        "path": "renderers/architecture/grid.mjs",
+        "size": 2071,
+        "mode": 420
+      },
+      {
+        "path": "renderers/architecture/labels.mjs",
+        "size": 10645,
+        "mode": 420
+      },
+      {
+        "path": "renderers/architecture/render-architecture.mjs",
+        "size": 47714,
+        "mode": 420
+      },
+      {
+        "path": "renderers/architecture/routing.mjs",
+        "size": 58039,
+        "mode": 420
+      },
+      {
+        "path": "renderers/class/README.md",
+        "size": 5809,
+        "mode": 420
+      },
+      {
+        "path": "renderers/class/render-class.mjs",
+        "size": 42640,
+        "mode": 420
+      },
+      {
+        "path": "renderers/dataflow/README.md",
+        "size": 4204,
+        "mode": 420
+      },
+      {
+        "path": "renderers/dataflow/render-dataflow.mjs",
+        "size": 24550,
+        "mode": 420
+      },
+      {
+        "path": "renderers/erd/grid.mjs",
+        "size": 6444,
+        "mode": 420
+      },
+      {
+        "path": "renderers/erd/README.md",
+        "size": 13987,
+        "mode": 420
+      },
+      {
+        "path": "renderers/erd/render-erd.mjs",
+        "size": 67516,
+        "mode": 420
+      },
+      {
+        "path": "renderers/lifecycle/grid-routing.mjs",
+        "size": 20516,
+        "mode": 420
+      },
+      {
+        "path": "renderers/lifecycle/README.md",
+        "size": 8760,
+        "mode": 420
+      },
+      {
+        "path": "renderers/lifecycle/render-lifecycle.mjs",
+        "size": 43122,
+        "mode": 420
+      },
+      {
+        "path": "renderers/sequence/README.md",
+        "size": 5911,
+        "mode": 420
+      },
+      {
+        "path": "renderers/sequence/render-sequence.mjs",
+        "size": 25503,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/atomic-output.mjs",
+        "size": 70372,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/brand-marks.mjs",
+        "size": 27680,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/cli.mjs",
+        "size": 18854,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/desktop-readability.mjs",
+        "size": 6873,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/diagnostics.mjs",
+        "size": 6828,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/engineering-profiles.mjs",
+        "size": 6936,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/generated-brand-marks.mjs",
+        "size": 163612,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/generated-validators.mjs",
+        "size": 847952,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/geometry.mjs",
+        "size": 83595,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/i18n.mjs",
+        "size": 13869,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/layout-report.mjs",
+        "size": 1587,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/legend.mjs",
+        "size": 8992,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/output-path.mjs",
+        "size": 19029,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/path-semantics.mjs",
+        "size": 32406,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/portable-path.mjs",
+        "size": 12543,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/repository-evidence.mjs",
+        "size": 17643,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/repository-location.mjs",
+        "size": 3552,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/route-quality.mjs",
+        "size": 23585,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/sidecar-path.mjs",
+        "size": 1269,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/spatial-grid.mjs",
+        "size": 2440,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/text-fit.mjs",
+        "size": 5195,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/utils.mjs",
+        "size": 12786,
+        "mode": 420
+      },
+      {
+        "path": "renderers/shared/validator.mjs",
+        "size": 3508,
+        "mode": 420
+      },
+      {
+        "path": "renderers/timeline/README.md",
+        "size": 3262,
+        "mode": 420
+      },
+      {
+        "path": "renderers/timeline/render-timeline.mjs",
+        "size": 28380,
+        "mode": 420
+      },
+      {
+        "path": "renderers/tree/README.md",
+        "size": 4190,
+        "mode": 420
+      },
+      {
+        "path": "renderers/tree/render-tree.mjs",
+        "size": 26827,
+        "mode": 420
+      },
+      {
+        "path": "renderers/waterfall/README.md",
+        "size": 3290,
+        "mode": 420
+      },
+      {
+        "path": "renderers/waterfall/render-waterfall.mjs",
+        "size": 19452,
+        "mode": 420
+      },
+      {
+        "path": "renderers/workflow/README.md",
+        "size": 15260,
+        "mode": 420
+      },
+      {
+        "path": "renderers/workflow/render-workflow.mjs",
+        "size": 1207,
+        "mode": 420
+      },
+      {
+        "path": "renderers/workflow/workflow-compiler.mjs",
+        "size": 195655,
+        "mode": 420
+      },
+      {
+        "path": "renderers/workflow/workflow-migration-geometry.mjs",
+        "size": 5299,
+        "mode": 420
+      },
+      {
+        "path": "schemas/architecture.schema.json",
+        "size": 6024,
+        "mode": 420
+      },
+      {
+        "path": "schemas/class.schema.json",
+        "size": 8024,
+        "mode": 420
+      },
+      {
+        "path": "schemas/common.schema.json",
+        "size": 5755,
+        "mode": 420
+      },
+      {
+        "path": "schemas/dataflow.schema.json",
+        "size": 6320,
+        "mode": 420
+      },
+      {
+        "path": "schemas/erd.schema.json",
+        "size": 9233,
+        "mode": 420
+      },
+      {
+        "path": "schemas/lifecycle.schema.json",
+        "size": 7038,
+        "mode": 420
+      },
+      {
+        "path": "schemas/README.md",
+        "size": 15365,
+        "mode": 420
+      },
+      {
+        "path": "schemas/sequence.schema.json",
+        "size": 6055,
+        "mode": 420
+      },
+      {
+        "path": "schemas/timeline.schema.json",
+        "size": 3855,
+        "mode": 420
+      },
+      {
+        "path": "schemas/tree.schema.json",
+        "size": 3076,
+        "mode": 420
+      },
+      {
+        "path": "schemas/waterfall.schema.json",
+        "size": 3430,
+        "mode": 420
+      },
+      {
+        "path": "schemas/workflow.schema.json",
+        "size": 10165,
+        "mode": 420
+      },
+      {
+        "path": "scripts/check-render-output.mjs",
+        "size": 61661,
+        "mode": 420
+      },
+      {
+        "path": "scripts/check-update.mjs",
+        "size": 58935,
+        "mode": 420
+      },
+      {
+        "path": "scripts/render-examples.mjs",
+        "size": 2024,
+        "mode": 420
+      },
+      {
+        "path": "scripts/update-contract.mjs",
+        "size": 6750,
+        "mode": 420
+      },
+      {
+        "path": "skill-release.json",
+        "size": 271,
+        "mode": 420
+      }
+    ],
+    "entryCount": 145,
+    "bundled": []
+  }
+]

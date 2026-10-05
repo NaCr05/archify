@@ -1,0 +1,4 @@
+
+==> 1/10 Staging the clean package tree (scripts/stage-clean-skill.mjs)
+npm package verification requires a clean tracked checkout, including the index; commit or stash changes and rerun
+  [FAIL] package source verification failed

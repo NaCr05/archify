@@ -1,0 +1,50 @@
+09:21:14 [astro-archify] Setting up Archify integration
+09:21:15 [content] Syncing content
+09:21:16 [astro-archify] astro-archify: rendered dataflow diagram in <workspace>\work\archify-followup-20261005\downstream-astro\starlight-demo\src\content\docs\dataflow.md
+09:21:16 [astro-archify] astro-archify: rendered sequence diagram in <workspace>\work\archify-followup-20261005\downstream-astro\starlight-demo\src\content\docs\sequence.md
+09:21:16 [astro-archify] astro-archify: rendered lifecycle diagram in <workspace>\work\archify-followup-20261005\downstream-astro\starlight-demo\src\content\docs\lifecycle.md
+09:21:16 [astro-archify] astro-archify: rendered architecture diagram in <workspace>\work\archify-followup-20261005\downstream-astro\starlight-demo\src\content\docs\architecture.md
+09:21:16 [astro-archify] astro-archify: rendered workflow diagram in <workspace>\work\archify-followup-20261005\downstream-astro\starlight-demo\src\content\docs\workflow.md
+09:21:16 [content] Synced content
+09:21:16 [types] Generated 1.38s
+09:21:16 [build] output: "static"
+09:21:16 [build] mode: "static"
+09:21:16 [build] directory: <workspace>\work\archify-followup-20261005\downstream-astro\starlight-demo\dist\
+09:21:16 [build] Collecting build info...
+09:21:16 [build] ✓ Completed in 1.67s.
+09:21:16 [build] Building static entrypoints...
+09:21:17 [astro-archify] astro-archify: rendered architecture diagram in <workspace>\work\archify-followup-20261005\downstream-astro\starlight-demo\src\content\docs\index.mdx
+09:21:17 [WARN] [vite] [MODULE_LEVEL_DIRECTIVE] The semantics of the module level directive "use astro:head-inject" in "src/content/docs/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   ╭─[ src/content/docs/index.mdx?astroPropagatedAssets:2:6 ]
+   │
+ 2 │               "use astro:head-inject";
+   │               ────────────┬───────────
+   │                           ╰───────────── module level directive may not be preserved
+   │
+   │ Help: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+───╯
+
+09:21:17 [vite] ✓ built in 985ms
+09:21:17 [vite] ✓ built in 62ms
+09:21:17 [build] Rearranging server assets...
+
+ generating static routes
+09:21:17 [WARN] [content] The collection "i18n" does not exist or is empty. Please check your content config file for errors.
+09:21:17   ├─ /404.html09:21:17 [WARN] [content] Entry docs → 404 was not found.
+ (+25ms)
+09:21:17   ├─ /architecture/index.html (+7ms)
+09:21:17   ├─ /dataflow/index.html (+4ms)
+09:21:17   ├─ /index.html (+13ms)
+09:21:17   ├─ /lifecycle/index.html (+7ms)
+09:21:17   ├─ /sequence/index.html (+4ms)
+09:21:17   ├─ /workflow/index.html (+4ms)
+09:21:17 ✓ Completed in 110ms.
+
+09:21:17 [build] ✓ Completed in 1.21s.
+09:21:17 [astro-archify] astro-archify: wrote 6 diagram artifact(s) to <workspace>\work\archify-followup-20261005\downstream-astro\starlight-demo\dist\_archify
+09:21:17 [starlight:pagefind] Building search index with Pagefind...
+09:21:18 [starlight:pagefind] Found 13 HTML files.
+09:21:18 [starlight:pagefind] Finished building search index in 0.79s.
+09:21:18 [WARN] [@astrojs/sitemap] The Sitemap integration requires the `site` astro.config option. Skipping.
+09:21:18 [build] 7 page(s) built in 3.68s
+09:21:18 [build] Complete!
