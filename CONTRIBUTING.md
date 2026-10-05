@@ -99,7 +99,7 @@ ZIP. Ordinary `npm pack` or `npm publish` from `archify/` retains repository-onl
 manifest fields and is not the supported distribution path.
 
 From the repository root, run the verification script with Node/npm, Git and
-tar available (Bash or Windows Git Bash):
+tar available (Bash 3.2 or newer, including macOS `/bin/bash` and Windows Git Bash):
 
 ```sh
 artifact_parent="$(mktemp -d)"
@@ -115,7 +115,10 @@ revision. Run the proof without editing or switching the source checkout.
 
 The script packs the clean staging tree, prints the package file list and
 integrity, then tests that tarball through local/npx and isolated-global CLI
-installs outside the checkout. Only after all checks pass does the optional,
+installs outside the checkout. The shared package smoke checks verify the
+extracted runtime resources, including bundled locale catalogs; all ten diagram
+types must produce the same HTML as the source through both installed CLI paths.
+Only after all checks pass does the optional,
 previously nonexistent output directory receive the exact tested `.tgz`,
 `pack.json` and `source-revision.txt`. Omitting the directory keeps the check
 temporary. Consumers can install the retained `.tgz` directly with `npm install
@@ -127,6 +130,11 @@ scope/name, publishing permissions and release automation remain maintainer
 decisions. Any future publication must use the exact verified staged tarball,
 not repack the source directory. The npm and Skill versions stay aligned with
 the current development version; a packaging PR does not introduce a version bump.
+
+The CI npm-package proof runs on Linux, Windows and macOS (using its system
+`/bin/bash`) from the exact submitted commit. Each run retains that tested
+tarball and its metadata as an Actions artifact. Existing integration checks
+also test the PR merge result; an npm proof alone does not establish full CI.
 
 ### Generated artifacts
 

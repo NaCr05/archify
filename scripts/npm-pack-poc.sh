@@ -11,7 +11,7 @@
 # Usage: bash scripts/npm-pack-poc.sh [artifact-directory]
 # The optional directory must not exist; after all checks pass it receives the
 # exact tested tarball, npm pack metadata, and the tested source revision.
-# Requires: node >= 18, npm, git, tar.
+# Requires: Bash >= 3.2 (including macOS /bin/bash), node >= 18, npm, git, tar.
 # Use this clean staging path for the package under test; running npm pack
 # directly in archify/ retains repository-only manifest fields.
 #
@@ -105,6 +105,9 @@ node -e '
   }
 ' "${extract_dir}/package/package.json" || fail "packaged metadata violates the packaging constraints"
 ok "name, bin-only surface, and clean manifest confirmed"
+node scripts/package-smoke.mjs "${extract_dir}/package" \
+  || fail "extracted npm package failed the shared package contracts"
+ok "shared package contracts (including bundled locale catalogs)"
 
 log "5/10 Verifying bundled assets required by the shipped commands"
 missing=0
@@ -196,19 +199,28 @@ node -e '
 ' "${work}/receipt.json" || fail "delivery receipt failed verification"
 ok "deliver architecture (receipt verified, artifact written)"
 
-log "9/10 Rendering all five installed examples through local and global CLI shims"
+log "9/10 Rendering all ten installed examples through local and global CLI shims"
 # Exercises the installed CLI exactly like a consumer would: npx from an
 # isolated project directory outside the source checkout. The packed output
 # must be byte-identical to a render straight from the repository sources.
-declare -A fixture=(
-  [architecture]="web-app.architecture.json"
-  [workflow]="agent-tool-call.workflow.json"
-  [sequence]="cache-miss-request.sequence.json"
-  [dataflow]="product-analytics.dataflow.json"
-  [lifecycle]="agent-run.lifecycle.json"
-)
-for type in architecture workflow sequence dataflow lifecycle; do
-  relative="examples/${fixture[$type]}"
+# Use a case lookup so the proof also runs on macOS's system Bash 3.2.
+fixture_for() {
+  case "$1" in
+    architecture) printf '%s\n' 'web-app.architecture.json' ;;
+    workflow) printf '%s\n' 'agent-tool-call.workflow.json' ;;
+    sequence) printf '%s\n' 'cache-miss-request.sequence.json' ;;
+    dataflow) printf '%s\n' 'product-analytics.dataflow.json' ;;
+    lifecycle) printf '%s\n' 'agent-run.lifecycle.json' ;;
+    erd) printf '%s\n' 'orders.erd.json' ;;
+    class) printf '%s\n' 'payments.class.json' ;;
+    tree) printf '%s\n' 'payment-platform.tree.json' ;;
+    timeline) printf '%s\n' 'payment-incident.timeline.json' ;;
+    waterfall) printf '%s\n' 'checkout-request.waterfall.json' ;;
+    *) fail "unknown fixture type: $1" ;;
+  esac
+}
+for type in architecture workflow sequence dataflow lifecycle erd class tree timeline waterfall; do
+  relative="examples/$(fixture_for "$type")"
   input="${install_dir}/node_modules/${PKG_DIR_NAME}/${relative}"
   cmp -s "${repo_root}/archify/${relative}" "$input" \
     || fail "installed example differs from source: ${relative}"

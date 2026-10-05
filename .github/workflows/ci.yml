@@ -272,6 +272,40 @@ jobs:
           --test-name-pattern="cli: lock release failure does not invoke the requested opener"
           test/cli.test.mjs
 
+  npm-package-proof:
+    needs: scope
+    if: needs.scope.outputs.scope == 'full'
+    name: npm package proof (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          # Bind retained source-revision.txt to the submitted commit, while
+          # the existing integration jobs continue checking the merge result.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: 22
+      - name: Verify the installed npm package on the host shell
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = macOS ]; then
+            /bin/bash --version
+            /bin/bash scripts/npm-pack-poc.sh "$PWD/npm-package-proof"
+          else
+            bash --version
+            bash scripts/npm-pack-poc.sh "$PWD/npm-package-proof"
+          fi
+      - uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        with:
+          name: npm-package-proof-${{ runner.os }}
+          path: npm-package-proof/
+          if-no-files-found: error
+
   website:
     needs: scope
     if: needs.scope.outputs.website == 'true'
