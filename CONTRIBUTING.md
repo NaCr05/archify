@@ -92,6 +92,52 @@ remain in the separate `npm run test:webm` gate used by both workflows.
 
 ## Packages and generated artifacts
 
+### CLI-first npm package proof
+
+The npm prototype uses the same tracked-only clean staging path as the Skill
+ZIP. Ordinary `npm pack` or `npm publish` from `archify/` retains repository-only
+manifest fields and is not the supported distribution path.
+
+From the repository root, run the verification script with Node/npm, Git and
+tar available (Bash 3.2 or newer, including macOS `/bin/bash` and Windows Git Bash):
+
+```sh
+artifact_parent="$(mktemp -d)"
+bash scripts/npm-pack-poc.sh "$artifact_parent/verified-package"
+```
+
+The npm proof requires a clean tracked checkout, including staged changes;
+commit or stash them first. Untracked files remain excluded by the stager.
+It captures the source revision before staging and verifies that the revision,
+index and tracked files remain unchanged after staging and before reporting
+success or retaining artifacts. `source-revision.txt` records that captured
+revision. Run the proof without editing or switching the source checkout.
+
+The script packs the clean staging tree, prints the package file list and
+integrity, then tests that tarball through local/npx and isolated-global CLI
+installs outside the checkout. The shared package smoke checks verify the
+extracted runtime resources, including bundled locale catalogs; all ten diagram
+types must produce the same HTML as the source through both installed CLI paths.
+Only after all checks pass does the optional,
+previously nonexistent output directory receive the exact tested `.tgz`,
+`pack.json` and `source-revision.txt`. Omitting the directory keeps the check
+temporary. Consumers can install the retained `.tgz` directly with `npm install
+/absolute/path/to/verified-package/tt-a1i-archify-<version>.tgz` and invoke its
+`archify` bin as a subprocess; internal renderer paths are not a public API.
+
+This command does not publish to a registry or install an agent Skill. The npm
+scope/name, publishing permissions and release automation remain maintainer
+decisions. Any future publication must use the exact verified staged tarball,
+not repack the source directory. The npm and Skill versions stay aligned with
+the current development version; a packaging PR does not introduce a version bump.
+
+The CI npm-package proof runs on Linux, Windows and macOS (using its system
+`/bin/bash`) from the exact submitted commit. Each run retains that tested
+tarball and its metadata as an Actions artifact. Existing integration checks
+also test the PR merge result; an npm proof alone does not establish full CI.
+
+### Generated artifacts
+
 Viewer maintenance starts in [`viewer/`](viewer/README.md). Edit its source
 files, then run `npm run generate:viewer` from `archify/`; the delivered template
 is generated and its freshness is checked by `npm test`.
