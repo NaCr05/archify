@@ -123,9 +123,10 @@ test('packed Skill payload remains byte-identical to the declared immutable sour
     const cleanManifest = JSON.parse(sourceManifest.stdout);
     delete cleanManifest.scripts;
     delete cleanManifest.devDependencies;
+    delete cleanManifest.overrides;
     assert.deepEqual(skillPackage, cleanManifest, 'only development metadata is stripped from the source manifest');
     for (const field of ['scripts', 'dependencies', 'devDependencies', 'optionalDependencies',
-      'peerDependencies', 'bundledDependencies', 'bundleDependencies']) {
+      'peerDependencies', 'bundledDependencies', 'bundleDependencies', 'overrides']) {
       assert.equal(Object.hasOwn(skillPackage, field), false, `packaged Skill must not declare ${field}`);
     }
     const skillRelease = JSON.parse(fs.readFileSync(path.join(skillRoot, 'skill-release.json'), 'utf8'));
