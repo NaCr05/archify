@@ -27,8 +27,9 @@
 
 <p align="center">
   <a href="https://github.com/tt-a1i/archify/stargazers"><img src="https://img.shields.io/github/stars/tt-a1i/archify?style=flat-square&amp;color=E5B650&amp;logo=github&amp;label=Stars" alt="GitHub stars" /></a>
+  <a href="https://skills.sh/tt-a1i/archify/archify"><img src="https://img.shields.io/badge/installs-130K%2B-0EA5E9?style=flat-square" alt="130K+ installs on skills.sh" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-22c55e?style=flat-square" alt="MIT License" /></a>
-  <a href="archify/SKILL.md"><img src="https://img.shields.io/badge/Agent-Skill-7C3AED?style=flat-square" alt="Agent Skill" /></a>
+  <a href="#installation-options"><img src="https://img.shields.io/badge/works_with-Claude_Code_%7C_Codex_%7C_Cursor_%7C_OpenCode-7C3AED?style=flat-square" alt="Works with Claude Code, Codex, Cursor, and OpenCode" /></a>
   <a href="CHANGELOG.md#unreleased"><img src="https://img.shields.io/badge/version-3.0.2--dev.1-0891b2?style=flat-square" alt="Development version 3.0.2-dev.1" /></a>
 </p>
 
@@ -208,6 +209,14 @@ Archify may GET the fixed stable manifest solely to show an optional reminder; i
 
 </details>
 
+### Stay updated
+
+- **Get release notifications:** select **Watch → Custom → Releases** at the top of this GitHub repository. Starring the project does not subscribe you to release notifications.
+- **See what changed:** [Release notes](https://github.com/tt-a1i/archify/releases).
+- **Use a feed reader:** [Subscribe to the release feed](https://github.com/tt-a1i/archify/releases.atom).
+
+Installations with the update checker also check for newer stable releases during diagram delivery and can show a reminder. Older installations without the checker need a manual update to gain this feature. You choose whether and when to upgrade; Archify never installs updates automatically.
+
 ### 2. Start from a description — no repository required
 
 ```text
@@ -343,7 +352,7 @@ Settings:
 }
 ```
 
-`meta.locale` localizes page title, Legend, states/errors, a11y, HTML/SVG `lang`—never authored content. `en`/`zh-CN` are built in; other languages, including Spanish (`es`), need `meta.translations` (canonical message key → translated string; see `examples/locales/es.json`), or the renderer falls back to English and discloses it. Static omits `animation`; `classic` defaults.
+`meta.locale` localizes page title, Legend, states/errors, a11y, HTML/SVG `lang`—never authored content. `en`, `zh-CN`, `es`, and `ko` are bundled and need only `meta.locale`; `meta.translations` (canonical message key → translated string) overrides individual keys and keeps the rest of the language. Other languages supply their catalog there (see `archify/examples/locales/`), or the renderer falls back to English and discloses it. Static omits `animation`; `classic` defaults.
 
 </details>
 

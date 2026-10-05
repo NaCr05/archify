@@ -27,8 +27,9 @@
 
 <p align="center">
   <a href="https://github.com/tt-a1i/archify/stargazers"><img src="https://img.shields.io/github/stars/tt-a1i/archify?style=flat-square&amp;color=E5B650&amp;logo=github&amp;label=Stars" alt="GitHub stars" /></a>
+  <a href="https://skills.sh/tt-a1i/archify/archify"><img src="https://img.shields.io/badge/installs-130K%2B-0EA5E9?style=flat-square" alt="130K+ installs on skills.sh" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-22c55e?style=flat-square" alt="MIT License" /></a>
-  <a href="archify/SKILL.md"><img src="https://img.shields.io/badge/Agent-Skill-7C3AED?style=flat-square" alt="Agent Skill" /></a>
+  <a href="#安装方式"><img src="https://img.shields.io/badge/works_with-Claude_Code_%7C_Codex_%7C_Cursor_%7C_OpenCode-7C3AED?style=flat-square" alt="Works with Claude Code, Codex, Cursor, and OpenCode" /></a>
   <a href="CHANGELOG.md#unreleased"><img src="https://img.shields.io/badge/version-3.0.2--dev.1-0891b2?style=flat-square" alt="Development version 3.0.2-dev.1" /></a>
 </p>
 
@@ -206,6 +207,14 @@ DeepSeek Harness（社区集成、显式启用）：运行 `dsh plugin --profile
 
 </details>
 
+### 获取更新
+
+- **订阅新版本：** 在本 GitHub 仓库顶部选择 **Watch → Custom → Releases**，订阅版本发布通知。点 Star 不会自动订阅更新。
+- **查看更新内容：** [版本说明](https://github.com/tt-a1i/archify/releases)。
+- **使用 RSS 阅读器：** [订阅版本更新源](https://github.com/tt-a1i/archify/releases.atom)。
+
+带有更新检查器的安装版本，也会在交付图时检查新的稳定版，并可显示提醒。不带检查器的旧安装需要先手动更新，才能获得这项功能。是否升级、何时升级由你决定，Archify 不会自动安装更新。
+
 ### 2. 直接从描述开始——不需要代码库
 
 ```text
@@ -344,7 +353,7 @@ node bin/archify.mjs deliver workflow examples/agent-tool-call.workflow.json /tm
 }
 ```
 
-不设置 `animation` 时结果完全静态；`classic` 始终是默认视觉预设。设计评审、发布说明和技术文档可以显式选择 `editorial`，获得暖纸张与深墨色的编辑风格，同时保持几何完全不变。将 `meta.locale` 设为任意合法语言标签，可选择 `<html lang>`、默认图例、无障碍文案和所有固定 Viewer UI。`en` 与 `zh-CN` 已内置；西班牙语等其他语言需同时提供 `meta.translations`（规范消息键到译文字符串的映射，`examples/locales/es.json` 是完整示例），否则渲染器回退为英文并在 stderr 中说明。作者编写的标题、节点、关系和卡片不会被机器翻译。未带该字段的旧文件仍然有效，并默认使用英文。对于既未内置也未提供 `meta.translations` 的创作语言，应省略 `meta.locale`、保持 authored content 使用用户要求的语言，并主动告知用户固定 Viewer UI 与 `<html lang>` 回退为英文，因此该成品不属于完整本地化。
+不设置 `animation` 时结果完全静态；`classic` 始终是默认视觉预设。设计评审、发布说明和技术文档可以显式选择 `editorial`，获得暖纸张与深墨色的编辑风格，同时保持几何完全不变。将 `meta.locale` 设为任意合法语言标签，可选择 `<html lang>`、默认图例、无障碍文案和所有固定 Viewer UI。`en`、`zh-CN`、`es` 与 `ko` 已内置，只需设置 `meta.locale`；`meta.translations`（规范消息键到译文字符串的映射）可逐键覆盖，其余文案保持所选语言。其他语言需在该字段中提供完整目录（参见 `archify/examples/locales/`），否则渲染器回退为英文并在 stderr 中说明。作者编写的标题、节点、关系和卡片不会被机器翻译。未带该字段的旧文件仍然有效，并默认使用英文。对于既未内置也未提供 `meta.translations` 的创作语言，应省略 `meta.locale`、保持 authored content 使用用户要求的语言，并主动告知用户固定 Viewer UI 与 `<html lang>` 回退为英文，因此该成品不属于完整本地化。
 
 </details>
 
